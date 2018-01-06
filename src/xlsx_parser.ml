@@ -12,6 +12,19 @@ let find_attr_exn attrs name_to_find =
   find_attr attrs name_to_find
   |> Option.value_exn ~here:[%here]
 
+let rec find_elements el ~path =
+  match path with
+  | [] -> [ el ]
+  | search_tag :: tl ->
+    match el with
+    | Xml.Element (tag, _, children) when String.(tag = search_tag) ->
+      List.concat_map children ~f:(find_elements ~path:tl)
+    | _ -> []
+
+let find_element_exn el ~path =
+  find_elements el ~path
+  |> List.hd_exn
+
 module Workbook_view = struct
   type t =
     { x_window : int
@@ -95,16 +108,13 @@ let read_file filename =
       Zip.find_entry zip "xl/sharedStrings.xml"
       |> Zip.read_entry zip
       |> Xml.parse_string
-      |> let open Xml in function
-      | Element ("sst", _, children) ->
-        List.map children ~f:(function
-          | Element ("si", _, [ Element ("t", _, []) ]) -> ""
-          | Element ("si", _, [ Element ("t", _, [ PCData str ]) ]) -> str
-          | el ->
-            failwithf "Unexpected shared string element %s"
-              (Xml.to_string el) ())
-        |> List.to_array
-      | _ -> assert false
+      |> find_elements ~path:[ "sst" ; "si" ]
+      |> List.map ~f:(function
+      | Element ("t", _, [ PCData str] ) -> str
+      | el ->
+        failwithf "Unexpected shared string element %s"
+          (Xml.to_string el) ())
+      |> List.to_array
     in
     let sheets =
       Workbook_meta.of_zip zip
@@ -113,65 +123,70 @@ let read_file filename =
     List.map sheets ~f:(fun { Sheet_meta.name ; id } ->
       let rows =
         let path = sprintf "xl/worksheets/sheet%d.xml" id in
-        Zip.find_entry zip path
-        |> Zip.read_entry zip
-        |> Xml.parse_string
-        |> let open Xml in function
-        | Element ("worksheet", _, children) ->
-          let num_cols =
-            List.find_map_exn children ~f:(function
-            | Element ("cols", _, cols) ->
-              List.filter_map cols ~f:(function
-                | Element ("col", attrs, _) ->
-                  find_attr attrs "max" |> Option.map ~f:Int.of_string
-                | _ -> None)
-              |> Option.return
-            | _ -> None)
-            |> List.max_elt ~cmp:Int.compare
-            |> Option.value ~default:0
-          in
-          let row_map =
-            List.find_map children ~f:(function
-            | Element ("sheetData", _, children) -> Some children
-            | _ -> None)
-            |> Option.value ~default:[]
-            |> List.filter_map ~f:(function
-            | Element ("row", attrs, cells) ->
-              let index = find_attr_exn attrs "r" |> Int.of_string in
-              let row =
-                List.filter_map cells ~f:(function
+        let root =
+          Zip.find_entry zip path
+          |> Zip.read_entry zip
+          |> Xml.parse_string
+        in
+        let num_cols =
+          find_elements root ~path:[ "worksheet" ; "cols" ]
+          |> List.filter_map ~f:(function
+          | Element ("col", attrs, _) ->
+            find_attr attrs "max" |> Option.map ~f:Int.of_string
+          | _ -> None)
+          |> List.max_elt ~cmp:Int.compare
+          |> Option.value ~default:0
+        in
+        let row_map =
+          let open Xml in
+          find_elements root ~path:[ "worksheet" ; "sheetData" ]
+          |> List.filter_map ~f:(function
+          | Element ("row", attrs, cells) ->
+            let index = find_attr_exn attrs "r" |> Int.of_string in
+            let row =
+              List.map cells ~f:(fun cell ->
+                match cell with
                 | Element ("c", attrs, children) ->
-                  (match children with
-                  | [] -> Some ""
-                  | [ Element ("v", _, [ PCData v ]) ] ->
-                    let is_shared = List.exists attrs ~f:(function
-                      | "t", "s" -> true
-                      | _ -> false)
-                    in
-                    if is_shared then
-                      let i = Int.of_string v in
-                      Some shared_strings.(i)
-                    else
-                      Some v
-                  | _ -> None)
-                | _ -> None)
-              in
-              (* Rows at 1-indexed, convert to 0-indexed *)
-              Some (index - 1, row)
-            | _ -> None)
-            |> Map.Using_comparator.of_alist_exn ~comparator:Int.comparator
-          in
-          let n =
-            Map.keys row_map
-            |> List.max_elt ~cmp:Int.compare
-            |> Option.value ~default:0
-          in
-          let default_row = List.init num_cols ~f:(Fn.const "") in
-          List.init n ~f:Fn.id
-          |> List.map ~f:(fun i ->
-            Map.find row_map i
-            |> Option.value ~default:default_row)
-        | _ -> assert false
+                  let t = List.find_map attrs ~f:(function
+                    | "t", value -> Some value
+                    | _ -> None)
+                  in
+                  (match t with
+                  | None | Some "s" ->
+                    find_elements cell ~path:[ "c" ; "v" ]
+                    |> List.find_map ~f:(function
+                    | PCData v ->
+                      if Option.equal String.equal t (Some "s") then
+                        let i = Int.of_string v in
+                        Some shared_strings.(i)
+                      else
+                        Some v
+                    | _ -> None)
+                    |> Option.value ~default:""
+                  | Some "inlineStr" ->
+                    find_elements cell ~path:[ "c" ; "is" ; "t" ]
+                    |> List.find_map ~f:(function
+                    | PCData v -> Some v
+                    | _ -> None)
+                    |> Option.value ~default:""
+                  | _ -> "")
+                | _ -> "")
+            in
+            (* Rows at 1-indexed, convert to 0-indexed *)
+            Some (index - 1, row)
+          | _ -> None)
+          |> Map.Using_comparator.of_alist_exn ~comparator:Int.comparator
+        in
+        let n =
+          Map.keys row_map
+          |> List.max_elt ~cmp:Int.compare
+          |> Option.value ~default:0
+        in
+        let default_row = List.init num_cols ~f:(Fn.const "") in
+        List.init n ~f:Fn.id
+        |> List.map ~f:(fun i ->
+          Map.find row_map i
+          |> Option.value ~default:default_row)
       in
       { name ; rows }))
     ~finally:(fun () -> Zip.close_in zip)
