@@ -152,7 +152,13 @@ let read_file filename =
                     | _ -> None)
                   in
                   (match t with
-                  | None | Some "s" ->
+                  | Some "inlineStr" ->
+                    find_elements cell ~path:[ "c" ; "is" ; "t" ]
+                    |> List.find_map ~f:(function
+                    | PCData v -> Some v
+                    | _ -> None)
+                    |> Option.value ~default:""
+                  | None | Some "s" | _->
                     find_elements cell ~path:[ "c" ; "v" ]
                     |> List.find_map ~f:(function
                     | PCData v ->
@@ -162,14 +168,7 @@ let read_file filename =
                       else
                         Some v
                     | _ -> None)
-                    |> Option.value ~default:""
-                  | Some "inlineStr" ->
-                    find_elements cell ~path:[ "c" ; "is" ; "t" ]
-                    |> List.find_map ~f:(function
-                    | PCData v -> Some v
-                    | _ -> None)
-                    |> Option.value ~default:""
-                  | _ -> "")
+                    |> Option.value ~default:"")
                 | _ -> "")
             in
             (* Rows at 1-indexed, convert to 0-indexed *)
