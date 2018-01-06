@@ -181,11 +181,17 @@ let read_file filename =
           |> List.max_elt ~cmp:Int.compare
           |> Option.value ~default:0
         in
-        let default_row = List.init num_cols ~f:(Fn.const "") in
         List.init (n + 1) ~f:Fn.id
         |> List.map ~f:(fun i ->
-          Map.find row_map i
-          |> Option.value ~default:default_row)
+          let row =
+            Map.find row_map i
+            |> Option.value ~default:[]
+          in
+          let missing_cols = num_cols - List.length row in
+          if missing_cols > 0 then
+            row @ List.init ~f:(Fn.const "") missing_cols
+          else
+            row)
       in
       { name ; rows }))
     ~finally:(fun () -> Zip.close_in zip)
