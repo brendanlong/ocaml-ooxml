@@ -183,7 +183,7 @@ let read_file filename =
           |> Option.value ~default:0
         in
         let default_row = List.init num_cols ~f:(Fn.const "") in
-        List.init n ~f:Fn.id
+        List.init (n + 1) ~f:Fn.id
         |> List.map ~f:(fun i ->
           Map.find row_map i
           |> Option.value ~default:default_row)
