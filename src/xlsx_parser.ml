@@ -25,26 +25,6 @@ let find_element_exn el ~path =
   find_elements el ~path
   |> List.hd_exn
 
-module Workbook_view = struct
-  type t =
-    { x_window : int
-    ; y_window : int
-    ; window_width : int
-    ; window_height : int }
-      [@@deriving compare, fields, sexp]
-
-  let of_xml =
-    let open Xml in
-    function
-    | Element ("workbookView", attrs, _) ->
-      let x_window = find_attr_exn attrs "xWindow" |> Int.of_string in
-      let y_window = find_attr_exn attrs "yWindow" |> Int.of_string in
-      let window_width = find_attr_exn attrs "windowWidth" |> Int.of_string in
-      let window_height = find_attr_exn attrs "windowHeight" |> Int.of_string in
-      Some { x_window ; y_window ; window_width ; window_height }
-    | _ -> None
-end
-
 module Sheet_meta = struct
   type t =
     { name : string
@@ -63,8 +43,7 @@ end
 
 module Workbook_meta = struct
   type t =
-    { book_views : Workbook_view.t list
-    ; sheets : Sheet_meta.t list }
+    { sheets : Sheet_meta.t list }
       [@@deriving compare, fields, sexp]
 
   let of_zip zip =
@@ -81,14 +60,7 @@ module Workbook_meta = struct
         | _ -> None)
         |> Option.value ~default:[]
       in
-      let book_views =
-        List.find_map children ~f:(function
-        | Element ("bookViews", _, views) ->
-          Some (List.filter_map views ~f:Workbook_view.of_xml)
-        | _ -> None)
-        |> Option.value ~default:[]
-      in
-      { book_views ; sheets }
+      { sheets }
     | _ -> assert false
 end
 
