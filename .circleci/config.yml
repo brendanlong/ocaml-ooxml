@@ -1,0 +1,29 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: ocaml/opam:alpine-3.6_ocaml-4.04.2
+        environment:
+          TERM: xterm
+    steps:
+      - checkout
+      - run:
+          name: Pin packages
+          command: |
+            opam pin add -y -n xlsx_parser .
+      - run:
+          name: Install system dependencies
+          command: opam depext -y xlsx_parser
+      - run:
+          name: Install OCaml dependencies
+          command: opam install --deps-only -y xlsx_parser
+      - run:
+          name: Build
+          command: eval `opam config env` && jbuilder build @install
+      - run:
+          name: Install OCaml test dependencies
+          # Not using opam install -y -t because it tries to run csv's tests
+          command: opam install -y csv oUnit
+      - run:
+          name: Test
+          command: eval `opam config env` && jbuilder runtest
