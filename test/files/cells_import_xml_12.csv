@@ -1,0 +1,29 @@
+CELL TEST DOCUMENT,,,,,,
+,,,,,,
+1 - SIMPLE CELLS,,,,,,
+,,,,,,
+1.1 - NUMBERS,,,,,,
+,Pos. int,Neg. int,Pos. float,Neg. float,Null,
+Is,1,-1,1.2345,-1.2345,0,
+Must,1,-1,1.2345,-1.2345,0,
+,,,,,,
+1.2 - STRINGS,,,,,,
+,Simple,Spaces,Multiline,Multiline with spaces,,
+Shared,Text,  Text  ,"Line 1
+Line 2","  Line 1  
+  Line 2  ",,
+Inplace,Text,  Text  ,"Line 1
+Line 2","  Line 1  
+  Line 2  ",,
+,,,,,,
+1.3 - BOOLEAN VALUES,,,,,,
+True,False,,,,,
+1,0,,,,,
+,,,,,,
+1.4 - ERROR CODES,,,,,,
+NULL,DIV/0,VALUE,REF,NAME,NUM,N/A
+#NULL!,#DIV/0!,#VALUE!,#REF!,#NAME?,#NUM!,#N/A
+,,,,,,
+1.5 - FORMULAS,,,,,,
+String,Number,Boolean,Error,Empty,,
+Text,2,1,#N/A,,,

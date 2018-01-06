@@ -1,0 +1,14 @@
+opam-version: "1.2"
+name: "xlsx-parser"
+version: "~unknown"
+maintainer: "Brendan Long <self@brendanlong.com>"
+authors: "Brendan Long <self@brendanlong.com>"
+build: [
+  ["./configure" "--prefix=%{prefix}%"]
+  [make]
+]
+install: [make "install"]
+remove: ["ocamlfind" "remove" "xlsx-parser"]
+depends: [
+  "ocamlfind" {build}
+]
