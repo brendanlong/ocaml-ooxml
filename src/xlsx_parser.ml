@@ -64,6 +64,24 @@ module Workbook_meta = struct
     | _ -> assert false
 end
 
+module Column = struct
+  type t =
+    { min : int
+    ; max : int }
+      [@@deriving compare, fields, sexp]
+
+  let of_xml = function
+    | Xml.Element ("col", attrs, _) ->
+      let min = find_attr_exn attrs "min" |> Int.of_string in
+      let max = find_attr_exn attrs "max" |> Int.of_string in
+      Some { min ; max }
+    | _ -> None
+
+  let of_worksheet_xml root =
+    find_elements root ~path:[ "worksheet" ; "cols" ]
+    |> List.filter_map ~f:of_xml
+end
+
 type row = string list [@@deriving compare, sexp]
 
 type sheet =
@@ -101,11 +119,8 @@ let read_file filename =
           |> Xml.parse_string
         in
         let num_cols =
-          find_elements root ~path:[ "worksheet" ; "cols" ]
-          |> List.filter_map ~f:(function
-          | Element ("col", attrs, _) ->
-            find_attr attrs "max" |> Option.map ~f:Int.of_string
-          | _ -> None)
+          Column.of_worksheet_xml root
+          |> List.map ~f:Column.max
           |> List.max_elt ~cmp:Int.compare
           |> Option.value ~default:0
         in
