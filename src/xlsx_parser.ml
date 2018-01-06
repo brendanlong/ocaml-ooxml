@@ -82,6 +82,70 @@ module Column = struct
     |> List.filter_map ~f:of_xml
 end
 
+module Cell = struct
+  type t = string [@@deriving compare, sexp]
+end
+
+module Row = struct
+  type t =
+    { index : int
+    ; cells : Cell.t list }
+      [@@deriving compare, fields, sexp]
+
+  let of_xml ~shared_strings =
+    let open Xml in
+    function
+    | Element ("row", attrs, cells) ->
+      let index = find_attr_exn attrs "r" |> Int.of_string in
+      let row =
+        List.map cells ~f:(fun cell ->
+          match cell with
+          | Element ("c", attrs, children) ->
+            let t = List.find_map attrs ~f:(function
+              | "t", value -> Some value
+              | _ -> None)
+            in
+            (match t with
+            | Some "inlineStr" ->
+              find_elements cell ~path:[ "c" ; "is" ; "t" ]
+              |> List.find_map ~f:(function
+              | PCData v -> Some v
+              | _ -> None)
+              |> Option.value ~default:""
+            | None | Some "s" | _->
+              find_elements cell ~path:[ "c" ; "v" ]
+              |> List.find_map ~f:(function
+              | PCData v ->
+                if Option.equal String.equal t (Some "s") then
+                  let i = Int.of_string v in
+                  Some shared_strings.(i)
+                else
+                  Some v
+              | _ -> None)
+              |> Option.value ~default:"")
+          | _ -> "")
+      in
+      (* Rows at 1-indexed, convert to 0-indexed *)
+      Some { index = index - 1 ; cells = row }
+    | _ -> None
+
+  let of_worksheet_xml ~shared_strings root =
+    find_elements root ~path:[ "worksheet" ; "sheetData" ]
+    |> List.filter_map ~f:(of_xml ~shared_strings)
+end
+
+module Worksheet = struct
+  type t =
+    { columns : Column.t list
+    ; rows : Row.t list }
+      [@@deriving compare, fields, sexp]
+
+  let of_xml ~shared_strings root =
+    let columns = Column.of_worksheet_xml root in
+    let rows = Row.of_worksheet_xml ~shared_strings root in
+    { columns ; rows }
+end
+
 type row = string list [@@deriving compare, sexp]
 
 type sheet =
@@ -113,54 +177,22 @@ let read_file filename =
     List.map sheets ~f:(fun { Sheet_meta.name ; id } ->
       let rows =
         let path = sprintf "xl/worksheets/sheet%d.xml" id in
-        let root =
+        let worksheet =
           Zip.find_entry zip path
           |> Zip.read_entry zip
           |> Xml.parse_string
+          |> Worksheet.of_xml ~shared_strings
         in
         let num_cols =
-          Column.of_worksheet_xml root
+          worksheet.Worksheet.columns
           |> List.map ~f:Column.max
           |> List.max_elt ~cmp:Int.compare
           |> Option.value ~default:0
         in
         let row_map =
-          let open Xml in
-          find_elements root ~path:[ "worksheet" ; "sheetData" ]
-          |> List.filter_map ~f:(function
-          | Element ("row", attrs, cells) ->
-            let index = find_attr_exn attrs "r" |> Int.of_string in
-            let row =
-              List.map cells ~f:(fun cell ->
-                match cell with
-                | Element ("c", attrs, children) ->
-                  let t = List.find_map attrs ~f:(function
-                    | "t", value -> Some value
-                    | _ -> None)
-                  in
-                  (match t with
-                  | Some "inlineStr" ->
-                    find_elements cell ~path:[ "c" ; "is" ; "t" ]
-                    |> List.find_map ~f:(function
-                    | PCData v -> Some v
-                    | _ -> None)
-                    |> Option.value ~default:""
-                  | None | Some "s" | _->
-                    find_elements cell ~path:[ "c" ; "v" ]
-                    |> List.find_map ~f:(function
-                    | PCData v ->
-                      if Option.equal String.equal t (Some "s") then
-                        let i = Int.of_string v in
-                        Some shared_strings.(i)
-                      else
-                        Some v
-                    | _ -> None)
-                    |> Option.value ~default:"")
-                | _ -> "")
-            in
-            (* Rows at 1-indexed, convert to 0-indexed *)
-            Some (index - 1, row)
-          | _ -> None)
+          worksheet.Worksheet.rows
+          |> List.map ~f:(fun { Row.index ; cells } ->
+            index, cells)
           |> Map.Using_comparator.of_alist_exn ~comparator:Int.comparator
         in
         let n =
