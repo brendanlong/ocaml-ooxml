@@ -92,7 +92,7 @@ let () =
   ; `Skip, "cellnotes_import_xml_12", [ "Line"; "Fill"; "Visibility" ]
   ; `Run, "cells_import_xml_12", [ "Sheet1" ]
   ; `Run, "chart_3dsettings_import_xml_12", [ "Rotation"; "Elevation"; "Perspective"; "Settings"; "SourceData" ]
-  ; `Skip, "chart_axis_import_xml_12", [ "Axis Line"; "Axis Labels"; "Tick Marks"; "Gridlines"; "SourceData" ]
+  ; `Run, "chart_axis_import_xml_12", [ "Axis Line"; "Axis Labels"; "Tick Marks"; "Gridlines"; "SourceData" ]
   ; `Skip, "chart_axis_scaling_import_xml_12", [ "Linear"; "Logarithmic"; "Category"; "Scatter"; "Date"; "Secondary"; "Series"; "SourceData" ]
   ; `Skip, "chart_bitmaps_import_xml_12", [ "General"; "Series 2D"; "Series 3D"; "SourceData" ]
   ; `Skip, "chart_charttype_area_import_xml_12", [ "Area 2D"; "Area 3D"; "SourceData" ]
