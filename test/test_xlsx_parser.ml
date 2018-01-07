@@ -83,7 +83,7 @@ let () =
   ; `Skip, "pivottable_grouping_import_xml_12", [ "Discrete"; "Numeric"; "DateTime"; "Data" ]
   ; `Skip, "pivottable_layout_import_xml_12", [ "RowColDim"; "RowColSettings"; "ItemSettings"; "DataDim"; "DataSettings"; "PageDim"; "PageSettings"; "TableSettings"; "Data" ]
   ; `Skip, "scenarios_import_xml_12", [ "Ranges"; "Settings"; "Name"; "RefCheck" ]
-  ; `Skip, "sheetprotection_import_xml_12", [ "Sheet1"; "Sheet2"; "Sheet3"; "Sheet4" ]
+  ; `Run, "sheetprotection_import_xml_12", [ "Sheet1"; "Sheet2"; "Sheet3"; "Sheet4" ]
   ; `Skip, "viewsettings_import_xml_12", [ "No Splits 1"; "No Splits 2"; "Frozen Vert 1"; "Frozen Vert 2"; "Frozen Hor 1"; "Frozen Hor 2"; "Frozen 1"; "Frozen 2"; "Split Vert 1"; "Split Vert 2"; "Split Hor 1"; "Split Hor 2"; "Split 1"; "Split 2"; "Split 3"; "Selection"; "Sheet Settings 1"; "Sheet Settings 2"; "Sheet Settings 3"; "Sheet Settings 4"; "Mirrored Sheet"; "Show Formulas" ]]
   |> List.map ~f:make_test
   |> test_list
