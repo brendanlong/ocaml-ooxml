@@ -1,0 +1,36 @@
+FORM CONTROLS TEST DOCUMENT,,,,,Line 1
+,,,,,Line 2
+8 - ACTIVEX LIST BOX (Forms.ListBox.1),,,,,Line 3
+,,,,,Line 4
+8.1 - BACKGROUND,,,,,Line 5
+Default (system window),System tooltip,Light red (#FFC0C0),,,Line 6
+,,,,,
+,,,,,
+8.2 - FONT,,,,,
+System disabled text,Red (#FF0000),Bold,Italic,Bold italic,
+,,,,,
+Cambria 14pt,Strikeout,Underline,Strikeout underline,,
+,,,,,
+,,,,,
+8.3 - BORDER,,,,,
+No border,System highlight,Red (#FF0000),3D raised,3D sunken,
+,,,,,
+3D etched,3D bumped,,,,
+,,,,,
+,,,,,
+8.4 - SELECTION,,,,,
+"Single, no selection","Multi, no selection","Extended, no selection","Single, linked to cell E23",,
+,,,,,
+"Single, Line2",Selection in multi-selectable list boxes is not persistent,,"Single, linked to cell E25",,
+,,,,Line 3,
+,,,,,
+8.5 - OTHER SETTINGS,,,,,
+Enabled = false,PrintObject = false,Shadow = true,Align = left,Align = center,
+,,,,,
+Align = right,IntegralHeight = false,MatchEntry = first letter,MatchEntry = complete,MatchEntry = none,
+,,,,,
+TopIndex = 2,Locked = false,,,,
+,,,,,
+,,,,,
+8.6 - OPTION/CHECK LIST,,,,,
+Option list,Check list,,,,

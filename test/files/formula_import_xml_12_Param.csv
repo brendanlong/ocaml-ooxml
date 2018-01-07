@@ -1,0 +1,33 @@
+FORMULA TEST DOCUMENT,,,,,,
+,,,,,,
+3 - SPECIAL PARAMETER HANDLING,,,,,,
+,,,,,,
+3.1 - ADD MISSING/DIFFERENT DEFAULT PARAMETERS,,,,,,
+Formula,Is,Must,Ok?,,,
+"=FLOOR(-15,-10)",-10.0,-10.0,1.0,,,
+"=CEILING(-15,-10)",-20.0,-20.0,1.0,,,
+,,,,,,
+3.2 - REMOVE UNSUPPORTED PARAMETERS,,,,,,
+Formula,Is,Must,Ok?,,,
+"=PERCENTRANK($D$12:$D$15,2)",0.333,0.333,1.0,1.0,,
+"=PERCENTRANK($D$12:$D$15,2,1)",0.3,0.3,1.0,2.0,,
+"=PERCENTRANK($D$12:$D$15,2,3)",0.333,0.333,1.0,3.0,,
+"=PERCENTRANK($D$12:$D$15,2,5)",0.33333,0.33333,1.0,4.0,,
+"=INDIRECT(""$E$16"")",5.0,5.0,1.0,5.0,,
+"=INDIRECT(""$E$17"",TRUE)",6.0,6.0,1.0,6.0,,
+"=ADDRESS(18,5)",$E$18,$E$18,1.0,,,
+"=ADDRESS(19,5,4)",E19,E19,1.0,,,
+"=ADDRESS(20,5,4,TRUE)",E20,E20,1.0,,,Test cells for 3D references in other sheets
+"=ADDRESS(21,5,4,TRUE,""Param"")",Param!E21,Param!E21,1.0,,,16.0
+,,,,,,17.0
+3.3 - REPLACE DEFAULT PARAMETERS,,,,,,18.0
+Formula,Is,Must,Ok?,,,19.0
+"=IF(FALSE,)",0,0,1.0,,,
+"=IF(TRUE,)",0.0,0.0,1.0,,,
+"=IF(FALSE,,)",0.0,0.0,1.0,,,
+"=IF(TRUE,,)",0.0,0.0,1.0,,,
+,,,,,,
+3.4 - REMOVE TRAILING EMPTY PARAMETERS,,,,,,
+Formula,Is,Must,Ok?,,,
+"=SUM(1,)",1.0,1.0,1.0,,,
+"=SUM( 1, 1, , )",2.0,2.0,1.0,,,

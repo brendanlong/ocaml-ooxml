@@ -1,0 +1,18 @@
+CHART TEST DOCUMENT - BITMAP FILLS,,,,,,,,
+,,,,,,,,
+3 - 3-DIMENSIONAL DATA SERIES,,,,,,,,
+,,,,,,,,
+"2.2 - BAR CHARTS (Series1, Series2 Point2)",,,,,,,,
+"Series1, Series2/Point2 = stretched",,,,"Series1, Series2/Point2 = stacked",,,,"Stacked with unit, Series1 unit = 10, Series2 unit = 5"
+,,,,,,,,
+,,,,,,,,
+,,,,,,,,
+,,,,,,,,
+"Series1 = front only, Series2 = side+top",,,,"Series1 = side only, Series2 = front+top",,,,"Series1 = top only, Series2 = front+side"
+,,,,,,,,
+,,,,,,,,
+,,,,,,,,
+,,,,,,,,
+,,,,,,,,
+3.2 - OTHER CHART TYPES,,,,,,,,
+"Area, Series1 = stretched, Series2 = tiled",,,,"Pie, Point1 = stretched, Point2 = tiled",,,,"Line, Series1 = stretched, Series2 = tiled"

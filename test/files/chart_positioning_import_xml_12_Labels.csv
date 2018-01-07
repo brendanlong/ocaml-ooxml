@@ -1,0 +1,13 @@
+CHART TEST DOCUMENT - OBJECT POSITIONING,,,,,,,,
+,,,,,,,,
+4 - LABELS POSITIONING,,,,,,,,
+,,,,,,,,
+"4.1 - DEFAULT AXIS UNIT AND TRENDLINE LABEL POSITIONS (red = inner plot area, blue = outer plot area, green = labels, yellow = label space)",,,,,,,,
+2D scatter chart (unit labels and trendline labels),,,,"2D scatter chart, secondary axes set (unit labels)",,,,"3D bar chart (unit labels, no trendlines in 3D charts)"
+,,,,,,,,
+,,,,,,,,
+,,,,,,,,
+,,,,,,,,
+,,,,,,,,
+"4.2 - MANUAL AXIS UNIT AND TRENDLINE LABEL POSITIONS (shapes on the charts: red = inner plot area, green = labels)",,,,,,,,
+2D scatter chart (unit labels and trendline labels),,,,"2D scatter chart, secondary axes set (unit labels)",,,,

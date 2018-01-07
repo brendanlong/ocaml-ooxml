@@ -1,0 +1,40 @@
+PIVOT TABLES DATA SOURCE TEST DOCUMENT,,,,,,,,,
+,,,,,,,,,
+2 - EXTERNAL SHEET SOURCE,,,,,,,,,
+,,,,,,,,,
+2.1 - EXTERNAL CELL RANGE,,,,,,,,,
+"Data from sheet ""Data""",,,,,,"Second pivot table, shared data source",,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+Sum of Field 3,Column Labels,,,,,Sum of Field 3,Column Labels,,
+Row Labels,Item 1.A,Item 1.B,Grand Total,,,Row Labels,Item 2.A,Item 2.B,Grand Total
+Item 2.A,3.0,11.0,14.0,,,Item 1.A,3.0,7.0,10.0
+Item 2.B,7.0,15.0,22.0,,,Item 1.B,11.0,15.0,26.0
+Grand Total,10.0,26.0,36.0,,,Grand Total,14.0,22.0,36.0
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+2.2 - EXTERNAL GLOBAL NAME,,,,,,2.3 - EXTERNAL LOCAL NAME,,,
+"Data from sheet ""Data"", name ""name""",,,,,,"Data from sheet ""Data"", name ""localname""",,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+Sum of Field 6,Column Labels,,,,,Sum of Field 9,Column Labels,,
+Row Labels,Item 4.A,Item 4.B,Grand Total,,,Row Labels,Item 7.A,Item 7.B,Grand Total
+Item 5.A,123.0,131.0,254.0,,,Item 8.A,183.0,191.0,374.0
+Item 5.B,127.0,135.0,262.0,,,Item 8.B,187.0,195.0,382.0
+Grand Total,250.0,266.0,516.0,,,Grand Total,370.0,386.0,756.0
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+2.4 - EXTERNAL BUILT-IN NAME,,,,,,2.5 - EXTERNAL TABLE,,,
+"Data from sheet ""Data"", name ""_xlnm.Print_Area""",,,,,,"Data from sheet ""Data"", table ""Table1""",,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+Sum of Field 12,Column Labels,,,,,Sum of Field 15,Column Labels,,
+Row Labels,Item 10.A,Item 10.B,Grand Total,,,Row Labels,Item 13.A,Item 13.B,Grand Total
+Item 11.A,243.0,251.0,494.0,,,Item 14.A,303.0,311.0,614.0
+Item 11.B,247.0,255.0,502.0,,,Item 14.B,307.0,315.0,622.0
+Grand Total,490.0,506.0,996.0,,,Grand Total,610.0,626.0,1236.0

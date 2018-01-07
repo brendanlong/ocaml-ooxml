@@ -1,0 +1,46 @@
+DRAWING LAYER TEST DOCUMENT,,,,,,,,,,
+,,,,,,,,,,
+5 - AUTOMATIC STYLES,,,,,,,,,,
+,,,,,,,,,,
+5.1 - OUTLINE STYLES,,,,,,,,,,
+,Dark 1,Dark 2,Light 1,Light 2,Accent 1,Accent 2,Accent 3,Accent 4,Accent 5,Accent 6
+"None
+(invisible)",,,,,,,,,,
+"Subtle
+(solid thin)",,,,,,,,,,
+"Moderate
+(solid medium)",,,,,,,,,,
+"Intense
+(solid thick)",,,,,,,,,,
+,,,,,,,,,,
+5.2 - FILL STYLES,,,,,,,,,,
+,Dark 1,Dark 2,Light 1,Light 2,Accent 1,Accent 2,Accent 3,Accent 4,Accent 5,Accent 6
+"None
+(invisible)",,,,,,,,,,
+"Subtle
+(solid color)",,,,,,,,,,
+"Moderate
+(light gradient)",,,,,,,,,,
+"Intense
+(dark gradient)",,,,,,,,,,
+"None BG
+(invisible)",,,,,,,,,,
+"Subtle BG
+(solid color)",,,,,,,,,,
+"Moderate BG
+(light top circle)",,,,,,,,,,
+"Intense BG
+(light center circle)",,,,,,,,,,
+,,,,,,,,,,
+5.3 - EFFECT STYLES,,,,,,,,,,
+,Dark 1,Dark 2,Light 1,Light 2,Accent 1,Accent 2,Accent 3,Accent 4,Accent 5,Accent 6
+None,,,,,,,,,,
+"Subtle
+(bot/right shadow)",,,,,,,,,,
+"Moderate
+(bot/right shadow)",,,,,,,,,,
+"Intense
+(3D effect)",,,,,,,,,,
+,,,,,,,,,,
+5.4 - STYLE REFERENCES,,,,,,,,,,
+,0 (none),1 (subtle),2 (moderate),3 (intense),4 (intense),5 (intense),missing,,,

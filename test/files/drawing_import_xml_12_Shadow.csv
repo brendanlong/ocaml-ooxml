@@ -1,0 +1,19 @@
+DRAWING LAYER TEST DOCUMENT,,,,,,,,,
+,,,,,,,,,
+6 - SHADOW,,,,,,,,,
+,,,,,,,,,
+6.1 - OUTER SHADOW,,,,,,,,,
+,0.0,0.3,0.6,0.9,,Text 1,Accent 1,Accent 3,Red
+Transparency,,,,,Color,,,,
+,0.6,0.8,1.0,1.2,,0 points,3 points,6 points,9 points
+Size,,,,,Blur,,,,
+,0°,45°,90°,135°,,0 points,5 points,10 points,15 points
+Angle,,,,,Distance,,,,
+,,,,,,,,,
+6.2 - INNER SHADOW,,,,,,,,,
+,0.0,0.3,0.6,0.9,,Text 1,Accent 1,Accent 3,Red
+Transparency,,,,,Color,,,,
+,,,,,,0 points,3 points,6 points,9 points
+,,,,,Blur,,,,
+,0°,45°,90°,135°,,0 points,5 points,10 points,15 points
+Angle,,,,,Distance,,,,

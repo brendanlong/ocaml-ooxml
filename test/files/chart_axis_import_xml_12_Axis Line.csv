@@ -1,0 +1,13 @@
+CHART AXES TEST DOCUMENT,,,,,,,,
+,,,,,,,,
+1 - AXIS LINE FORMATTING,,,,,,,,
+,,,,,,,,
+1.1 - AXIS VISIBILITY,,,,,,,,
+Invisible line,,,,Default line,,,,Deleted axes
+,,,,,,,,
+,,,,,,,,
+,,,,,,,,
+,,,,,,,,
+,,,,,,,,
+1.2 - AXIS LINE FORMATTING,,,,,,,,
+"X = solid thin red, Y = solid thin blue",,,,"X = dashed thick red 50% transp., Y = dotted thick blue",,,,"X = black-red gradient arrow, Y = transp. gradient arrow"

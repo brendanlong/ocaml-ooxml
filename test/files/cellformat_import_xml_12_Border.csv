@@ -1,0 +1,20 @@
+CELL FORMAT TEST DOCUMENT,,,,,,,,,,,
+,,,,,,,,,,,
+5 - BORDER,,,,,,,,,,,
+,,,,,,,,,,,
+5.1 - BORDER LINES,,,,,,,,,,,
+,L,,R,,T,,B,,/,,\
+,,,,,,,,,,,
+,LR,,TB,,Box,,X,,N,,Z
+,,,,,,,,,,,
+,,,,,,,,,,,
+5.2 - BORDER STYLE,,,,,,,,,,,
+,Hair,,Thin .,,Thin -..,,Thin -.,,Thin -,,Thin
+,,,,,,,,,,,
+,Med -..,,Slant -.,,Med -.,,Med -,,Med,,Thick
+,,,,,,,,,,,
+,=,,,,,,,,,,
+,,,,,,,,,,,
+,,,,,,,,,,,
+5.3 - BORDER COLOR,,,,,,,,,,,
+,Red,,Green,,Blue,,Multi,,Red =,,Multi

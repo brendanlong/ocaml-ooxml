@@ -1,0 +1,14 @@
+FORM CONTROLS TEST DOCUMENT,,,,
+,,,,
+2 - MOUSE POINTER,,,,
+,,,,
+2.1 - BUILT-IN MOUSE POINTER,,,,
+Default,Arrow,Cross,Text edit,SizeBLTR
+,,,,
+SizeVert,SizeTLBR,SizeHor,UpArrow,Hour glass
+,,,,
+No drop,Application start,Help,SizeAll,
+,,,,
+,,,,
+2.2 - CUSTOM MOUSE POINTER,,,,
+Custom,,,,

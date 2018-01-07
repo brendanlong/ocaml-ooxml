@@ -1,0 +1,15 @@
+CHART TEST DOCUMENT - MISSING AND HIDDEN VALUES,
+,
+3 - SOURCE DATA,
+,Series 1
+Point 1,1.0
+Point 2,2.0
+Point 3,
+Point 4,3.0
+Point 5,4.0
+,Series 1
+Point 1,1.0
+Point 2,2.0
+Hidden 3,3.0
+Point 4,4.0
+Point 5,5.0

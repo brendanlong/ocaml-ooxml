@@ -1,0 +1,16 @@
+FORM CONTROLS TEST DOCUMENT,,,,
+,,,,
+3 - ACTIVEX IMAGE (Forms.Image.1),,,,
+,,,,
+3.1 - BACKGROUND,,,,
+Default (system button),Transparent,System tooltip,Light red (#FFC0C0),
+,,,,
+,,,,
+3.2 - BORDER,,,,
+No border,System highlight,Red (#FF0000),3D raised,3D sunken
+,,,,
+3D etched,3D bumped,,,
+,,,,
+,,,,
+3.3 - OTHER SETTINGS,,,,
+Enabled = false,PrintObject = false,Shadow = true,Picture,Locked = false

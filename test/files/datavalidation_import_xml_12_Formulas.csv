@@ -1,0 +1,31 @@
+DATA VALIDATION TEST DOCUMENT,,,,
+,,,,
+2 - REFERENCES AND FORMULAS,,,,
+,,,,
+2.1 - REFERENCES IN CONDITIONS,,,,
+Condition,Is,,Is,
+whole numbers between =C7 and $E$8+1,,1.0,,3.0
+must: between cell to the right and 5,,2.0,,4.0
+,,,,
+2.2 - CUSTOM FORMULA,,,,
+Condition,Is,,Is,
+=B12=C12,,5.0,,7.0
+must: equal to cell to the right,,6.0,,8.0
+=B14=$C$14,,9.0,,
+must: equal to value 9 (value in cell C14),,,,
+,,,,
+2.3 - SOURCE RANGE,,,,
+Condition,Is,,Is,
+=C$19:C$21,,1.0,,4.0
+must: 3-element list to right of cells,,2.0,,5.0
+,,3.0,,6.0
+=$C$22:$C$24,,A,,
+"must: A,B,C (list in range C22:C24)",,B,,
+,,C,,D
+=name,,,,E
+"must: D,E,F (list in range E24:E26)",,,,F
+,,,,
+2.4 - STRING LIST,,,,
+Condition,Is,,Is,
+"""A"",""B"",""C""",,,,
+"""A"",""  B"",""  C  "",""1%""",,,,

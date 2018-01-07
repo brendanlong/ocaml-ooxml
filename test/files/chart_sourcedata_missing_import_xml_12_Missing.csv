@@ -1,0 +1,27 @@
+CHART TEST DOCUMENT - MISSING AND HIDDEN VALUES,,,,,,,,
+,,,,,,,,
+1 - MISSING VALUES,,,,,,,,
+,,,,,,,,
+1.1 - LINE CHART,,,,,,,,
+Skip,,,,Zero,,,,Interpolate
+,,,,,,,,
+,,,,,,,,
+,,,,,,,,
+,,,,,,,,
+,,,,,,,,
+1.2 - BAR CHART,,,,,,,,
+Skip,,,,Zero,,,,Interpolate (not supported by MS Excel)
+,,,,,,,,
+,,,,,,,,
+,,,,,,,,
+,,,,,,,,
+,,,,,,,,
+1.3 - AREA CHART,,,,,,,,
+Skip,,,,Zero,,,,Interpolate (not supported by MS Excel)
+,,,,,,,,
+,,,,,,,,
+,,,,,,,,
+,,,,,,,,
+,,,,,,,,
+1.4 - PIE CHART (no difference in display),,,,,,,,
+Skip,,,,Zero,,,,Interpolate

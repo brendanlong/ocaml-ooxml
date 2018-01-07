@@ -1,0 +1,48 @@
+PIVOT TABLES LAYOUT TEST DOCUMENT,,,,,,
+,,,,,,
+9 - SOURCE DATA,,,,,,
+Field 1,Field 2,Field 3,Field 4,Field 5,Field 6,Field 7
+Item 1.A,Item 2.A,Item 3.A,Item 4.A,Item 5.A,1.0,16.0
+Item 1.A,Item 2.A,Item 3.A,Item 4.A,Item 5.B,2.0,15.0
+Item 1.A,Item 2.A,Item 3.A,Item 4.B,Item 5.A,3.0,14.0
+Item 1.A,Item 2.A,Item 3.A,Item 4.B,Item 5.B,4.0,13.0
+Item 1.A,Item 2.A,Item 3.B,Item 4.A,Item 5.A,5.0,12.0
+Item 1.A,Item 2.A,Item 3.B,Item 4.A,Item 5.B,6.0,11.0
+Item 1.A,Item 2.A,Item 3.B,Item 4.B,Item 5.A,7.0,10.0
+Item 1.A,Item 2.A,Item 3.B,Item 4.B,Item 5.B,8.0,9.0
+Item 1.A,Item 2.B,Item 3.A,Item 4.A,Item 5.A,9.0,8.0
+Item 1.A,Item 2.B,Item 3.A,Item 4.A,Item 5.B,10.0,7.0
+Item 1.A,Item 2.B,Item 3.A,Item 4.B,Item 5.A,11.0,6.0
+Item 1.A,Item 2.B,Item 3.A,Item 4.B,Item 5.B,12.0,5.0
+Item 1.A,Item 2.B,Item 3.B,Item 4.A,Item 5.A,13.0,4.0
+Item 1.A,Item 2.B,Item 3.B,Item 4.A,Item 5.B,14.0,3.0
+Item 1.A,Item 2.B,Item 3.B,Item 4.B,Item 5.A,15.0,2.0
+Item 1.A,Item 2.B,Item 3.B,Item 4.B,Item 5.B,16.0,1.0
+,,,,,,
+Field 1,Field 2,Field 3,,,,
+Item 1.A,Item 2.A,2.0,,,,
+Item 1.A,Item 2.B,4.0,,,,
+Item 1.B,Item 2.A,Text 1,,,,
+Item 1.B,Item 2.B,Text 2,,,,
+,,,,,,
+Field 1,Field 2,,Field 1,Field 2,Field 3,
+Item 1.A,1.0,,Item 1.A,1.0,12.0,
+Item 1.B,1.0,,Item 1.B,2.0,11.0,
+Item 1.C,2.0,,Item 1.C,3.0,10.0,
+Item 1.D,3.0,,Item 1.D,4.0,9.0,
+Item 1.E,5.0,,Item 1.E,5.0,8.0,
+Item 1.F,6.0,,Item 1.F,6.0,7.0,
+Item 1.A,1.0,,Item 1.G,7.0,6.0,
+Item 1.B,2.0,,Item 1.H,8.0,5.0,
+Item 1.C,3.0,,Item 1.I,9.0,4.0,
+Item 1.D,4.0,,Item 1.J,10.0,3.0,
+Item 1.E,6.0,,Item 1.K,11.0,2.0,
+Item 1.F,7.0,,Item 1.L,12.0,1.0,
+,,,,,,
+Field 1,Field 2,Field 3,,,,
+Item 1.A,Item 2.A,1.0,,,,
+Item 1.A,Item 2.B,2.0,,,,
+Item 1.B,Item 2.A,3.0,,,,
+Item 1.B,Item 2.C,4.0,,,,
+Item 1.C,Item 2.B,5.0,,,,
+Item 1.C,Item 2.C,6.0,,,,

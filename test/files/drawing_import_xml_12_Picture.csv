@@ -1,0 +1,24 @@
+DRAWING LAYER TEST DOCUMENT,,,,,,
+,,,,,,
+11 - PICTURES,,,,,,Image source: http://en.wikipedia.org/wiki/File:Smiley.svg
+,,,,,,
+10.1 - PICTURE FORMAT,,,,,,
+BMP,EMF,GIF,JPG,PNG (alpha),TIF,WMF
+,,,,,,
+,,,,,,
+11.2 - RECOLOR,,,,,,
+Original,Grayscale,Sepia,Washout,Black/white,,
+,,,,,,
+Dark text2,Dark accent1,Dark accent2,Dark accent3,Dark accent4,Dark accent5,Dark accent6
+,,,,,,
+Light bg2,Light accent1,Light accent2,Light accent3,Light accent4,Light accent5,Light accent6
+,,,,,,
+,,,,,,
+11.3 - BRIGHTNESS/CONTRAST,,,,,,
+Bright -90%,Bright -50%,Bright -10%,Bright +10%,Bright +50%,Bright +90%,
+,,,,,,
+Contrast -90%,Contrast -50%,Contrast -10%,Contrast +10%,Contrast +50%,Contrast +90%,
+,,,,,,
+,,,,,,
+11.4 - SHAPE FORMATTING,,,,,,
+Red border,Accent 6 fill,Gradient,Texture,Fill bitmap,,

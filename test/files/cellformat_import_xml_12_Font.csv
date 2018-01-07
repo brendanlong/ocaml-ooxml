@@ -1,0 +1,67 @@
+CELL FORMAT TEST DOCUMENT,,,,,,
+,,,,,,
+1 - FONT,,,,,,
+,,,,,,
+1.1 - FONT NAME AND SIZE,,,,,,
+,Calibri,Cambria,Consolas,Major theme,Minor theme,
+8 points,Calibri,Cambria,Consolas,Headings,Body,
+10 points,Calibri,Cambria,Consolas,Headings,Body,
+12 points,Calibri,Cambria,Consolas,Headings,Body,
+,,,,,,
+1.2 - FONT ATTRIBUTES,,,,,,
+Bold,Italic,Strikeout,Subscript,Superscript,,
+Bold,Italic,Strikeout,Subscript,Superscript,,
+Single ul,Double ul,Single acc ul,Double acc ul,,,
+Single,Double,Single Acc,Double Acc,,,
+Red,Green,Blue,,,,
+Red,Green,Blue,,,,
+Richtext,,,,,,
+Calibri Consolas 8point 14point bold italic strikeout subscript superscript underline red,,,,,,
+Consolas-14pt bold-italic strikeout-superscript underline-red,,,,,,
+,,,,,,
+1.3 - ESCAPEMENT AND LINE BREAKS,,,,,,
+All,Line 1,Line 2,Line 1 Start,Line 1 End,Line 2 Start,Line 2 End
+"Subscript
+Subscript","Subscript
+Text","Text
+Subscript","SubscriptText
+Text","TextSubscript
+Text","Text
+SubscriptText","Text
+TextSubscript"
+"Superscript
+Superscript","Superscript
+Text","Text
+Superscript","SuperscriptText
+Text","TextSuperscript
+Text","Text
+SuperscriptText","Text
+TextSuperscript"
+"Subscript
+Superscript","SubscriptSuperscript
+Text","Text
+SubscriptSuperscript","SubSuperText
+Text","TextSubSuper
+Text","Text
+SubSuperText","Text
+TextSubSuper"
+,,,,,,
+1.4 - SCRIPT TYPES,,,,,,
+,Asian,,Complex,,,
+Calibri,Japanese 日本語,,Hebrew עברית,,,
+Arial,Japanese 日本語,,Hebrew עברית,,,
+Cambria,Japanese 日本語,,Hebrew עברית,,,
+Times NR,Japanese 日本語,,Hebrew עברית,,,
+Consolas,Japanese 日本語,,Hebrew עברית,,,
+Courier New,Japanese 日本語,,Hebrew עברית,,,
+,,,,,,
+1.5 - PHONETIC TEXT,,,,,,
+,No control,Hiragana,Full-width Kat.,Half-width Kat.,,Hidden
+Type,東京,東京,東京,東京,,東京
+,東京,東京,東京,東京,,東京
+,Left,Center,Distributed,No Control,,
+Alignment,東京,東京,東京,東京,,
+,東京,東京,東京,東京,,
+,12pt,Italic,Bold,Red,Underline,Strikeout
+Font,東京,東京,東京,東京,東京,東京
+,東京,東京,東京,東京,東京,東京

@@ -1,0 +1,61 @@
+LINKS TEST DOCUMENT,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,
+1 - INTERNAL REFERENCES,,,,,,2 - EXTERNAL REFERENCES,,,,,,,3 - DDE AND OLE LINKS,,,,,,
+,,,,,,,,,,,,,,,,,,,
+1.1 - INTERNAL 2D REFERENCES,,,,,,2.1 - ANALYSIS ADDIN,,,,,,,3.1 - DDE LINKS,,,not updated,,updated,
+Formula,Is,Must,Ok?,,,Formula,Is,Must,Ok?,,,,Formula,Is,,Must,Ok?,Must,Ok?
+=E7,1.0,1.0,1.0,1.0,,"=IMSUM(""1+1i"";""1+2i"")",2+3i,2+3i,1.0,,,,=excel|'X:\PATH\[EXTP12_3.XLSX]Sheet1'!'R7C1',10.0,,10.0,1.0,Text,ERR!
+=$E8,2.0,2.0,1.0,2.0,,=FACTDOUBLE(6),48.0,48.0,1.0,,,,=SUM(excel|'X:\PATH\[EXTP12_3.XLSX]Sheet1'!'R11C1:R11C6'),6.0,,6.0,1.0,66.0,ERR!
+=E$9,3.0,3.0,1.0,3.0,,,,,,,,,{=TRANSPOSE(excel|'X:\PATH\[EXTP12_3.XLSX]Sheet1'!'R7C1:R7C6')},10.0,,10.0,1.0,Text,ERR!
+=$E$10,4.0,4.0,1.0,4.0,,2.2 - EXTERNAL CELL REFERENCES,,not updated,,updated,,,,Text,,Text,1.0,10.0,ERR!
+{=$E$11},5.0,5.0,1.0,5.0,,Formula,Is,Must,Ok?,Must,Ok?,,,1,,1,1.0,7,ERR!
+=E12:E18,6.0,6.0,1.0,6.0,,=[EXTDATA12X.XLSX]Sheet1!$A$7,10.0,10.0,1.0,Text,ERR!,,,15,,15,1.0,0,ERR!
+=$E12:E18,7.0,7.0,1.0,7.0,,=[EXTDATA12X.XLSX]Sheet1!$B$7,Text,Text,1.0,10.0,ERR!,,,0.0,,0.0,1.0,,ERR!
+=E$12:E18,8.0,8.0,1.0,8.0,,=[EXTDATA12X.XLSX]Sheet1!$C$7,1,1,1.0,7,ERR!,,,,,,1.0,0.0,ERR!
+=E12:$E18,9.0,9.0,1.0,9.0,,=[EXTDATA12X.XLSX]Sheet1!$D$7,15,15,1.0,0,ERR!,,,,,,,,
+=E12:E$18,10.0,10.0,1.0,10.0,,=[EXTDATA12X.XLSX]Sheet1!$E$7,0.0,0.0,1.0,,ERR!,,3.2 - DDE PICTURE LINK,,,not updated,,updated,
+=$E$12:$E$18,11.0,11.0,1.0,11.0,,=[EXTDATA12X.XLSX]Sheet1!$F$7,,,1.0,0.0,ERR!,,Formula,Is,,Must,,Must,
+{=$E$12:$E$18},6.0,6.0,1.0,12.0,,=SUM([EXTDATA12X.XLSX]Sheet1!$A$11:$F$11),6.0,6.0,1.0,66.0,ERR!,,=excel|'X:\PATH\[EXTP12_3.XLSX]Sheet1'!'R7C2',,,,,,
+=E:E,13.0,13.0,1.0,13.0,,=SUM([EXTDATA12X.XLSX]Sheet1!$11:$11),9.0,9.0,1.0,99.0,ERR!,,,,,,,,
+=$E:$E,14.0,14.0,1.0,14.0,,=SUM([EXTDATA12X.XLSX]Sheet1!$H:$H),4.0,4.0,1.0,44.0,ERR!,,3.3 - OLE LINKS,,,not updated,,updated,
+=7:7,1.0,1.0,1.0,15.0,,=SUM([EXTDATA12X.XLSX]Sheet1:Sheet3!$A$11),6.0,6.0,1.0,36.0,ERR!,,Formula,Is,,Must,Ok?,Must,Ok?
+=$8:$8,2.0,2.0,1.0,16.0,,=[EXTDATA12X.XLSX]Sheet5!$A$7,5.0,5.0,1.0,15.0,ERR!,,=Excel.Sheet.12|\PATH\EXTP12_2.XLSX!'!Sheet1!R7C1',10.0,,10.0,1.0,Text,ERR!
+,,,,,,=extname1 - contains: =[EXTDATA12X.XLSX]Sheet1!$A$7,10.0,10.0,1.0,Text,ERR!,,=SUM(Excel.Sheet.12|\PATH\EXTP12_2.XLSX!'!Sheet1!R11C1:R11C6'),6.0,,6.0,1.0,66.0,ERR!
+1.2 - INTERNAL 3D REFERENCES TO THIS SHEET,,,,,,=SUM(extname2) - contains: =[EXTDATA12X.XLSX]Sheet1!$A$11:$F$11,6.0,6.0,1.0,66.0,ERR!,,{=TRANSPOSE(Excel.Sheet.12|\PATH\EXTP12_2.XLSX!'!Sheet1!R7C1:R7C6')},10.0,,10.0,1.0,Text,ERR!
+Formula,Is,Must,Ok?,,,=extname3 - contains: =SUM([EXTDATA12X.XLSX]Sheet1:Sheet3!$A$11),6.0,6.0,1.0,36.0,ERR!,,,Text,,Text,1.0,10.0,ERR!
+=Sheet1!E26,21.0,21.0,1.0,21.0,,=[EXTDATA12B.XLSB]Sheet1!$A$7,10.0,10.0,1.0,Text,ERR!,,,1,,1,1.0,7,ERR!
+=Sheet1!$E$27,22.0,22.0,1.0,22.0,,=SUM([EXTDATA12B.XLSB]Sheet1!$A$11:$F$11),6.0,6.0,1.0,66.0,ERR!,,,15,,15,1.0,0,ERR!
+{=Sheet1!$E$28},23.0,23.0,1.0,23.0,,=SUM([EXTDATA12B.XLSB]Sheet1:Sheet3!$A$11),6.0,6.0,1.0,36.0,ERR!,,,0.0,,0.0,1.0,,ERR!
+=Sheet1!E29:E31,24.0,24.0,1.0,24.0,,,,,,,,,,,,,1.0,0.0,ERR!
+=Sheet1!$E$29:$E$31,25.0,25.0,1.0,25.0,,2.3 - EXTERNAL NAMES,,not updated,,updated,,,,,,,,,
+{=Sheet1!$E$29:$E$31},24.0,24.0,1.0,26.0,,Formula,Is,Must,Ok?,Must,Ok?,,3.4 - OLE PICTURE LINK,,,not updated,,updated,
+=Sheet1!E:E,27.0,27.0,1.0,27.0,,=EXTDATA12X.XLSX!name,10.0,10.0,1.0,Text,ERR!,,Formula,Is,,Must,,Must,
+=Sheet1!$E:$E,28.0,28.0,1.0,28.0,,=[EXTDATA12X.XLSX]Sheet1!name,2.0,2.0,1.0,12.0,ERR!,,=Excel.Sheet.12|\PATH\EXTP12_2.XLSX!'!Sheet1!R7C2',,,,,,
+=Sheet1!26:26,21.0,21.0,1.0,29.0,,=[EXTDATA12X.XLSX]Sheet2!name,1.0,1.0,1.0,11.0,ERR!,,,,,,,,
+=Sheet1!$27:$27,22.0,22.0,1.0,30.0,,=SUM([EXTDATA12X.XLSX]Sheet1!Print_Area),4.0,4.0,1.0,24.0,ERR!,,3.5 - OLE ICONIFIED PICTURE LINK,,,,,,
+=name1 - contains: =Sheet1!$E$36,31.0,31.0,1.0,31.0,,,,,,,,,Formula,Is,,,,,
+,,,,,,2.4 - ABSOLUTE AND RELATIVE PATHS,,not updated,,updated,,,=Excel.Sheet.12|\PATH\EXTP12_2.XLSX!'!Sheet1!R7C3',,,,,,
+1.3 - INTERNAL 3D REFERENCES TO OTHER SHEETS,,,,,,Formula,Is,Must,Ok?,Must,Ok?,,,,,,,,
+Formula,Is,Must,Ok?,,,='PATH\[EXTP12_1.XLSX]Sheet1'!$A$7,10.0,10.0,1.0,Text,ERR!,,,,,,,,
+=Sheet2!E40,31.0,31.0,1.0,,,='\PATH\[EXTP12_2.XLSX]Sheet1'!$B$7,Text,Text,1.0,10.0,ERR!,,,,,,,,
+=Sheet2!$E$41,32.0,32.0,1.0,,,='X:\PATH\[EXTP12_3.XLSX]Sheet1'!$C$7,1,1,1.0,7,ERR!,,,,,,,,
+{=Sheet2!$E$42},33.0,33.0,1.0,,,='\\127.0.0.1\PATH\[EXTP12_4.XLSX]Sheet1'!$D$7,15,15,1.0,0,ERR!,,,,,,,,
+=Sheet2!E43:E45,34.0,34.0,1.0,,,=extname4 - contains: ='\\127.0.0.1\PATH\[EXTP12_4.XLSX]Sheet1'!$E$7,0.0,0.0,1.0,,ERR!,,,,,,,,
+=Sheet2!$E$43:$E$45,35.0,35.0,1.0,,,,,,,,,,,,,,,,
+{=Sheet2!$E$43:$E$45},34.0,34.0,1.0,,,2.5 - OLD BIFF TARGETS,,not updated,,updated,,,,,,,,,
+=Sheet2!E:E,37.0,37.0,1.0,,,Formula,Is,Must,Ok?,Must,Ok?,,,,,,,,
+=Sheet2!$E:$E,38.0,38.0,1.0,,,=[EXTDATA8.XLS]Sheet1!$A$7,10.0,10.0,1.0,Text,ERR!,,,,,,,,
+=Sheet2!40:40,39.0,39.0,1.0,,,=SUM([EXTDATA8.XLS]Sheet1!$A$11:$F$11),6.0,6.0,1.0,66.0,ERR!,,,,,,,,
+=Sheet2!$41:$41,40.0,40.0,1.0,,,=SUM([EXTDATA8.XLS]Sheet1:Sheet3!$A$11),6.0,6.0,1.0,36.0,ERR!,,,,,,,,
+=name2 - contains: =Sheet2!$E$50,41.0,41.0,1.0,,,=[EXTDATA5.XLS]Sheet1!$A$7,10.0,10.0,1.0,Text,ERR!,,,,,,,,
+=SUM(Sheet1:Sheet3!$E$51),42.0,42.0,1.0,1.0,,=SUM([EXTDATA5.XLS]Sheet1!$A$11:$F$11),6.0,6.0,1.0,66.0,ERR!,,,,,,,,
+=SUM(Sheet5:Sheet6!$E$4:$E$5),43.0,43.0,1.0,,,=SUM([EXTDATA5.XLS]Sheet1:Sheet3!$A$11),6.0,6.0,1.0,36.0,ERR!,,,,,,,,
+,,,,,,=[EXTDATA4.XLW]Sheet1!$A$7,10.0,10.0,1.0,Text,ERR!,,,,,,,,
+1.4 - DELETED REFERENCES,,,,,,=SUM([EXTDATA4.XLW]Sheet1!$A$11:$F$11),6.0,6.0,1.0,66.0,ERR!,,,,,,,,
+Formula,Is,Must,Ok?,,,=SUM([EXTDATA4.XLW]Sheet1:Sheet3!$A$11),6.0,6.0,1.0,36.0,ERR!,,,,,,,,
+=#REF!,23,23,1.0,,,=[EXTDATA4.XLS]EXTDATA4!$A$7,10.0,10.0,1.0,Text,ERR!,,,,,,,,
+=Sheet1!#REF!,23,23,1.0,,,=SUM([EXTDATA4.XLS]EXTDATA4!$A$11:$F$11),6.0,6.0,1.0,66.0,ERR!,,,,,,,,
+=Sheet2!#REF!,23,23,1.0,,,=[EXTDATA3.XLS]EXTDATA3!$A$7,10.0,10.0,1.0,Text,ERR!,,,,,,,,
+,,,,,,=SUM([EXTDATA3.XLS]EXTDATA3!$A$11:$F$11),6.0,6.0,1.0,66.0,ERR!,,,,,,,,
+,,,,,,=[EXTDATA2.XLS]EXTDATA2!$A$7,10.0,10.0,1.0,Text,ERR!,,,,,,,,
+,,,,,,=SUM([EXTDATA2.XLS]EXTDATA2!$A$11:$F$11),6.0,6.0,1.0,66.0,ERR!,,,,,,,,

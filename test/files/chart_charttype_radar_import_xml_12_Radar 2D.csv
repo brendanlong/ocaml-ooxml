@@ -1,0 +1,13 @@
+RADAR CHART TEST DOCUMENT,,,,,,,,
+,,,,,,,,
+1 - TWO-DIMENSIONAL RADAR CHARTS,,,,,,,,
+,,,,,,,,
+1.1 - RADAR STYLE,,,,,,,,
+Lines,,,,Lines and symbols,,,,Filled
+,,,,,,,,
+,,,,,,,,
+,,,,,,,,
+,,,,,,,,
+,,,,,,,,
+1.2 - LINE FORMATTING PROPERTIES,,,,,,,,
+VaryColors = on,,,,VaryColors = on (not used with multiple series),,,,Smoothed = on
