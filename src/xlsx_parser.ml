@@ -112,7 +112,7 @@ module Row = struct
               | PCData v -> Some v
               | _ -> None)
               |> Option.value ~default:""
-            | None | Some "s" | _->
+            | _ ->
               find_elements cell ~path:[ "c" ; "v" ]
               |> List.find_map ~f:(function
               | PCData v ->
