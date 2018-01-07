@@ -152,6 +152,12 @@ module Shared_strings = struct
   let of_xml root =
     find_elements ~path:[ "sst" ; "si" ] root
     |> List.map ~f:(function
+    | (Element ("r", _, _) as el) ->
+      find_elements el ~path:[ "r"; "t" ]
+      |> List.find_map ~f:(function
+      | PCData str -> Some str
+      | _ -> None)
+      |> Option.value ~default:""
     | Element ("t", _, [ PCData str] ) -> str
     | el ->
       failwithf "Unexpected shared string element %s"
