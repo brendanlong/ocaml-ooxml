@@ -36,7 +36,8 @@ let find_element_exn el ~path =
 module Sheet_meta = struct
   type t =
     { name : string
-    ; id : int }
+    ; id : int
+    ; rel_id : string }
       [@@deriving compare, fields, sexp]
 
   let of_xml =
@@ -45,7 +46,8 @@ module Sheet_meta = struct
     | Element ("sheet", attrs, _) ->
       let name = find_attr_exn attrs "name" in
       let id = find_attr_exn attrs "sheetId" |> Int.of_string in
-      Some { name ; id }
+      let rel_id = find_attr_exn attrs "r:id" in
+      Some { name ; id ; rel_id }
     | _ -> None
 end
 
@@ -69,6 +71,35 @@ module Workbook_meta = struct
         |> Option.value ~default:[]
       in
       { sheets }
+    | _ -> assert false
+end
+
+module Relationship = struct
+  type t =
+    { id : string
+    ; type_ : string
+    ; target : string }
+      [@@deriving compare, fields, sexp]
+
+  let to_map ts =
+    List.map ts ~f:(fun { id ; target } -> id, target)
+    |> Map.Using_comparator.of_alist_exn ~comparator:String.comparator
+
+  let of_xml = function
+    | Xml.Element ("Relationship", attrs, _) ->
+      let id = find_attr_exn attrs "Id" in
+      let type_ = find_attr_exn attrs "Type" in
+      let target = find_attr_exn attrs "Target" in
+      Some { id ; type_ ; target }
+    | _ -> None
+
+  let of_zip zip =
+    Zip.find_entry zip "xl/_rels/workbook.xml.rels"
+    |> Zip.read_entry zip
+    |> Xml.parse_string
+    |> function
+    | Xml.Element("Relationships", _, children) ->
+      List.filter_map children ~f:of_xml
     | _ -> assert false
 end
 
@@ -215,9 +246,14 @@ let read_file filename =
       Workbook_meta.of_zip zip
       |> Workbook_meta.sheets
     in
-    List.map sheets ~f:(fun { Sheet_meta.name ; id } ->
+    let rel_map =
+      Relationship.of_zip zip
+      |> Relationship.to_map
+    in
+    List.map sheets ~f:(fun { Sheet_meta.name ; rel_id } ->
       let rows =
-        let path = sprintf "xl/worksheets/sheet%d.xml" id in
+        let target = Map.find_exn rel_map rel_id in
+        let path = sprintf "xl/%s" target in
         let worksheet =
           Zip.find_entry zip path
           |> Zip.read_entry zip
