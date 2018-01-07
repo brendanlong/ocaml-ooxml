@@ -46,7 +46,7 @@ let make_test (skip, file_name, sheet_names) =
         assert_equal ~printer expect actual)
 
 let () =
-  [ `Skip, "autofilter_import_xml_12", [ "Discrete"; "Top10"; "Custom"; "Advanced1"; "Advanced2" ]
+  [ `Run, "autofilter_import_xml_12", [ "Discrete"; "Top10"; "Custom"; "Advanced1"; "Advanced2" ]
   ; `Skip, "cellformat_import_xml_12", [ "Font"; "Number Format"; "Alignment"; "Protection"; "Border"; "Fill"; "Styles" ]
   ; `Skip, "cellnotes_import_xml_12", [ "Line"; "Fill"; "Visibility" ]
   ; `Run, "cells_import_xml_12", [ "Sheet1" ]

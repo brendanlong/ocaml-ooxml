@@ -98,32 +98,56 @@ module Row = struct
     | Element ("row", attrs, cells) ->
       let index = find_attr_exn attrs "r" |> Int.of_string in
       let row =
-        List.map cells ~f:(fun cell ->
-          match cell with
-          | Element ("c", attrs, children) ->
-            let t = List.find_map attrs ~f:(function
-              | "t", value -> Some value
-              | _ -> None)
-            in
-            (match t with
-            | Some "inlineStr" ->
-              find_elements cell ~path:[ "c" ; "is" ; "t" ]
-              |> List.find_map ~f:(function
-              | PCData v -> Some v
-              | _ -> None)
-              |> Option.value ~default:""
-            | _ ->
-              find_elements cell ~path:[ "c" ; "v" ]
-              |> List.find_map ~f:(function
-              | PCData v ->
-                if Option.equal String.equal t (Some "s") then
-                  let i = Int.of_string v in
-                  Some shared_strings.(i)
-                else
-                  Some v
-              | _ -> None)
-              |> Option.value ~default:"")
-          | _ -> "")
+        let cell_map =
+          List.map cells ~f:(fun cell ->
+            match cell with
+            | Element ("c", attrs, children) ->
+              let col =
+                (* get the column number from the "r" attribute, which looks
+                   like A1, B1, etc. *)
+                (find_attr_exn attrs "r"
+                 |> String.to_list
+                 |> List.take_while ~f:Char.is_alpha
+                 |> List.map ~f:Char.uppercase
+                 |> List.map ~f:(fun c -> Char.to_int c - Char.to_int 'A' + 1)
+                 |> List.fold ~init:0 ~f:(fun acc n -> acc * 26 + n))
+                - 1
+              in
+              let t = List.find_map attrs ~f:(function
+                | "t", value -> Some value
+                | _ -> None)
+              in
+              col, (match t with
+              | Some "inlineStr" ->
+                find_elements cell ~path:[ "c" ; "is" ; "t" ]
+                |> List.find_map ~f:(function
+                | PCData v -> Some v
+                | _ -> None)
+                |> Option.value ~default:""
+              | _ ->
+                find_elements cell ~path:[ "c" ; "v" ]
+                |> List.find_map ~f:(function
+                | PCData v ->
+                  if Option.equal String.equal t (Some "s") then
+                    let i = Int.of_string v in
+                    Some shared_strings.(i)
+                  else
+                    Some v
+                | _ -> None)
+                |> Option.value ~default:"")
+            | _ -> assert false)
+          |> Map.Using_comparator.of_alist_exn ~comparator:Int.comparator
+        in
+        let n =
+          Map.keys cell_map
+          |> List.max_elt ~cmp:Int.compare
+          |> Option.map ~f:((+) 1)
+          |> Option.value ~default:0
+        in
+        List.init n ~f:Fn.id
+        |> List.map ~f:(fun i ->
+          Map.find cell_map i
+          |> Option.value ~default:"")
       in
       (* Rows at 1-indexed, convert to 0-indexed *)
       Some { index = index - 1 ; cells = row }
