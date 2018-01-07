@@ -45,6 +45,21 @@ let sort_sheets =
     String.compare a.Xlsx_parser.name b.Xlsx_parser.name)
 
 let make_test (skip, file_name, sheet_names) =
+  let normalize_sheets sheets =
+    (* Fix sheet order and remove whitespace at the end of lines or sheets,
+       since we don't care about either of these things *)
+    sort_sheets sheets
+    |> List.map ~f:(fun { Xlsx_parser.name ; rows } ->
+      let rows =
+        List.rev_map rows ~f:(fun row ->
+          List.rev row
+          |> List.drop_while ~f:String.is_empty
+          |> List.rev)
+        |> List.drop_while ~f:List.is_empty
+        |> List.rev
+      in
+      { Xlsx_parser.name ; rows })
+  in
   let sheet_names = List.sort ~cmp:String.compare sheet_names in
   file_name >::
     fun _ ->
@@ -62,16 +77,18 @@ let make_test (skip, file_name, sheet_names) =
             |> Array.to_list
           in
           { Xlsx_parser.name = sheet_name ; rows })
-        |> sort_sheets
+        |> normalize_sheets
       in
       Xlsx_parser.read_file (sprintf "test/files/%s.xlsx" file_name)
-      |> sort_sheets
+      |> normalize_sheets
       |> List.iter2_exn expect ~f:(fun expect actual ->
         assert_equal ~pp_diff expect actual)
 
 let () =
   [ `Run, "autofilter_import_xml_12", [ "Discrete"; "Top10"; "Custom"; "Advanced1"; "Advanced2" ]
+  (* Need to handle <phoneticPr/> element in shared strings *)
   ; `Skip, "cellformat_import_xml_12", [ "Font"; "Number Format"; "Alignment"; "Protection"; "Border"; "Fill"; "Styles" ]
+  (* Need to handle percent formatting *)
   ; `Skip, "cellnotes_import_xml_12", [ "Line"; "Fill"; "Visibility" ]
   ; `Run, "cells_import_xml_12", [ "Sheet1" ]
   ; `Skip, "chart_3dsettings_import_xml_12", [ "Rotation"; "Elevation"; "Perspective"; "Settings"; "SourceData" ]
