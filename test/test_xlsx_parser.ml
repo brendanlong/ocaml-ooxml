@@ -118,7 +118,7 @@ let () =
   ; `Skip, "formcontrols_import_xml_12", [ "AxCmdButton"; "AxLabel"; "AxImage"; "AxToggle"; "AxCheckBox"; "AxOptButton"; "AxTextBox"; "AxListBox"; "AxComboBox"; "AxSpinButton"; "AxScrollBar" ]
   ; `Skip, "formcontrols_legacy_import_xml_12", [ "Legacy Controls" ]
   ; `Skip, "formula_import_xml_12", [ "Cell"; "Table"; "Param"; "Functions"; "Array"; "Shared"; "TableOp" ]
-  ; `Skip, "hyperlink_import_xml_12", [ "Sheet1"; "Sheet2"; "Sheet'!" ]
+  ; `Run, "hyperlink_import_xml_12", [ "Sheet1"; "Sheet2"; "Sheet'!" ]
   (* Need to support various kinds of number formatting *)
   ; `Skip, "numberformat_import_xml_12", [ "Sheet1" ]
   ; `Run, "oleobject_import_xml_12", [ "OLE"; "SourceData" ]

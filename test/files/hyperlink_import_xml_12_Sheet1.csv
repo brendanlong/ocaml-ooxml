@@ -62,16 +62,16 @@ This is another tooltip.,http://www.example.org/,,
 Cell type,Cell without hyperlink,Cell with hyperlink,With text formatting
 String,STRING,STRING,STRING
 Rich string,RICH STRING,RICH STRING,RICH STRING
-Number,12345.0,12345.0,12345.0
+Number,12345,12345,12345
 Boolean,1,1,1
-Error,7,7,7
+Error,#DIV/0!,#DIV/0!,#DIV/0!
 String formula,STRING,STRING,STRING
-Number formula,12345.0,12345.0,12345.0
+Number formula,12345,12345,12345
 Boolean formula,1,1,1
-Error formula,7,7,7
+Error formula,#DIV/0!,#DIV/0!,#DIV/0!
 String formula with HYPERLINK function,STRING,STRING,STRING
-Number formula with HYPERLINK function,12345.0,12345.0,12345.0
+Number formula with HYPERLINK function,12345,12345,12345
 Boolean formula with HYPERLINK function,1,1,1
-Error formula with HYPERLINK function,7,7,7
+Error formula with HYPERLINK function,#DIV/0!,#DIV/0!,#DIV/0!
 Single-cell array formulas,STRING,STRING,STRING
 Array formula,STRING,STRING,STRING
