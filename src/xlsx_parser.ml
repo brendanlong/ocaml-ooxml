@@ -212,9 +212,10 @@ let read_file filename =
         let n =
           Map.keys row_map
           |> List.max_elt ~cmp:Int.compare
+          |> Option.map ~f:((+) 1)
           |> Option.value ~default:0
         in
-        List.init (n + 1) ~f:Fn.id
+        List.init n ~f:Fn.id
         |> List.map ~f:(fun i ->
           let row =
             Map.find row_map i
