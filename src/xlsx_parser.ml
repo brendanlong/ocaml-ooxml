@@ -146,11 +146,29 @@ module Worksheet = struct
     { columns ; rows }
 end
 
-type row = string list [@@deriving compare, sexp]
+module Shared_strings = struct
+  type t = string list [@@deriving compare, sexp]
+
+  let of_xml root =
+    find_elements ~path:[ "sst" ; "si" ] root
+    |> List.map ~f:(function
+    | Element ("t", _, [ PCData str] ) -> str
+    | el ->
+      failwithf "Unexpected shared string element %s"
+        (Xml.to_string el) ())
+    |> List.to_array
+
+  let of_zip zip =
+    Zip.find_entry zip "xl/sharedStrings.xml"
+    |> Zip.read_entry zip
+    |> Xml.parse_string
+    |> of_xml
+
+end
 
 type sheet =
   { name : string
-  ; rows : row list }
+  ; rows : string list list }
     [@@deriving compare, sexp]
 
 type t = sheet list [@@deriving compare, sexp]
@@ -158,18 +176,7 @@ type t = sheet list [@@deriving compare, sexp]
 let read_file filename =
   let zip = Zip.open_in filename in
   Exn.protect ~f:(fun () ->
-    let shared_strings =
-      Zip.find_entry zip "xl/sharedStrings.xml"
-      |> Zip.read_entry zip
-      |> Xml.parse_string
-      |> find_elements ~path:[ "sst" ; "si" ]
-      |> List.map ~f:(function
-      | Element ("t", _, [ PCData str] ) -> str
-      | el ->
-        failwithf "Unexpected shared string element %s"
-          (Xml.to_string el) ())
-      |> List.to_array
-    in
+    let shared_strings = Shared_strings.of_zip zip in
     let sheets =
       Workbook_meta.of_zip zip
       |> Workbook_meta.sheets
