@@ -6,9 +6,10 @@ CELL NOTES TEST DOCUMENT,,,,,,,,,,,
 ,No color,Automatic,Black,Red,Yellow,Green,Blue,White,,,
 Palette,,,,,,,,,,,
 ,,,,,,,,,,,
-,Gray 25%,Gray 50%,Gray 75%,Violet 50%,Violet 100%,Brown,Orange,,0.25,0.5,0.75
+,Gray 25%,Gray 50%,Gray 75%,Violet 50%,Violet 100%,Brown,Orange,,25%,50%,75%
 RGB,,,,,,,,Transparence,,,
 ,,,,,,,,,,,
 1.2 - LINE STYLE,,,,,,,,,,,
 ,Double,Dotted round,Dotted edgy,Dashed,,Hair (0 pt),1 pt,2 pt,3 pt,4 pt,5 pt
 Line style,,,,,Line width,,,,,,
+,,,,,,,,,,,

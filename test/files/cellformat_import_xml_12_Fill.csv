@@ -1,29 +1,45 @@
-CELL FORMAT TEST DOCUMENT,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,
-6 - FILL,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,
-"6.1 - PATTERN FILL (background = black, pattern = red)",,,,,,,,,,,,,,,,
-Solid,75%,50%,25%,12%,6%,Hor,Ver,Tl-Br,Bl-Tr,,,Hor,Ver,Tl-Br,Bl-Tr,
-,,,,,,,,,,,,,,,,
-PCol,Blk,75%,50%,25%,Red,75%,50%,25%,Wht,75%,50%,25%,Aut,75%,50%,25%
-Blk,,,,,,,,,,,,,,,,
-Red,,,,,,,,,,,,,,,,
-Wht,,,,,,,,,,,,,,,,
-Aut,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,
-"6.2 - GRADIENT FILL (color1 = black, color2 = red)",,,,,,,,,,,,,,,,
-T-B,B-T,T-C,L-R,R-L,L-C,Tl-Br,Bl-Tr,Tl-C,Tr-Bl,Bl-Tr,Tr-C,Br,Bl,Tr,Tl,C
-,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,
-"6.3 - THEME COLORS, CUSTOM COLORS",,,,,,,,,,,,,,,,
-Theme colors,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,
-Base colors,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,
-Custom RGB colors,,,,,,,,,,,,,,,,
+CELL NOTES TEST DOCUMENT,,,,,,,,,,,
+,,,,,,,,,,,
+2 - FILL FORMATTING,,,,,,,,,,,
+,,,,,,,,,,,
+2.1 - SOLID COLOR AND TRANSPARENCE,,,,,,,,,,,
+,No color,System,Black,Red,Yellow,Green,Blue,White,Automatic,,
+Palette,,,,,,,,,,,
+,,,,,,,,,,,
+,Gray 25%,Gray 50%,Gray 75%,Violet 50%,Violet 100%,Brown,Orange,,25%,50%,75%
+RGB,,,,,,,,Transparence,,,
+,,,,,,,,,,,
+2.2 - GRADIENT COLOR AND TRANSPARENCE,,,,,,,,,,,
+,Dark 100%,Dark 60%,Dark 20%,Light 20%,Light 60%,Light 100%,,Red-black,Green-white,,
+"1-color
+gradient",,,,,,,"2-color
+gradient",,,,
+,,,,,,,,,,,
+,"0%, 50%","0%, 100%","50%, 100%","100%, 50%","100%, 0%","50%, 0%",,Early Sunset,Late Sunset,Nightfall,Daybreak
+"Gradient
+transparence",,,,,,,"Gradient
+presets",,,,
+,,,,,,,,,,,
+,0°,45°,90°,135°,180°,225°,270°,315°,,,
+"Linear
+gradient
+angle",,,,,,,,,,,
+,,,,,,,,,,,
+,0°,45°,90°,135°,,0°,45°,90°,135°,,
+"Inner axial
+gradient
+angle",,,,,"Outer axial
+gradient
+angle",,,,,,
+,,,,,,,,,,,
+,Top left,Top right,Bottom left,Bottom right,Inner,Outer,,,,,
+"Rectangular
+gradient",,,,,,,,,,,
+,,,,,,,,,,,
+"2.3 - TEXTURE, PATTERN, BITMAP",,,,,,,,,,,
+,Newsprint,Green marble,Denim,Paper bag,,Light dn diag,Wide dn diag,Hor brick,Solid diamond,,
+Texture,,,,,Pattern,,,,,,
+,,,,,,,,,,,
+,EMF stretch,EMF fix,JPG,PNG,,,,,,,
+Bitmap,,,,,,,,,,,
+,,,,,,,,,,,
