@@ -158,6 +158,7 @@ module Shared_strings = struct
       | PCData str -> Some str
       | _ -> None)
       |> Option.value ~default:""
+    | Element ("t", _, []) -> ""
     | Element ("t", _, [ PCData str] ) -> str
     | el ->
       failwithf "Unexpected shared string element %s"
