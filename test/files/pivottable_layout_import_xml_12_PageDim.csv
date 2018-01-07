@@ -5,9 +5,9 @@ PIVOT TABLES LAYOUT TEST DOCUMENT,,,,,,,
 6.1 - FIELDS IN PAGE DIMENSION,,,,,,,
 Page = Field 2,,,"Page = Field 2, Field 3",,,"Page = Field 5, Field 3",
 ,,,,,,,
-,,,Field 2,(All),,Field 5,(All)
-Field 2,(All),,Field 3,(All),,Field 3,(All)
+,,,Field 2,- all -,,Field 5,- all -
+Field 2,- all -,,Field 3,- all -,,Field 3,- all -
 ,,,,,,,
-Field 1,Sum of Field 6,,Field 1,Sum of Field 6,,Field 1,Sum of Field 6
-Item 1.A,136.0,,Item 1.A,136.0,,Item 1.A,136.0
-Grand Total,136.0,,Grand Total,136.0,,Grand Total,136.0
+Field 1,Sum - Field 6,,Field 1,Sum - Field 6,,Field 1,Sum - Field 6
+Item 1.A,136,,Item 1.A,136,,Item 1.A,136
+Total Result,136,,Total Result,136,,Total Result,136

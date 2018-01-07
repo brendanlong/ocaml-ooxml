@@ -7,11 +7,11 @@ PIVOT TABLES DATA SOURCE TEST DOCUMENT,,,,,,,,,
 ,,,,,,,,,
 ,,,,,,,,,
 ,,,,,,,,,
-Sum of Field 3,Column Labels,,,,,Sum of Field 3,Column Labels,,
-Row Labels,Item 1.A,Item 1.B,Grand Total,,,Row Labels,Item 2.A,Item 2.B,Grand Total
-Item 2.A,3.0,11.0,14.0,,,Item 1.A,3.0,7.0,10.0
-Item 2.B,7.0,15.0,22.0,,,Item 1.B,11.0,15.0,26.0
-Grand Total,10.0,26.0,36.0,,,Grand Total,14.0,22.0,36.0
+Sum - Field 3,Field 1,,,,,Sum - Field 3,Field 2,,
+Field 2,Item 1.A,Item 1.B,Total Result,,,Field 1,Item 2.A,Item 2.B,Total Result
+Item 2.A,3,11,14,,,Item 1.A,3,7,10
+Item 2.B,7,15,22,,,Item 1.B,11,15,26
+Total Result,10,26,36,,,Total Result,14,22,36
 ,,,,,,,,,
 ,,,,,,,,,
 ,,,,,,,,,
@@ -21,11 +21,11 @@ Grand Total,10.0,26.0,36.0,,,Grand Total,14.0,22.0,36.0
 ,,,,,,,,,
 ,,,,,,,,,
 ,,,,,,,,,
-Sum of Field 6,Column Labels,,,,,Sum of Field 9,Column Labels,,
-Row Labels,Item 4.A,Item 4.B,Grand Total,,,Row Labels,Item 7.A,Item 7.B,Grand Total
-Item 5.A,123.0,131.0,254.0,,,Item 8.A,183.0,191.0,374.0
-Item 5.B,127.0,135.0,262.0,,,Item 8.B,187.0,195.0,382.0
-Grand Total,250.0,266.0,516.0,,,Grand Total,370.0,386.0,756.0
+Sum - Field 6,Field 4,,,,,Sum - Field 9,Field 7,,
+Field 5,Item 4.A,Item 4.B,Total Result,,,Field 8,Item 7.A,Item 7.B,Total Result
+Item 5.A,123,131,254,,,Item 8.A,183,191,374
+Item 5.B,127,135,262,,,Item 8.B,187,195,382
+Total Result,250,266,516,,,Total Result,370,386,756
 ,,,,,,,,,
 ,,,,,,,,,
 ,,,,,,,,,
@@ -34,8 +34,8 @@ Grand Total,250.0,266.0,516.0,,,Grand Total,370.0,386.0,756.0
 ,,,,,,,,,
 ,,,,,,,,,
 ,,,,,,,,,
-Sum of Field 12,Column Labels,,,,,Sum of Field 15,Column Labels,,
-Row Labels,Item 10.A,Item 10.B,Grand Total,,,Row Labels,Item 13.A,Item 13.B,Grand Total
-Item 11.A,243.0,251.0,494.0,,,Item 14.A,303.0,311.0,614.0
-Item 11.B,247.0,255.0,502.0,,,Item 14.B,307.0,315.0,622.0
-Grand Total,490.0,506.0,996.0,,,Grand Total,610.0,626.0,1236.0
+Sum - Field 12,Field 10,,,,,Sum - Field 15,Field 13,,
+Field 11,Item 10.A,Item 10.B,Total Result,,,Field 14,Item 13.A,Item 13.B,Total Result
+Item 11.A,243,251,494,,,Item 14.A,303,311,614
+Item 11.B,247,255,502,,,Item 14.B,307,315,622
+Total Result,490,506,996,,,Total Result,610,626,1236

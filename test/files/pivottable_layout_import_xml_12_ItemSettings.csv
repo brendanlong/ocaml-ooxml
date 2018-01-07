@@ -5,43 +5,43 @@ PIVOT TABLES LAYOUT TEST DOCUMENT,,,,,,,,,,,,,,
 3.1 - VISIBILITY,,,,,,,,,,,,,,
 All visible,,,,Item 1.A hidden,,,,Item 1.B hidden,,,,"Item 1.A, 1.C hidden",,
 ,,,,,,,,,,,,,,
-Field 1,Field 2,Sum of Field 3,,Field 1,Field 2,Sum of Field 3,,Field 1,Field 2,Sum of Field 3,,Field 1,Field 2,Sum of Field 3
-Item 1.A,Item 2.A,1.0,,Item 1.B,Item 2.A,3.0,,Item 1.A,Item 2.A,1.0,,Item 1.B,Item 2.A,3.0
-,Item 2.B,2.0,,,Item 2.C,4.0,,,Item 2.B,2.0,,,Item 2.C,4.0
-Item 1.A Total,,3.0,,Item 1.B Total,,7.0,,Item 1.A Total,,3.0,,Item 1.B Total,,7.0
-Item 1.B,Item 2.A,3.0,,Item 1.C,Item 2.B,5.0,,Item 1.C,Item 2.B,5.0,,Grand Total,,7.0
-,Item 2.C,4.0,,,Item 2.C,6.0,,,Item 2.C,6.0,,,,
-Item 1.B Total,,7.0,,Item 1.C Total,,11.0,,Item 1.C Total,,11.0,,,,
-Item 1.C,Item 2.B,5.0,,Grand Total,,18.0,,Grand Total,,14.0,,,,
-,Item 2.C,6.0,,,,,,,,,,,,
-Item 1.C Total,,11.0,,,,,,,,,,,,
-Grand Total,,21.0,,,,,,,,,,,,
+Field 1,Field 2,Sum - Field 3,,Field 1,Field 2,Sum - Field 3,,Field 1,Field 2,Sum - Field 3,,Field 1,Field 2,Sum - Field 3
+Item 1.A,Item 2.A,1,,Item 1.B,Item 2.A,3,,Item 1.A,Item 2.A,1,,Item 1.B,Item 2.A,3
+,Item 2.B,2,,,Item 2.C,4,,,Item 2.B,2,,,Item 2.C,4
+Item 1.A Result,,3,,Item 1.B Result,,7,,Item 1.A Result,,3,,Item 1.B Result,,7
+Item 1.B,Item 2.A,3,,Item 1.C,Item 2.B,5,,Item 1.C,Item 2.B,5,,Total Result,,7
+,Item 2.C,4,,,Item 2.C,6,,,Item 2.C,6,,,,
+Item 1.B Result,,7,,Item 1.C Result,,11,,Item 1.C Result,,11,,,,
+Item 1.C,Item 2.B,5,,Total Result,,18,,Total Result,,14,,,,
+,Item 2.C,6,,,,,,,,,,,,
+Item 1.C Result,,11,,,,,,,,,,,,
+Total Result,,21,,,,,,,,,,,,
 ,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,
 Item 2.A hidden,,,,Item 2.B hidden,,,,"Item 2.A, 2.C hidden",,,,"Item 1.A, 2.B hidden",,
 ,,,,,,,,,,,,,,
-Field 1,Field 2,Sum of Field 3,,Field 1,Field 2,Sum of Field 3,,Field 1,Field 2,Sum of Field 3,,Field 1,Field 2,Sum of Field 3
-Item 1.A,Item 2.B,2.0,,Item 1.A,Item 2.A,1.0,,Item 1.A,Item 2.B,2.0,,Item 1.B,Item 2.A,3.0
-Item 1.A Total,,2.0,,Item 1.A Total,,1.0,,Item 1.A Total,,2.0,,,Item 2.C,4.0
-Item 1.B,Item 2.C,4.0,,Item 1.B,Item 2.A,3.0,,Item 1.C,Item 2.B,5.0,,Item 1.B Total,,7.0
-Item 1.B Total,,4.0,,,Item 2.C,4.0,,Item 1.C Total,,5.0,,Item 1.C,Item 2.C,6.0
-Item 1.C,Item 2.B,5.0,,Item 1.B Total,,7.0,,Grand Total,,7.0,,Item 1.C Total,,6.0
-,Item 2.C,6.0,,Item 1.C,Item 2.C,6.0,,,,,,Grand Total,,13.0
-Item 1.C Total,,11.0,,Item 1.C Total,,6.0,,,,,,,,
-Grand Total,,17.0,,Grand Total,,14.0,,,,,,,,
+Field 1,Field 2,Sum - Field 3,,Field 1,Field 2,Sum - Field 3,,Field 1,Field 2,Sum - Field 3,,Field 1,Field 2,Sum - Field 3
+Item 1.A,Item 2.B,2,,Item 1.A,Item 2.A,1,,Item 1.A,Item 2.B,2,,Item 1.B,Item 2.A,3
+Item 1.A Result,,2,,Item 1.A Result,,1,,Item 1.A Result,,2,,,Item 2.C,4
+Item 1.B,Item 2.C,4,,Item 1.B,Item 2.A,3,,Item 1.C,Item 2.B,5,,Item 1.B Result,,7
+Item 1.B Result,,4,,,Item 2.C,4,,Item 1.C Result,,5,,Item 1.C,Item 2.C,6
+Item 1.C,Item 2.B,5,,Item 1.B Result,,7,,Total Result,,7,,Item 1.C Result,,6
+,Item 2.C,6,,Item 1.C,Item 2.C,6,,,,,,Total Result,,13
+Item 1.C Result,,11,,Item 1.C Result,,6,,,,,,,,
+Total Result,,17,,Total Result,,14,,,,,,,,
 ,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,
 3.2 - EXPANSION,,,,,,,,,,,,,,
 All expanded,,,,Item 1.A collapsed,,,,Item 1.B collapsed,,,,"Item 1.A, 1.C collapsed",,
 ,,,,,,,,,,,,,,
-Field 1,Field 2,Sum of Field 3,,Field 1,Field 2,Sum of Field 3,,Field 1,Field 2,Sum of Field 3,,Field 1,Field 2,Sum of Field 3
-Item 1.A,Item 2.A,1.0,,Item 1.A,,3.0,,Item 1.A,Item 2.A,1.0,,Item 1.A,,3.0
-,Item 2.B,2.0,,Item 1.B,Item 2.A,3.0,,,Item 2.B,2.0,,Item 1.B,Item 2.A,3.0
-Item 1.A Total,,3.0,,,Item 2.C,4.0,,Item 1.A Total,,3.0,,,Item 2.C,4.0
-Item 1.B,Item 2.A,3.0,,Item 1.B Total,,7.0,,Item 1.B,,7.0,,Item 1.B Total,,7.0
-,Item 2.C,4.0,,Item 1.C,Item 2.B,5.0,,Item 1.C,Item 2.B,5.0,,Item 1.C,,11.0
-Item 1.B Total,,7.0,,,Item 2.C,6.0,,,Item 2.C,6.0,,Grand Total,,21.0
-Item 1.C,Item 2.B,5.0,,Item 1.C Total,,11.0,,Item 1.C Total,,11.0,,,,
-,Item 2.C,6.0,,Grand Total,,21.0,,Grand Total,,21.0,,,,
-Item 1.C Total,,11.0,,,,,,,,,,,,
-Grand Total,,21.0,,,,,,,,,,,,
+Field 1,Field 2,Sum - Field 3,,Field 1,Field 2,Sum - Field 3,,Field 1,Field 2,Sum - Field 3,,Field 1,Field 2,Sum - Field 3
+Item 1.A,Item 2.A,1,,Item 1.A,,3,,Item 1.A,Item 2.A,1,,Item 1.A,,3
+,Item 2.B,2,,Item 1.B,Item 2.A,3,,,Item 2.B,2,,Item 1.B,Item 2.A,3
+Item 1.A Result,,3,,,Item 2.C,4,,Item 1.A Result,,3,,,Item 2.C,4
+Item 1.B,Item 2.A,3,,Item 1.B Result,,7,,Item 1.B,,7,,Item 1.B Result,,7
+,Item 2.C,4,,Item 1.C,Item 2.B,5,,Item 1.C,Item 2.B,5,,Item 1.C,,11
+Item 1.B Result,,7,,,Item 2.C,6,,,Item 2.C,6,,Total Result,,21
+Item 1.C,Item 2.B,5,,Item 1.C Result,,11,,Item 1.C Result,,11,,,,
+,Item 2.C,6,,Total Result,,21,,Total Result,,21,,,,
+Item 1.C Result,,11,,,,,,,,,,,,
+Total Result,,21,,,,,,,,,,,,

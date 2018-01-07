@@ -5,131 +5,131 @@ PIVOT TABLES LAYOUT TEST DOCUMENT,,,,,,,,,,,,,,,,,,,,,,
 2.1 - FIELD SUBTOTAL (Field 1),,,,,,,,,,,,,,,,,,,,,,
 "Automatic (6, 0)",,,,"Sum (6, 0)",,,,"Count all (2, 2)",,,,"Average (3, #DIV/0!)",,,,"Max (4, 0)",,,,"Min (2, 0)",,
 ,,,,,,,,,,,,,,,,,,,,,,
-Field 1,Field 2,Sum of Field 3,,Field 1,Field 2,Sum of Field 3,,Field 1,Field 2,Sum of Field 3,,Field 1,Field 2,Sum of Field 3,,Field 1,Field 2,Sum of Field 3,,Field 1,Field 2,Sum of Field 3
-Item 1.A,Item 2.A,2.0,,Item 1.A,Item 2.A,2.0,,Item 1.A,Item 2.A,2.0,,Item 1.A,Item 2.A,2.0,,Item 1.A,Item 2.A,2.0,,Item 1.A,Item 2.A,2.0
-,Item 2.B,4.0,,,Item 2.B,4.0,,,Item 2.B,4.0,,,Item 2.B,4.0,,,Item 2.B,4.0,,,Item 2.B,4.0
-Item 1.A Total,,6.0,,Item 1.A Sum,,6.0,,Item 1.A Count,,2.0,,Item 1.A Average,,3.0,,Item 1.A Max,,4.0,,Item 1.A Min,,2.0
-Item 1.B,Item 2.A,0.0,,Item 1.B,Item 2.A,0.0,,Item 1.B,Item 2.A,0.0,,Item 1.B,Item 2.A,0.0,,Item 1.B,Item 2.A,0.0,,Item 1.B,Item 2.A,0.0
-,Item 2.B,0.0,,,Item 2.B,0.0,,,Item 2.B,0.0,,,Item 2.B,0.0,,,Item 2.B,0.0,,,Item 2.B,0.0
-Item 1.B Total,,0.0,,Item 1.B Sum,,0.0,,Item 1.B Count,,2.0,,Item 1.B Average,,7,,Item 1.B Max,,0.0,,Item 1.B Min,,0.0
-Grand Total,,6.0,,Grand Total,,6.0,,Grand Total,,6.0,,Grand Total,,6.0,,Grand Total,,6.0,,Grand Total,,6.0
+Field 1,Field 2,Sum - Field 3,,Field 1,Field 2,Sum - Field 3,,Field 1,Field 2,Sum - Field 3,,Field 1,Field 2,Sum - Field 3,,Field 1,Field 2,Sum - Field 3,,Field 1,Field 2,Sum - Field 3
+Item 1.A,Item 2.A,2,,Item 1.A,Item 2.A,2,,Item 1.A,Item 2.A,2,,Item 1.A,Item 2.A,2,,Item 1.A,Item 2.A,2,,Item 1.A,Item 2.A,2
+,Item 2.B,4,,,Item 2.B,4,,,Item 2.B,4,,,Item 2.B,4,,,Item 2.B,4,,,Item 2.B,4
+Item 1.A Result,,6,,Item 1.A Sum - Field 3,,6,,Item 1.A Count - Field 3,,2,,Item 1.A Average - Field 3,,3,,Item 1.A Max - Field 3,,4,,Item 1.A Min - Field 3,,2
+Item 1.B,Item 2.A,,,Item 1.B,Item 2.A,,,Item 1.B,Item 2.A,,,Item 1.B,Item 2.A,,,Item 1.B,Item 2.A,,,Item 1.B,Item 2.A,
+,Item 2.B,,,,Item 2.B,,,,Item 2.B,,,,Item 2.B,,,,Item 2.B,,,,Item 2.B,
+Item 1.B Result,,,,Item 1.B Sum - Field 3,,,,Item 1.B Count - Field 3,,2,,Item 1.B Average - Field 3,,,,Item 1.B Max - Field 3,,,,Item 1.B Min - Field 3,,
+Total Result,,6,,Total Result,,6,,Total Result,,6,,Total Result,,6,,Total Result,,6,,Total Result,,6
 ,,,,,,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,
 "Product (8, 0)",,,,"Count numbers (2, 0)",,,,"Std Dev (1.4142, #DIV/0!)",,,,"Std Dev Pop (1, #DIV/0!)",,,,"Variance (2, #DIV/0!)",,,,"Variance Pop (1, #DIV/0!)",,
 ,,,,,,,,,,,,,,,,,,,,,,
-Field 1,Field 2,Sum of Field 3,,Field 1,Field 2,Sum of Field 3,,Field 1,Field 2,Sum of Field 3,,Field 1,Field 2,Sum of Field 3,,Field 1,Field 2,Sum of Field 3,,Field 1,Field 2,Sum of Field 3
-Item 1.A,Item 2.A,2.0,,Item 1.A,Item 2.A,2.0,,Item 1.A,Item 2.A,2.0,,Item 1.A,Item 2.A,2.0,,Item 1.A,Item 2.A,2.0,,Item 1.A,Item 2.A,2.0
-,Item 2.B,4.0,,,Item 2.B,4.0,,,Item 2.B,4.0,,,Item 2.B,4.0,,,Item 2.B,4.0,,,Item 2.B,4.0
-Item 1.A Product,,8.0,,Item 1.A Count,,2.0,,Item 1.A StdDev,,1.4142135623730951,,Item 1.A StdDevp,,1.0,,Item 1.A Var,,2.0,,Item 1.A Varp,,1.0
-Item 1.B,Item 2.A,0.0,,Item 1.B,Item 2.A,0.0,,Item 1.B,Item 2.A,0.0,,Item 1.B,Item 2.A,0.0,,Item 1.B,Item 2.A,0.0,,Item 1.B,Item 2.A,0.0
-,Item 2.B,0.0,,,Item 2.B,0.0,,,Item 2.B,0.0,,,Item 2.B,0.0,,,Item 2.B,0.0,,,Item 2.B,0.0
-Item 1.B Product,,0.0,,Item 1.B Count,,0.0,,Item 1.B StdDev,,7,,Item 1.B StdDevp,,7,,Item 1.B Var,,7,,Item 1.B Varp,,7
-Grand Total,,6.0,,Grand Total,,6.0,,Grand Total,,6.0,,Grand Total,,6.0,,Grand Total,,6.0,,Grand Total,,6.0
+Field 1,Field 2,Sum - Field 3,,Field 1,Field 2,Sum - Field 3,,Field 1,Field 2,Sum - Field 3,,Field 1,Field 2,Sum - Field 3,,Field 1,Field 2,Sum - Field 3,,Field 1,Field 2,Sum - Field 3
+Item 1.A,Item 2.A,2,,Item 1.A,Item 2.A,2,,Item 1.A,Item 2.A,2,,Item 1.A,Item 2.A,2,,Item 1.A,Item 2.A,2,,Item 1.A,Item 2.A,2
+,Item 2.B,4,,,Item 2.B,4,,,Item 2.B,4,,,Item 2.B,4,,,Item 2.B,4,,,Item 2.B,4
+Item 1.A Product - Field 3,,8,,Item 1.A Count - Field 3,,2,,Item 1.A StDev - Field 3,,1.4142135623731,,Item 1.A StDev - Field 3,,1,,Item 1.A Var - Field 3,,2,,Item 1.A Var - Field 3,,1
+Item 1.B,Item 2.A,,,Item 1.B,Item 2.A,,,Item 1.B,Item 2.A,,,Item 1.B,Item 2.A,,,Item 1.B,Item 2.A,,,Item 1.B,Item 2.A,
+,Item 2.B,,,,Item 2.B,,,,Item 2.B,,,,Item 2.B,,,,Item 2.B,,,,Item 2.B,
+Item 1.B Product - Field 3,,,,Item 1.B Count - Field 3,,,,Item 1.B StDev - Field 3,,,,Item 1.B StDev - Field 3,,,,Item 1.B Var - Field 3,,,,Item 1.B Var - Field 3,,
+Total Result,,6,,Total Result,,6,,Total Result,,6,,Total Result,,6,,Total Result,,6,,Total Result,,6
 ,,,,,,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,
 None,,,,"2 subtotals (Sum, Count all)",,,,"3 subtotals (Average, Max, Min)",,,,"All subtotals (Sum, Count all, Average, Max, Min, Product, Count numbers, StdDev, StdDevP, Var, VarP)",,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,
-Field 1,Field 2,Sum of Field 3,,Field 1,Field 2,Sum of Field 3,,Field 1,Field 2,Sum of Field 3,,Field 1,Field 2,Sum of Field 3,,,,,,,,
-Item 1.A,Item 2.A,2.0,,Item 1.A,Item 2.A,2.0,,Item 1.A,Item 2.A,2.0,,Item 1.A,Item 2.A,2.0,,,,,,,,
-,Item 2.B,4.0,,,Item 2.B,4.0,,,Item 2.B,4.0,,,Item 2.B,4.0,,,,,,,,
-Item 1.B,Item 2.A,0.0,,Item 1.A Sum,,6.0,,Item 1.A Average,,3.0,,Item 1.A Sum,,6.0,,,,,,,,
-,Item 2.B,0.0,,Item 1.A Count,,2.0,,Item 1.A Max,,4.0,,Item 1.A Count,,2.0,,,,,,,,
-Grand Total,,6.0,,Item 1.B,Item 2.A,0.0,,Item 1.A Min,,2.0,,Item 1.A Average,,3.0,,,,,,,,
-,,,,,Item 2.B,0.0,,Item 1.B,Item 2.A,0.0,,Item 1.A Max,,4.0,,,,,,,,
-,,,,Item 1.B Sum,,0.0,,,Item 2.B,0.0,,Item 1.A Min,,2.0,,,,,,,,
-,,,,Item 1.B Count,,2.0,,Item 1.B Average,,7,,Item 1.A Product,,8.0,,,,,,,,
-,,,,Grand Total,,6.0,,Item 1.B Max,,0.0,,Item 1.A Count,,2.0,,,,,,,,
-,,,,,,,,Item 1.B Min,,0.0,,Item 1.A StdDev,,1.4142135623730951,,,,,,,,
-,,,,,,,,Grand Total,,6.0,,Item 1.A StdDevp,,1.0,,,,,,,,
-,,,,,,,,,,,,Item 1.A Var,,2.0,,,,,,,,
-,,,,,,,,,,,,Item 1.A Varp,,1.0,,,,,,,,
-,,,,,,,,,,,,Item 1.B,Item 2.A,0.0,,,,,,,,
-,,,,,,,,,,,,,Item 2.B,0.0,,,,,,,,
-,,,,,,,,,,,,Item 1.B Sum,,0.0,,,,,,,,
-,,,,,,,,,,,,Item 1.B Count,,2.0,,,,,,,,
-,,,,,,,,,,,,Item 1.B Average,,7,,,,,,,,
-,,,,,,,,,,,,Item 1.B Max,,0.0,,,,,,,,
-,,,,,,,,,,,,Item 1.B Min,,0.0,,,,,,,,
-,,,,,,,,,,,,Item 1.B Product,,0.0,,,,,,,,
-,,,,,,,,,,,,Item 1.B Count,,0.0,,,,,,,,
-,,,,,,,,,,,,Item 1.B StdDev,,7,,,,,,,,
-,,,,,,,,,,,,Item 1.B StdDevp,,7,,,,,,,,
-,,,,,,,,,,,,Item 1.B Var,,7,,,,,,,,
-,,,,,,,,,,,,Item 1.B Varp,,7,,,,,,,,
-,,,,,,,,,,,,Grand Total,,6.0,,,,,,,,
+Field 1,Field 2,Sum - Field 3,,Field 1,Field 2,Sum - Field 3,,Field 1,Field 2,Sum - Field 3,,Field 1,Field 2,Sum - Field 3,,,,,,,,
+Item 1.A,Item 2.A,2,,Item 1.A,Item 2.A,2,,Item 1.A,Item 2.A,2,,Item 1.A,Item 2.A,2,,,,,,,,
+,Item 2.B,4,,,Item 2.B,4,,,Item 2.B,4,,,Item 2.B,4,,,,,,,,
+Item 1.B,Item 2.A,,,Item 1.A Sum - Field 3,,6,,Item 1.A Average - Field 3,,3,,Item 1.A Sum - Field 3,,6,,,,,,,,
+,Item 2.B,,,Item 1.A Count - Field 3,,2,,Item 1.A Max - Field 3,,4,,Item 1.A Count - Field 3,,2,,,,,,,,
+Total Result,,6,,Item 1.B,Item 2.A,,,Item 1.A Min - Field 3,,2,,Item 1.A Average - Field 3,,3,,,,,,,,
+,,,,,Item 2.B,,,Item 1.B,Item 2.A,,,Item 1.A Max - Field 3,,4,,,,,,,,
+,,,,Item 1.B Sum - Field 3,,,,,Item 2.B,,,Item 1.A Min - Field 3,,2,,,,,,,,
+,,,,Item 1.B Count - Field 3,,2,,Item 1.B Average - Field 3,,,,Item 1.A Product - Field 3,,8,,,,,,,,
+,,,,Total Result,,6,,Item 1.B Max - Field 3,,,,Item 1.A Count - Field 3,,2,,,,,,,,
+,,,,,,,,Item 1.B Min - Field 3,,,,Item 1.A StDev - Field 3,,1.4142135623731,,,,,,,,
+,,,,,,,,Total Result,,6,,Item 1.A StDev - Field 3,,1,,,,,,,,
+,,,,,,,,,,,,Item 1.A Var - Field 3,,2,,,,,,,,
+,,,,,,,,,,,,Item 1.A Var - Field 3,,1,,,,,,,,
+,,,,,,,,,,,,Item 1.B,Item 2.A,,,,,,,,,
+,,,,,,,,,,,,,Item 2.B,,,,,,,,,
+,,,,,,,,,,,,Item 1.B Sum - Field 3,,,,,,,,,,
+,,,,,,,,,,,,Item 1.B Count - Field 3,,2,,,,,,,,
+,,,,,,,,,,,,Item 1.B Average - Field 3,,,,,,,,,,
+,,,,,,,,,,,,Item 1.B Max - Field 3,,,,,,,,,,
+,,,,,,,,,,,,Item 1.B Min - Field 3,,,,,,,,,,
+,,,,,,,,,,,,Item 1.B Product - Field 3,,,,,,,,,,
+,,,,,,,,,,,,Item 1.B Count - Field 3,,,,,,,,,,
+,,,,,,,,,,,,Item 1.B StDev - Field 3,,,,,,,,,,
+,,,,,,,,,,,,Item 1.B StDev - Field 3,,,,,,,,,,
+,,,,,,,,,,,,Item 1.B Var - Field 3,,,,,,,,,,
+,,,,,,,,,,,,Item 1.B Var - Field 3,,,,,,,,,,
+,,,,,,,,,,,,Total Result,,6,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,
 2.2 - FIELD LAYOUT SETTINGS,,,,,,,,,,,,,,,,,,,,,,
 Hide items with no data (Field 2),,,,Show items with no data (Field 2),,,,Insert blank line after item (Field 1),,,,Insert pagebreak after item (Field 1),,,,"Manual field names (Field 1, Field 2, Field 3)",,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,
-Field 1,Field 2,Sum of Field 3,,Field 1,Field 2,Sum of Field 3,,Field 1,Field 2,Sum of Field 3,,Field 1,Field 2,Sum of Field 3,,My Field 1,My Field 2,My Field 3 Sum,,,,
-Item 1.A,Item 2.A,1.0,,Item 1.A,Item 2.A,1.0,,Item 1.A,Item 2.A,1.0,,Item 1.A,Item 2.A,1.0,,Item 1.A,Item 2.A,1.0,,,,
-,Item 2.B,2.0,,,Item 2.B,2.0,,,Item 2.B,2.0,,,Item 2.B,2.0,,,Item 2.B,2.0,,,,
-Item 1.A Total,,3.0,,,Item 2.C,,,Item 1.A Total,,3.0,,Item 1.A Total,,3.0,,Item 1.A Total,,3.0,,,,
-Item 1.B,Item 2.A,3.0,,Item 1.A Total,,3.0,,,,,,Item 1.B,Item 2.A,3.0,,Item 1.B,Item 2.A,3.0,,,,
-,Item 2.C,4.0,,Item 1.B,Item 2.A,3.0,,Item 1.B,Item 2.A,3.0,,,Item 2.C,4.0,,,Item 2.C,4.0,,,,
-Item 1.B Total,,7.0,,,Item 2.B,,,,Item 2.C,4.0,,Item 1.B Total,,7.0,,Item 1.B Total,,7.0,,,,
-Item 1.C,Item 2.B,5.0,,,Item 2.C,4.0,,Item 1.B Total,,7.0,,Item 1.C,Item 2.B,5.0,,Item 1.C,Item 2.B,5.0,,,,
-,Item 2.C,6.0,,Item 1.B Total,,7.0,,,,,,,Item 2.C,6.0,,,Item 2.C,6.0,,,,
-Item 1.C Total,,11.0,,Item 1.C,Item 2.A,,,Item 1.C,Item 2.B,5.0,,Item 1.C Total,,11.0,,Item 1.C Total,,11.0,,,,
-Grand Total,,21.0,,,Item 2.B,5.0,,,Item 2.C,6.0,,Grand Total,,21.0,,Grand Total,,21.0,,,,
-,,,,,Item 2.C,6.0,,Item 1.C Total,,11.0,,,,,,,,,,,,
-,,,,Item 1.C Total,,11.0,,,,,,,,,,,,,,,,
-,,,,Grand Total,,21.0,,Grand Total,,21.0,,,,,,,,,,,,
+Field 1,Field 2,Sum - Field 3,,Field 1,Field 2,Sum - Field 3,,Field 1,Field 2,Sum - Field 3,,Field 1,Field 2,Sum - Field 3,,Field 1,Field 2,Sum - Field 3,,,,
+Item 1.A,Item 2.A,1,,Item 1.A,Item 2.A,1,,Item 1.A,Item 2.A,1,,Item 1.A,Item 2.A,1,,Item 1.A,Item 2.A,1,,,,
+,Item 2.B,2,,,Item 2.B,2,,,Item 2.B,2,,,Item 2.B,2,,,Item 2.B,2,,,,
+Item 1.A Result,,3,,,Item 2.C,,,Item 1.A Result,,3,,Item 1.A Result,,3,,Item 1.A Result,,3,,,,
+Item 1.B,Item 2.A,3,,Item 1.A Result,,3,,,,,,Item 1.B,Item 2.A,3,,Item 1.B,Item 2.A,3,,,,
+,Item 2.C,4,,Item 1.B,Item 2.A,3,,Item 1.B,Item 2.A,3,,,Item 2.C,4,,,Item 2.C,4,,,,
+Item 1.B Result,,7,,,Item 2.B,,,,Item 2.C,4,,Item 1.B Result,,7,,Item 1.B Result,,7,,,,
+Item 1.C,Item 2.B,5,,,Item 2.C,4,,Item 1.B Result,,7,,Item 1.C,Item 2.B,5,,Item 1.C,Item 2.B,5,,,,
+,Item 2.C,6,,Item 1.B Result,,7,,,,,,,Item 2.C,6,,,Item 2.C,6,,,,
+Item 1.C Result,,11,,Item 1.C,Item 2.A,,,Item 1.C,Item 2.B,5,,Item 1.C Result,,11,,Item 1.C Result,,11,,,,
+Total Result,,21,,,Item 2.B,5,,,Item 2.C,6,,Total Result,,21,,Total Result,,21,,,,
+,,,,,Item 2.C,6,,Item 1.C Result,,11,,,,,,,,,,,,
+,,,,Item 1.C Result,,11,,,,,,,,,,,,,,,,
+,,,,Total Result,,21,,Total Result,,21,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,
 Tabular form,,,,Outline form (subtotals above),,,,Outline form (subtotals below),,,,Compact form (subtotals above),,,,Compact form (subtotals below),,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,
-Field 1,Field 2,Sum of Field 3,,Field 1,Field 2,Sum of Field 3,,Field 1,Field 2,Sum of Field 3,,Row Labels,Sum of Field 3,,,Row Labels,Sum of Field 3,,,,,
-Item 1.A,Item 2.A,1.0,,Item 1.A,,3.0,,Item 1.A,,,,Item 1.A,3.0,,,Item 1.A,,,,,,
-,Item 2.B,2.0,,,Item 2.A,1.0,,,Item 2.A,1.0,,Item 2.A,1.0,,,Item 2.A,1.0,,,,,
-Item 1.A Total,,3.0,,,Item 2.B,2.0,,,Item 2.B,2.0,,Item 2.B,2.0,,,Item 2.B,2.0,,,,,
-Item 1.B,Item 2.A,3.0,,Item 1.B,,7.0,,Item 1.A Total,,3.0,,Item 1.B,7.0,,,Item 1.A Total,3.0,,,,,
-,Item 2.C,4.0,,,Item 2.A,3.0,,Item 1.B,,,,Item 2.A,3.0,,,Item 1.B,,,,,,
-Item 1.B Total,,7.0,,,Item 2.C,4.0,,,Item 2.A,3.0,,Item 2.C,4.0,,,Item 2.A,3.0,,,,,
-Item 1.C,Item 2.B,5.0,,Item 1.C,,11.0,,,Item 2.C,4.0,,Item 1.C,11.0,,,Item 2.C,4.0,,,,,
-,Item 2.C,6.0,,,Item 2.B,5.0,,Item 1.B Total,,7.0,,Item 2.B,5.0,,,Item 1.B Total,7.0,,,,,
-Item 1.C Total,,11.0,,,Item 2.C,6.0,,Item 1.C,,,,Item 2.C,6.0,,,Item 1.C,,,,,,
-Grand Total,,21.0,,Grand Total,,21.0,,,Item 2.B,5.0,,Grand Total,21.0,,,Item 2.B,5.0,,,,,
-,,,,,,,,,Item 2.C,6.0,,,,,,Item 2.C,6.0,,,,,
-,,,,,,,,Item 1.C Total,,11.0,,,,,,Item 1.C Total,11.0,,,,,
-,,,,,,,,Grand Total,,21.0,,,,,,Grand Total,21.0,,,,,
+Field 1,Field 2,Sum - Field 3,,Field 1,Field 2,Sum - Field 3,,Field 1,Field 2,Sum - Field 3,,Field 1,Field 2,Sum - Field 3,,Field 1,Field 2,Sum - Field 3,,,,
+Item 1.A,Item 2.A,1,,Item 1.A,,3,,Item 1.A,,,,Item 1.A,,3,,Item 1.A,,,,,,
+,Item 2.B,2,,,Item 2.A,1,,,Item 2.A,1,,,Item 2.A,1,,,Item 2.A,1,,,,
+Item 1.A Result,,3,,,Item 2.B,2,,,Item 2.B,2,,,Item 2.B,2,,,Item 2.B,2,,,,
+Item 1.B,Item 2.A,3,,Item 1.B,,7,,Item 1.A Result,,3,,Item 1.B,,7,,Item 1.A Result,,3,,,,
+,Item 2.C,4,,,Item 2.A,3,,Item 1.B,,,,,Item 2.A,3,,Item 1.B,,,,,,
+Item 1.B Result,,7,,,Item 2.C,4,,,Item 2.A,3,,,Item 2.C,4,,,Item 2.A,3,,,,
+Item 1.C,Item 2.B,5,,Item 1.C,,11,,,Item 2.C,4,,Item 1.C,,11,,,Item 2.C,4,,,,
+,Item 2.C,6,,,Item 2.B,5,,Item 1.B Result,,7,,,Item 2.B,5,,Item 1.B Result,,7,,,,
+Item 1.C Result,,11,,,Item 2.C,6,,Item 1.C,,,,,Item 2.C,6,,Item 1.C,,,,,,
+Total Result,,21,,Total Result,,21,,,Item 2.B,5,,Total Result,,21,,,Item 2.B,5,,,,
+,,,,,,,,,Item 2.C,6,,,,,,,Item 2.C,6,,,,
+,,,,,,,,Item 1.C Result,,11,,,,,,Item 1.C Result,,11,,,,
+,,,,,,,,Total Result,,21,,,,,,Total Result,,21,,,,
 ,,,,,,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,
 2.3 - AUTO SHOW SETTINGS,,,,,,,,,,,,,,,,,,,,,,
 Top 3 items by Sum of Field 2,,,,Top 3 items by Sum of Field 3,,,,Bottom 4 items by Sum of Field 2,,,,Top 20 percent by Sum of Field 2 (2 rows),,,,Bottom 7 sum by Sum of Field 2 (4 rows),,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,
-,Values,,,,Values,,,,Values,,,,Values,,,,Values,,,,,
-Field 1,Sum of Field 2,Sum of Field 3,,Field 1,Sum of Field 2,Sum of Field 3,,Field 1,Sum of Field 2,Sum of Field 3,,Field 1,Sum of Field 2,Sum of Field 3,,Field 1,Sum of Field 2,Sum of Field 3,,,,
-Item 1.J,10.0,3.0,,Item 1.A,1.0,12.0,,Item 1.A,1.0,12.0,,Item 1.K,11.0,2.0,,Item 1.A,1.0,12.0,,,,
-Item 1.K,11.0,2.0,,Item 1.B,2.0,11.0,,Item 1.B,2.0,11.0,,Item 1.L,12.0,1.0,,Item 1.B,2.0,11.0,,,,
-Item 1.L,12.0,1.0,,Item 1.C,3.0,10.0,,Item 1.C,3.0,10.0,,Grand Total,23.0,3.0,,Item 1.C,3.0,10.0,,,,
-Grand Total,33.0,6.0,,Grand Total,6.0,33.0,,Item 1.D,4.0,9.0,,,,,,Item 1.D,4.0,9.0,,,,
-,,,,,,,,Grand Total,10.0,42.0,,,,,,Grand Total,10.0,42.0,,,,
-,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,
+,Data,,,,Data,,,,Data,,,,Data,,,,Data,,,,,
+Field 1,Sum - Field 2,Sum - Field 3,,Field 1,Sum - Field 2,Sum - Field 3,,Field 1,Sum - Field 2,Sum - Field 3,,Field 1,Sum - Field 2,Sum - Field 3,,Field 1,Sum - Field 2,Sum - Field 3,,,,
+Item 1.J,10,3,,Item 1.A,1,12,,Item 1.A,1,12,,Item 1.A,1,12,,Item 1.A,1,12,,,,
+Item 1.K,11,2,,Item 1.B,2,11,,Item 1.B,2,11,,Item 1.B,2,11,,Item 1.B,2,11,,,,
+Item 1.L,12,1,,Item 1.C,3,10,,Item 1.C,3,10,,Item 1.C,3,10,,Item 1.C,3,10,,,,
+Total Result,33,6,,Total Result,6,33,,Item 1.D,4,9,,Item 1.D,4,9,,Item 1.D,4,9,,,,
+,,,,,,,,Total Result,10,42,,Item 1.E,5,8,,Item 1.E,5,8,,,,
+,,,,,,,,,,,,Item 1.F,6,7,,Item 1.F,6,7,,,,
+,,,,,,,,,,,,Item 1.G,7,6,,Item 1.G,7,6,,,,
+,,,,,,,,,,,,Item 1.H,8,5,,Item 1.H,8,5,,,,
+,,,,,,,,,,,,Item 1.I,9,4,,Item 1.I,9,4,,,,
+,,,,,,,,,,,,Item 1.J,10,3,,Item 1.J,10,3,,,,
+,,,,,,,,,,,,Item 1.K,11,2,,Item 1.K,11,2,,,,
+,,,,,,,,,,,,Item 1.L,12,1,,Item 1.L,12,1,,,,
+,,,,,,,,,,,,Total Result,78,78,,Total Result,78,78,,,,
 ,,,,,,,,,,,,,,,,,,,,,,
 2.4 - AUTOSORT SETTINGS,,,,,,,,,,,,,,,,,,,,,,
 Manual (original source order),,,,Manual (pairs swapped),,,,Ascending by Field 1,,,,Ascending by Sum of Field 3,,,,Descending by Field 1,,,,Descending by Sum of Field 3,,
 ,,,,,,,,,,,,,,,,,,,,,,
-,Values,,,,Values,,,,Values,,,,Values,,,,Values,,,,Values,
-Field 1,Sum of Field 2,Sum of Field 3,,Field 1,Sum of Field 2,Sum of Field 3,,Field 1,Sum of Field 2,Sum of Field 3,,Field 1,Sum of Field 2,Sum of Field 3,,Field 1,Sum of Field 2,Sum of Field 3,,Field 1,Sum of Field 2,Sum of Field 3
-Item 1.A,1.0,12.0,,Item 1.B,2.0,11.0,,Item 1.A,1.0,12.0,,Item 1.L,12.0,1.0,,Item 1.L,12.0,1.0,,Item 1.A,1.0,12.0
-Item 1.B,2.0,11.0,,Item 1.A,1.0,12.0,,Item 1.B,2.0,11.0,,Item 1.K,11.0,2.0,,Item 1.K,11.0,2.0,,Item 1.B,2.0,11.0
-Item 1.C,3.0,10.0,,Item 1.D,4.0,9.0,,Item 1.C,3.0,10.0,,Item 1.J,10.0,3.0,,Item 1.J,10.0,3.0,,Item 1.C,3.0,10.0
-Item 1.D,4.0,9.0,,Item 1.C,3.0,10.0,,Item 1.D,4.0,9.0,,Item 1.I,9.0,4.0,,Item 1.I,9.0,4.0,,Item 1.D,4.0,9.0
-Item 1.E,5.0,8.0,,Item 1.F,6.0,7.0,,Item 1.E,5.0,8.0,,Item 1.H,8.0,5.0,,Item 1.H,8.0,5.0,,Item 1.E,5.0,8.0
-Item 1.F,6.0,7.0,,Item 1.E,5.0,8.0,,Item 1.F,6.0,7.0,,Item 1.G,7.0,6.0,,Item 1.G,7.0,6.0,,Item 1.F,6.0,7.0
-Item 1.G,7.0,6.0,,Item 1.H,8.0,5.0,,Item 1.G,7.0,6.0,,Item 1.F,6.0,7.0,,Item 1.F,6.0,7.0,,Item 1.G,7.0,6.0
-Item 1.H,8.0,5.0,,Item 1.G,7.0,6.0,,Item 1.H,8.0,5.0,,Item 1.E,5.0,8.0,,Item 1.E,5.0,8.0,,Item 1.H,8.0,5.0
-Item 1.I,9.0,4.0,,Item 1.J,10.0,3.0,,Item 1.I,9.0,4.0,,Item 1.D,4.0,9.0,,Item 1.D,4.0,9.0,,Item 1.I,9.0,4.0
-Item 1.J,10.0,3.0,,Item 1.I,9.0,4.0,,Item 1.J,10.0,3.0,,Item 1.C,3.0,10.0,,Item 1.C,3.0,10.0,,Item 1.J,10.0,3.0
-Item 1.K,11.0,2.0,,Item 1.L,12.0,1.0,,Item 1.K,11.0,2.0,,Item 1.B,2.0,11.0,,Item 1.B,2.0,11.0,,Item 1.K,11.0,2.0
-Item 1.L,12.0,1.0,,Item 1.K,11.0,2.0,,Item 1.L,12.0,1.0,,Item 1.A,1.0,12.0,,Item 1.A,1.0,12.0,,Item 1.L,12.0,1.0
-Grand Total,78.0,78.0,,Grand Total,78.0,78.0,,Grand Total,78.0,78.0,,Grand Total,78.0,78.0,,Grand Total,78.0,78.0,,Grand Total,78.0,78.0
+,Data,,,,Data,,,,Data,,,,Data,,,,Data,,,,Data,
+Field 1,Sum - Field 2,Sum - Field 3,,Field 1,Sum - Field 2,Sum - Field 3,,Field 1,Sum - Field 2,Sum - Field 3,,Field 1,Sum - Field 2,Sum - Field 3,,Field 1,Sum - Field 2,Sum - Field 3,,Field 1,Sum - Field 2,Sum - Field 3
+Item 1.A,1,12,,Item 1.B,2,11,,Item 1.A,1,12,,Item 1.L,12,1,,Item 1.L,12,1,,Item 1.A,1,12
+Item 1.B,2,11,,Item 1.A,1,12,,Item 1.B,2,11,,Item 1.K,11,2,,Item 1.K,11,2,,Item 1.B,2,11
+Item 1.C,3,10,,Item 1.D,4,9,,Item 1.C,3,10,,Item 1.J,10,3,,Item 1.J,10,3,,Item 1.C,3,10
+Item 1.D,4,9,,Item 1.C,3,10,,Item 1.D,4,9,,Item 1.I,9,4,,Item 1.I,9,4,,Item 1.D,4,9
+Item 1.E,5,8,,Item 1.F,6,7,,Item 1.E,5,8,,Item 1.H,8,5,,Item 1.H,8,5,,Item 1.E,5,8
+Item 1.F,6,7,,Item 1.E,5,8,,Item 1.F,6,7,,Item 1.G,7,6,,Item 1.G,7,6,,Item 1.F,6,7
+Item 1.G,7,6,,Item 1.H,8,5,,Item 1.G,7,6,,Item 1.F,6,7,,Item 1.F,6,7,,Item 1.G,7,6
+Item 1.H,8,5,,Item 1.G,7,6,,Item 1.H,8,5,,Item 1.E,5,8,,Item 1.E,5,8,,Item 1.H,8,5
+Item 1.I,9,4,,Item 1.J,10,3,,Item 1.I,9,4,,Item 1.D,4,9,,Item 1.D,4,9,,Item 1.I,9,4
+Item 1.J,10,3,,Item 1.I,9,4,,Item 1.J,10,3,,Item 1.C,3,10,,Item 1.C,3,10,,Item 1.J,10,3
+Item 1.K,11,2,,Item 1.L,12,1,,Item 1.K,11,2,,Item 1.B,2,11,,Item 1.B,2,11,,Item 1.K,11,2
+Item 1.L,12,1,,Item 1.K,11,2,,Item 1.L,12,1,,Item 1.A,1,12,,Item 1.A,1,12,,Item 1.L,12,1
+Total Result,78,78,,Total Result,78,78,,Total Result,78,78,,Total Result,78,78,,Total Result,78,78,,Total Result,78,78

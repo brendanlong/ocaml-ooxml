@@ -93,6 +93,7 @@ let () =
   ; `Run, "cells_import_xml_12", [ "Sheet1" ]
   ; `Run, "chart_3dsettings_import_xml_12", [ "Rotation"; "Elevation"; "Perspective"; "Settings"; "SourceData" ]
   ; `Run, "chart_axis_import_xml_12", [ "Axis Line"; "Axis Labels"; "Tick Marks"; "Gridlines"; "SourceData" ]
+  (* Not sure what's wrong with this one. Maybe we're opening the wrong sheet, or treating rows wrong? *)
   ; `Skip, "chart_axis_scaling_import_xml_12", [ "Linear"; "Logarithmic"; "Category"; "Scatter"; "Date"; "Secondary"; "Series"; "SourceData" ]
   ; `Skip, "chart_bitmaps_import_xml_12", [ "General"; "Series 2D"; "Series 3D"; "SourceData" ]
   ; `Skip, "chart_charttype_area_import_xml_12", [ "Area 2D"; "Area 3D"; "SourceData" ]
@@ -108,6 +109,7 @@ let () =
   ; `Skip, "chart_series_import_xml_12", [ "Data Source"; "Formatting"; "Data Labels"; "SourceData" ]
   ; `Skip, "chart_sourcedata_missing_import_xml_12", [ "Missing"; "Hidden"; "SourceData" ]
   ; `Skip, "chart_title_import_xml_12", [ "Main Title"; "Axis Titles"; "Legend"; "Formatting"; "SourceData" ]
+  (* Need to support date types *)
   ; `Skip, "condformat_import_xml_12", [ "Cell Conditions"; "Range Conditions"; "Font"; "Border"; "Fill"; "Number" ]
   ; `Skip, "datavalidation_import_xml_12", [ "Types"; "Formulas"; "Settings" ]
   ; `Skip, "drawing_import_xml_12", [ "Simple"; "Line"; "Fill"; "Color"; "Style"; "Shadow"; "Textbox"; "Chart"; "Group"; "AutoShape"; "Picture"; " Background"; "Right-To-Left" ]
@@ -117,14 +119,20 @@ let () =
   ; `Skip, "formcontrols_legacy_import_xml_12", [ "Legacy Controls" ]
   ; `Skip, "formula_import_xml_12", [ "Cell"; "Table"; "Param"; "Functions"; "Array"; "Shared"; "TableOp" ]
   ; `Skip, "hyperlink_import_xml_12", [ "Sheet1"; "Sheet2"; "Sheet'!" ]
+  (* Need to support various kinds of number formatting *)
   ; `Skip, "numberformat_import_xml_12", [ "Sheet1" ]
-  ; `Skip, "oleobject_import_xml_12", [ "OLE"; "SourceData" ]
+  ; `Run, "oleobject_import_xml_12", [ "OLE"; "SourceData" ]
+  (* Need to support percent formatting *)
   ; `Skip, "pagesettings_import_xml_12", [ "Default"; "Changed 1"; "Changed 2"; "Header" ]
+  (* Need to support date types *)
   ; `Skip, "pivottable_datasource_import_xml_12", [ "Internal"; "External"; "DataType"; "ExtCache"; "Data" ]
+  (* Need to support date types *)
   ; `Skip, "pivottable_grouping_import_xml_12", [ "Discrete"; "Numeric"; "DateTime"; "Data" ]
+  (* This one is really strange. Something weird about pivot tables? Sum - Field 6 is being imported as Sum of Field 6 *)
   ; `Skip, "pivottable_layout_import_xml_12", [ "RowColDim"; "RowColSettings"; "ItemSettings"; "DataDim"; "DataSettings"; "PageDim"; "PageSettings"; "TableSettings"; "Data" ]
-  ; `Skip, "scenarios_import_xml_12", [ "Ranges"; "Settings"; "Name"; "RefCheck" ]
+  ; `Run, "scenarios_import_xml_12", [ "Ranges"; "Settings"; "Name"; "RefCheck" ]
   ; `Run, "sheetprotection_import_xml_12", [ "Sheet1"; "Sheet2"; "Sheet3"; "Sheet4" ]
+  (* Need to support percent formatting *)
   ; `Skip, "viewsettings_import_xml_12", [ "No Splits 1"; "No Splits 2"; "Frozen Vert 1"; "Frozen Vert 2"; "Frozen Hor 1"; "Frozen Hor 2"; "Frozen 1"; "Frozen 2"; "Split Vert 1"; "Split Vert 2"; "Split Hor 1"; "Split Hor 2"; "Split 1"; "Split 2"; "Split 3"; "Selection"; "Sheet Settings 1"; "Sheet Settings 2"; "Sheet Settings 3"; "Sheet Settings 4"; "Mirrored Sheet"; "Show Formulas" ]]
   |> List.map ~f:make_test
   |> test_list
