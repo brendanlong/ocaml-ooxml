@@ -93,7 +93,7 @@ let () =
   ; `Run, "cells_import_xml_12", [ "Sheet1" ]
   ; `Run, "chart_3dsettings_import_xml_12", [ "Rotation"; "Elevation"; "Perspective"; "Settings"; "SourceData" ]
   ; `Run, "chart_axis_import_xml_12", [ "Axis Line"; "Axis Labels"; "Tick Marks"; "Gridlines"; "SourceData" ]
-  (* Not sure what's wrong with this one. Maybe we're opening the wrong sheet, or treating rows wrong? *)
+  (* Need to support date formatting *)
   ; `Skip, "chart_axis_scaling_import_xml_12", [ "Linear"; "Logarithmic"; "Category"; "Scatter"; "Date"; "Secondary"; "Series"; "SourceData" ]
   ; `Skip, "chart_bitmaps_import_xml_12", [ "General"; "Series 2D"; "Series 3D"; "SourceData" ]
   ; `Skip, "chart_charttype_area_import_xml_12", [ "Area 2D"; "Area 3D"; "SourceData" ]
@@ -109,7 +109,7 @@ let () =
   ; `Skip, "chart_series_import_xml_12", [ "Data Source"; "Formatting"; "Data Labels"; "SourceData" ]
   ; `Skip, "chart_sourcedata_missing_import_xml_12", [ "Missing"; "Hidden"; "SourceData" ]
   ; `Skip, "chart_title_import_xml_12", [ "Main Title"; "Axis Titles"; "Legend"; "Formatting"; "SourceData" ]
-  (* Need to support date types *)
+  (* Need to support date formatting *)
   ; `Skip, "condformat_import_xml_12", [ "Cell Conditions"; "Range Conditions"; "Font"; "Border"; "Fill"; "Number" ]
   ; `Skip, "datavalidation_import_xml_12", [ "Types"; "Formulas"; "Settings" ]
   ; `Skip, "drawing_import_xml_12", [ "Simple"; "Line"; "Fill"; "Color"; "Style"; "Shadow"; "Textbox"; "Chart"; "Group"; "AutoShape"; "Picture"; " Background"; "Right-To-Left" ]
@@ -124,9 +124,9 @@ let () =
   ; `Run, "oleobject_import_xml_12", [ "OLE"; "SourceData" ]
   (* Need to support percent formatting *)
   ; `Skip, "pagesettings_import_xml_12", [ "Default"; "Changed 1"; "Changed 2"; "Header" ]
-  (* Need to support date types *)
+  (* Need to support date formatting *)
   ; `Skip, "pivottable_datasource_import_xml_12", [ "Internal"; "External"; "DataType"; "ExtCache"; "Data" ]
-  (* Need to support date types *)
+  (* Need to support date formatting *)
   ; `Skip, "pivottable_grouping_import_xml_12", [ "Discrete"; "Numeric"; "DateTime"; "Data" ]
   (* This one is really strange. Something weird about pivot tables? Sum - Field 6 is being imported as Sum of Field 6 *)
   ; `Skip, "pivottable_layout_import_xml_12", [ "RowColDim"; "RowColSettings"; "ItemSettings"; "DataDim"; "DataSettings"; "PageDim"; "PageSettings"; "TableSettings"; "Data" ]

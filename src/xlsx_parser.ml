@@ -208,19 +208,24 @@ module Shared_strings = struct
   type t = string list [@@deriving compare, sexp]
 
   let of_xml root =
-    find_elements ~path:[ "sst" ; "si" ] root
-    |> List.map ~f:(function
-    | (Element ("r", _, _) as el) ->
-      find_elements el ~path:[ "r"; "t" ]
-      |> List.find_map ~f:(function
-      | PCData str -> Some str
-      | _ -> None)
-      |> Option.value ~default:""
-    | Element ("t", _, []) -> ""
-    | Element ("t", _, [ PCData str] ) -> str
-    | el ->
-      failwithf "Unexpected shared string element %s"
-        (Xml.to_string el) ())
+    find_elements ~path:[ "sst" ] root
+    |> List.filter_map ~f:(function
+    | Element ("si", _, els) ->
+      List.map els ~f:(function
+        | (Element ("r", _, _) as el) ->
+          find_elements el ~path:[ "r"; "t" ]
+          |> List.filter_map ~f:(function
+          | PCData str -> Some str
+          | _ -> None)
+          |> String.concat ~sep:""
+        | Element ("t", _, []) -> ""
+        | Element ("t", _, [ PCData str] ) -> str
+        | el ->
+          failwithf "Unexpected shared string element %s"
+            (Xml.to_string el) ())
+      |> String.concat ~sep:""
+      |> Option.some
+    | _ -> None)
     |> List.to_array
 
   let of_zip zip =
