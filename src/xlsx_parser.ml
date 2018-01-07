@@ -12,6 +12,14 @@ let find_attr_exn attrs name_to_find =
   find_attr attrs name_to_find
   |> Option.value_exn ~here:[%here]
 
+let col_of_cell_id id =
+  (String.to_list id
+   |> List.take_while ~f:Char.is_alpha
+   |> List.map ~f:Char.uppercase
+   |> List.map ~f:(fun c -> Char.to_int c - Char.to_int 'A' + 1)
+   |> List.fold ~init:0 ~f:(fun acc n -> acc * 26 + n))
+  - 1
+
 let rec find_elements el ~path =
   match path with
   | [] -> [ el ]
@@ -105,13 +113,8 @@ module Row = struct
               let col =
                 (* get the column number from the "r" attribute, which looks
                    like A1, B1, etc. *)
-                (find_attr_exn attrs "r"
-                 |> String.to_list
-                 |> List.take_while ~f:Char.is_alpha
-                 |> List.map ~f:Char.uppercase
-                 |> List.map ~f:(fun c -> Char.to_int c - Char.to_int 'A' + 1)
-                 |> List.fold ~init:0 ~f:(fun acc n -> acc * 26 + n))
-                - 1
+                find_attr_exn attrs "r"
+                |> col_of_cell_id
               in
               let t = List.find_map attrs ~f:(function
                 | "t", value -> Some value
