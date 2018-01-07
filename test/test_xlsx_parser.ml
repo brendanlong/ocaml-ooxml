@@ -12,9 +12,33 @@ open Printf
    Note: OpenOffice seems to round floats when exporting CSV, so I had to
    manually edit the CSV's to have the literal float values in the XLSX file. *)
 
-let printer xlsx =
-  Xlsx_parser.sexp_of_sheet xlsx
-  |> Sexp.to_string_hum
+let pp_diff fmt (exp, real) =
+  let open Xlsx_parser in
+  if String.(exp.name <> real.name) then
+    Caml.Format.fprintf fmt "Expected sheet %s but got sheet %s" exp.name real.name
+  else
+    Caml.Format.fprintf fmt "Sheet: %s\n" (exp.Xlsx_parser.name);
+  let print_opt_row diff_mark row =
+    Option.iter row ~f:(fun row ->
+      String.concat ~sep:"," row
+      |> Caml.Format.fprintf fmt "%c %s\n" diff_mark)
+  in
+  let rec diff_lists = function
+    | [], [] -> ()
+    | exp, real ->
+      let exp_row = List.hd exp in
+      let real_row = List.hd real in
+      if Option.equal (List.equal ~equal:String.equal) exp_row real_row then
+        print_opt_row ' ' exp_row
+      else begin
+        print_opt_row '-' exp_row;
+        print_opt_row '+' real_row
+      end;
+      diff_lists
+        (List.tl exp |> Option.value ~default:[],
+         List.tl real |> Option.value ~default:[])
+  in
+  diff_lists (exp.Xlsx_parser.rows, real.Xlsx_parser.rows)
 
 let sort_sheets =
   List.sort ~cmp:(fun a b ->
@@ -43,7 +67,7 @@ let make_test (skip, file_name, sheet_names) =
       Xlsx_parser.read_file (sprintf "test/files/%s.xlsx" file_name)
       |> sort_sheets
       |> List.iter2_exn expect ~f:(fun expect actual ->
-        assert_equal ~printer expect actual)
+        assert_equal ~pp_diff expect actual)
 
 let () =
   [ `Run, "autofilter_import_xml_12", [ "Discrete"; "Top10"; "Custom"; "Advanced1"; "Advanced2" ]
