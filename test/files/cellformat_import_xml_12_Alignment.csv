@@ -10,9 +10,9 @@ Text,Text,Text,Text,Text,Text,Text,Text,
 ,General,Left,Center,Right,Justify,Distributed,Fill,Center Across
 Latin text,Text,Text,Text,Text,Text,Text,Text,Text
 Complex text,עברית,עברית,עברית,עברית,עברית,עברית,עברית,עברית
-Number,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0
+Number,1,1,1,1,1,1,1,1
 Boolean,1,1,1,1,1,1,1,1
-Error,42,42,42,42,42,42,42,42
+Error,#N/A,#N/A,#N/A,#N/A,#N/A,#N/A,#N/A,#N/A
 Vertical text,Text,Text,Text,Text,Text,Text,,
 Multiline text,"Text in first line.
 Text in second line.","Text in first line.
@@ -75,4 +75,3 @@ No borders,,,,,,,,
 ,,,,,,,,
 ,,,,,,,,
 With borders,,,,,,,,
-,,,,,,,,
