@@ -140,7 +140,9 @@ module Cell = struct
   type value =
     | Boolean of bool
     | Error of string
-    | Number of string
+    (* According to this, Excel seems to store numbers as doubles:
+       https://support.office.com/en-us/article/excel-specifications-and-limits-1672b34d-7043-467e-8e27-269d656771c3 *)
+    | Number of float
     | String of string
     | Shared_string of int
         [@@deriving compare, sexp]
@@ -158,8 +160,13 @@ module Cell = struct
     Option.map value ~f:(function
     | Boolean true -> "1"
     | Boolean false -> "0"
+    | Number n ->
+      if Float.(round_down n = n) then
+        Float.to_int n
+        |> sprintf "%d"
+      else
+        Float.to_string n
     | Error s
-    | Number s
     | String s -> s
     | Shared_string i -> shared_strings.(i))
     |> Option.value ~default:""
@@ -211,7 +218,7 @@ module Cell = struct
                 Error v
               | Some "n"
               | None ->
-                Number v
+                Number (Float.of_string v)
               | Some t -> failwithf "Invalid cell type %s" t ())
           | _ -> None)
       in

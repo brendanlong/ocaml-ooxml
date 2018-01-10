@@ -7,10 +7,7 @@ open Printf
 
    I downloaded the "XML" versions of each document, then converted them to
    CSV using OpenOffice. The tests then compare our input of the XLSX
-   document to the CSV.
-
-   Note: OpenOffice seems to round floats when exporting CSV, so I had to
-   manually edit the CSV's to have the literal float values in the XLSX file. *)
+   document to the CSV. *)
 
 let pp_diff fmt (exp, real) =
   let open Xlsx_parser in
