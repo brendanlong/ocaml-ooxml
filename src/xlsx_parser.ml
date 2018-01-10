@@ -29,9 +29,24 @@ let rec find_elements el ~path =
       List.concat_map children ~f:(find_elements ~path:tl)
     | _ -> []
 
-let find_element_exn el ~path =
-  find_elements el ~path
-  |> List.hd_exn
+let elements_to_string els =
+  let open Xml in
+  List.map els ~f:(function
+  | (Element ("r", _, _) as el) ->
+    find_elements el ~path:[ "r"; "t" ]
+    |> List.filter_map ~f:(function
+    | PCData str -> Some str
+    | _ -> None)
+    |> String.concat ~sep:""
+  | Element ("t", _, []) -> ""
+  (* Ignore phonetic helpers for now. These are just additional data. *)
+  | Element ("rPh", _, _) -> ""
+  | Element ("phoneticPr", _, _) -> ""
+  | Element ("t", _, [ PCData str] ) -> str
+  | el ->
+    failwithf "Unexpected shared string element %s"
+      (Xml.to_string el) ())
+  |> String.concat ~sep:""
 
 module Sheet_meta = struct
   type t =
@@ -153,11 +168,8 @@ module Row = struct
               in
               col, (match t with
               | Some "inlineStr" ->
-                find_elements cell ~path:[ "c" ; "is" ; "t" ]
-                |> List.find_map ~f:(function
-                | PCData v -> Some v
-                | _ -> None)
-                |> Option.value ~default:""
+                find_elements cell ~path:[ "c" ; "is" ]
+                |> elements_to_string
               | _ ->
                 find_elements cell ~path:[ "c" ; "v" ]
                 |> List.find_map ~f:(function
@@ -211,22 +223,7 @@ module Shared_strings = struct
     find_elements ~path:[ "sst" ] root
     |> List.filter_map ~f:(function
     | Element ("si", _, els) ->
-      List.map els ~f:(function
-        | (Element ("r", _, _) as el) ->
-          find_elements el ~path:[ "r"; "t" ]
-          |> List.filter_map ~f:(function
-          | PCData str -> Some str
-          | _ -> None)
-          |> String.concat ~sep:""
-        | Element ("t", _, []) -> ""
-        (* Ignore phonetic helpers for now. These are just additional data. *)
-        | Element ("rPh", _, _) -> ""
-        | Element ("phoneticPr", _, _) -> ""
-        | Element ("t", _, [ PCData str] ) -> str
-        | el ->
-          failwithf "Unexpected shared string element %s"
-            (Xml.to_string el) ())
-      |> String.concat ~sep:""
+      elements_to_string els
       |> Option.some
     | _ -> None)
     |> List.to_array
