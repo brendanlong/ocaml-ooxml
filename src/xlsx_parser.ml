@@ -219,6 +219,9 @@ module Shared_strings = struct
           | _ -> None)
           |> String.concat ~sep:""
         | Element ("t", _, []) -> ""
+        (* Ignore phonetic helpers for now. These are just additional data. *)
+        | Element ("rPh", _, _) -> ""
+        | Element ("phoneticPr", _, _) -> ""
         | Element ("t", _, [ PCData str] ) -> str
         | el ->
           failwithf "Unexpected shared string element %s"
