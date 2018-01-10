@@ -137,7 +137,60 @@ module Column = struct
 end
 
 module Cell = struct
-  type t = string [@@deriving compare, sexp]
+  type value =
+    | String of string
+    | Shared_string of int
+          [@@deriving compare, sexp]
+
+  type t =
+    { column : int
+    ; value : value option }
+      [@@deriving compare, sexp]
+
+  let empty column =
+    { column ; value = None }
+
+  let to_string ~shared_strings { value } =
+    Option.map value ~f:(function
+    | String s -> s
+    | Shared_string i -> shared_strings.(i))
+    |> Option.value ~default:""
+
+  let of_xml xml =
+    let open Xml in
+    match xml with
+    | Element ("c", attrs, _) ->
+      let column =
+        (* get the column number from the "r" attribute, which looks
+           like A1, B1, etc. *)
+        find_attr_exn attrs "r"
+        |> col_of_cell_id
+      in
+      let t = List.find_map attrs ~f:(function
+        | "t", value -> Some value
+        | _ -> None)
+      in
+      let value =
+        match t with
+        | Some "inlineStr" ->
+          let s =
+            find_elements xml ~path:[ "c" ; "is" ]
+            |> elements_to_string
+          in
+          Some (String s)
+        | _ ->
+          find_elements xml ~path:[ "c" ; "v" ]
+          |> List.find_map ~f:(function
+          | PCData v ->
+            if Option.equal String.equal t (Some "s") then
+              let i = Int.of_string v in
+              Some (Shared_string i)
+            else
+              Some (String v)
+          | _ -> None)
+      in
+      Some { column ; value }
+    | _ -> None
 end
 
 module Row = struct
@@ -153,35 +206,9 @@ module Row = struct
       let index = find_attr_exn attrs "r" |> Int.of_string in
       let row =
         let cell_map =
-          List.map cells ~f:(fun cell ->
-            match cell with
-            | Element ("c", attrs, children) ->
-              let col =
-                (* get the column number from the "r" attribute, which looks
-                   like A1, B1, etc. *)
-                find_attr_exn attrs "r"
-                |> col_of_cell_id
-              in
-              let t = List.find_map attrs ~f:(function
-                | "t", value -> Some value
-                | _ -> None)
-              in
-              col, (match t with
-              | Some "inlineStr" ->
-                find_elements cell ~path:[ "c" ; "is" ]
-                |> elements_to_string
-              | _ ->
-                find_elements cell ~path:[ "c" ; "v" ]
-                |> List.find_map ~f:(function
-                | PCData v ->
-                  if Option.equal String.equal t (Some "s") then
-                    let i = Int.of_string v in
-                    Some shared_strings.(i)
-                  else
-                    Some v
-                | _ -> None)
-                |> Option.value ~default:"")
-            | _ -> assert false)
+          List.filter_map cells ~f:Cell.of_xml
+          |> List.map ~f:(fun cell ->
+            cell.Cell.column, cell)
           |> Map.Using_comparator.of_alist_exn ~comparator:Int.comparator
         in
         let n =
@@ -191,9 +218,9 @@ module Row = struct
           |> Option.value ~default:0
         in
         List.init n ~f:Fn.id
-        |> List.map ~f:(fun i ->
-          Map.find cell_map i
-          |> Option.value ~default:"")
+        |> List.map ~f:(fun column ->
+          Map.find cell_map column
+          |> Option.value ~default:(Cell.empty column))
       in
       (* Rows at 1-indexed, convert to 0-indexed *)
       Some { index = index - 1 ; cells = row }
@@ -291,9 +318,10 @@ let read_file filename =
           in
           let missing_cols = num_cols - List.length row in
           if missing_cols > 0 then
-            row @ List.init ~f:(Fn.const "") missing_cols
+            row @ List.init ~f:Cell.empty missing_cols
           else
             row)
+        |> List.map ~f:(List.map ~f:(Cell.to_string ~shared_strings))
       in
       { name ; rows }))
     ~finally:(fun () -> Zip.close_in zip)
