@@ -136,6 +136,25 @@ module Column = struct
     |> List.filter_map ~f:of_xml
 end
 
+module Style = struct
+  type t =
+    { num_fmt_id : int }
+      [@@deriving compare, sexp]
+
+  let of_xml = function
+    | Xml.Element ("xf", attrs, _) ->
+      let num_fmt_id = find_attr_exn attrs "numFmtId" |> Int.of_string in
+      Some { num_fmt_id }
+    | _ -> None
+
+  let of_zip zip =
+    Zip.find_entry zip "xl/styles.xml"
+    |> Zip.read_entry zip
+    |> Xml.parse_string
+    |> find_elements ~path:[ "styleSheet" ; "cellXfs" ]
+    |> List.filter_map ~f:of_xml
+end
+
 module Cell = struct
   type value =
     | Boolean of bool
@@ -156,16 +175,55 @@ module Cell = struct
   let empty column =
     { column ; value = None ; style = 0 }
 
-  let to_string ~shared_strings { value } =
+  let to_string ~styles ~shared_strings { value ; style } =
     Option.map value ~f:(function
     | Boolean true -> "1"
     | Boolean false -> "0"
     | Number n ->
-      if Float.(round_down n = n) then
-        Float.to_int n
-        |> sprintf "%d"
-      else
-        Float.to_string n
+      let add_commas s =
+        String.split s ~on:'.'
+        |> (function
+        | i :: p ->
+          (String.to_list_rev i
+           |> List.groupi ~break:(fun i _ _ -> i mod 3 = 0)
+           |> List.map ~f:List.rev
+           |> List.map ~f:String.of_char_list
+           |> List.rev
+           |> String.concat ~sep:",")
+          :: p
+        | l -> l)
+        |> String.concat ~sep:"."
+      in
+      (match styles.(style).Style.num_fmt_id with
+      | 1 ->
+        Float.iround_exn n
+        |> Int.to_string
+      | 2 ->
+        sprintf "%.2f" n
+      | 3 ->
+        Float.iround_exn n
+        |> Int.to_string
+        |> add_commas
+      | 4 ->
+        sprintf "%.2f" n
+        |> add_commas
+      | 9 ->
+        n *. 100.
+        |> Float.iround_exn
+        |> sprintf "%d%%"
+      | 10 ->
+        n *. 100.
+        |> sprintf "%.2f%%"
+      | 11 ->
+        sprintf "%.2E" n
+      (* TODO: 12 is defined as # ?/?, ex: 1234 4/7 *)
+      (* TODO: 13 is defined as # ??/??, ex: 1234 46/81 *)
+      | 0 | _ ->
+        if Float.(round_down n = n) then
+          Float.to_int n
+          |> sprintf "%d"
+        else
+          Float.to_string n)
     | Error s
     | String s -> s
     | Shared_string i -> shared_strings.(i))
@@ -311,6 +369,10 @@ let read_file filename =
       Workbook_meta.of_zip zip
       |> Workbook_meta.sheets
     in
+    let styles =
+      Style.of_zip zip
+      |> Array.of_list
+    in
     let rel_map =
       Relationship.of_zip zip
       |> Relationship.to_map
@@ -354,7 +416,7 @@ let read_file filename =
             row @ List.init ~f:Cell.empty missing_cols
           else
             row)
-        |> List.map ~f:(List.map ~f:(Cell.to_string ~shared_strings))
+        |> List.map ~f:(List.map ~f:(Cell.to_string ~styles ~shared_strings))
       in
       { name ; rows }))
     ~finally:(fun () -> Zip.close_in zip)
