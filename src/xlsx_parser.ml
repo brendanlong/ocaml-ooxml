@@ -138,20 +138,28 @@ end
 
 module Cell = struct
   type value =
+    | Boolean of bool
+    | Error of string
+    | Number of string
     | String of string
     | Shared_string of int
-          [@@deriving compare, sexp]
+        [@@deriving compare, sexp]
 
   type t =
     { column : int
-    ; value : value option }
+    ; value : value option
+    ; style : int option }
       [@@deriving compare, sexp]
 
   let empty column =
-    { column ; value = None }
+    { column ; value = None ; style = None }
 
   let to_string ~shared_strings { value } =
     Option.map value ~f:(function
+    | Boolean true -> "1"
+    | Boolean false -> "0"
+    | Error s
+    | Number s
     | String s -> s
     | Shared_string i -> shared_strings.(i))
     |> Option.value ~default:""
@@ -170,6 +178,10 @@ module Cell = struct
         | "t", value -> Some value
         | _ -> None)
       in
+      let style = List.find_map attrs ~f:(function
+        | "s", value -> Some (Int.of_string value)
+        | _ -> None)
+      in
       let value =
         match t with
         | Some "inlineStr" ->
@@ -182,14 +194,26 @@ module Cell = struct
           find_elements xml ~path:[ "c" ; "v" ]
           |> List.find_map ~f:(function
           | PCData v ->
-            if Option.equal String.equal t (Some "s") then
-              let i = Int.of_string v in
-              Some (Shared_string i)
-            else
-              Some (String v)
+            Some (match t with
+              | Some "s" ->
+                let i = Int.of_string v in
+                Shared_string i
+              | Some "str" ->
+                String v
+              | Some "b" ->
+                Boolean (match v with
+                  | "1" -> true
+                  | "0" -> false
+                  | _ -> failwithf "Invalid boolean cell value %s" v ())
+              | Some "e" ->
+                Error v
+              | Some "n"
+              | None ->
+                Number v
+              | Some t -> failwithf "Invalid cell type %s" t ())
           | _ -> None)
       in
-      Some { column ; value }
+      Some { column ; value ; style }
     | _ -> None
 end
 
