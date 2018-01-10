@@ -148,11 +148,11 @@ module Cell = struct
   type t =
     { column : int
     ; value : value option
-    ; style : int option }
+    ; style : int }
       [@@deriving compare, sexp]
 
   let empty column =
-    { column ; value = None ; style = None }
+    { column ; value = None ; style = 0 }
 
   let to_string ~shared_strings { value } =
     Option.map value ~f:(function
@@ -178,9 +178,11 @@ module Cell = struct
         | "t", value -> Some value
         | _ -> None)
       in
-      let style = List.find_map attrs ~f:(function
+      let style =
+        List.find_map attrs ~f:(function
         | "s", value -> Some (Int.of_string value)
         | _ -> None)
+        |> Option.value ~default:0
       in
       let value =
         match t with
