@@ -1,4 +1,4 @@
-open Base
+open Core_kernel
 open Printf
 
 let find_attr (attrs : (string * string) list) (name_to_find : string) =
@@ -98,7 +98,7 @@ module Relationship = struct
 
   let to_map ts =
     List.map ts ~f:(fun { id ; target } -> id, target)
-    |> Map.Using_comparator.of_alist_exn ~comparator:String.comparator
+    |>String.Map.of_alist_exn
 
   let of_xml = function
     | Xml.Element ("Relationship", attrs, _) ->
@@ -218,6 +218,14 @@ module Cell = struct
         sprintf "%.2E" n
       (* TODO: 12 is defined as # ?/?, ex: 1234 4/7 *)
       (* TODO: 13 is defined as # ??/??, ex: 1234 46/81 *)
+      | 14 ->
+        Date.create_exn ~y:1899 ~m:Month.Dec ~d:30
+        |> (fun d -> Date.add_days d (Float.iround_exn ~dir:`Down n))
+        |> (fun d ->
+          let month = Date.month d |> Month.to_int in
+          let day = Date.day d in
+          let year = Date.year d in
+          sprintf "%d/%d/%d" month day year)
       | 0 | _ ->
         if Float.(round_down n = n) then
           Float.to_int n
@@ -300,7 +308,7 @@ module Row = struct
           List.filter_map cells ~f:Cell.of_xml
           |> List.map ~f:(fun cell ->
             cell.Cell.column, cell)
-          |> Map.Using_comparator.of_alist_exn ~comparator:Int.comparator
+          |> Int.Map.of_alist_exn
         in
         let n =
           Map.keys cell_map
@@ -397,7 +405,7 @@ let read_file filename =
           worksheet.Worksheet.rows
           |> List.map ~f:(fun { Row.index ; cells } ->
             index, cells)
-          |> Map.Using_comparator.of_alist_exn ~comparator:Int.comparator
+          |> Int.Map.of_alist_exn
         in
         let n =
           Map.keys row_map

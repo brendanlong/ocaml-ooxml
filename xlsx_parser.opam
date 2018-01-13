@@ -11,7 +11,7 @@ install: [jbuilder install]
 remove: [jbuilder uninstall]
 
 depends: [
-  "base" {>= "v0.9.0"}
+  "core_kernel" {>= "v0.9.0"}
   "camlzip"
   "ppx_jane"
   "xml-light"

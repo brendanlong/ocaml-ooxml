@@ -3,5 +3,5 @@
 (library
  ((name xlsx_parser)
   (public_name xlsx_parser)
-  (libraries (base camlzip xml-light))
+  (libraries (base camlzip core_kernel xml-light))
   (preprocess (pps (ppx_jane ppx_driver.runner)))))
