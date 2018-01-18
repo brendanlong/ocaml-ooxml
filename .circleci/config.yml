@@ -19,11 +19,11 @@ jobs:
           command: opam install --deps-only -y xlsx_parser
       - run:
           name: Build
-          command: eval `opam config env` && jbuilder build @install
+          command: eval `opam config env` && make
       - run:
           name: Install OCaml test dependencies
           # Not using opam install -y -t because it tries to run csv's tests
           command: opam install -y csv oUnit
       - run:
           name: Test
-          command: eval `opam config env` && jbuilder runtest
+          command: eval `opam config env` && make test
