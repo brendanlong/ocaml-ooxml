@@ -4,7 +4,10 @@ build:
 clean:
 	@jbuilder clean
 
+doc:
+	@jbuilder build @doc
+
 test:
 	@jbuilder runtest
 
-.PHONY: build clean test
+.PHONY: build clean doc test

@@ -34,8 +34,3 @@ let bool_of_xsd_boolean =
   | "true" | "1" -> true
   | "false" | "0" -> false
   | str -> failwithf "Expected xsd:boolean but got '%s'" str ()
-
-let zip_entry_to_xml zip name =
-  Zip.find_entry zip name
-  |> Zip.read_entry zip
-  |> Xml.parse_string

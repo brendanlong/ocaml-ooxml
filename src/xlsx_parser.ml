@@ -49,6 +49,11 @@ let elements_to_string els =
       (Xml.to_string el) ())
   |> String.concat ~sep:""
 
+let zip_entry_to_xml zip name =
+  Zip.find_entry zip name
+  |> Zip.read_entry zip
+  |> Xml.parse_string
+
 module Column = struct
   type t =
     { min : int

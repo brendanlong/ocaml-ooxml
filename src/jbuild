@@ -3,5 +3,5 @@
 (library
  ((name xlsx_parser)
   (public_name xlsx_parser)
-  (libraries (spreadsheetml))
+  (libraries (camlzip spreadsheetml))
   (preprocess (pps (ppx_jane ppx_driver.runner)))))

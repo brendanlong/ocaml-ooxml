@@ -2,5 +2,5 @@
 
 (library
  ((name utils)
-  (libraries (camlzip core_kernel stdint xml-light))
+  (libraries (core_kernel stdint xml-light))
   (preprocess (pps (ppx_jane ppx_driver.runner)))))
