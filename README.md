@@ -1,5 +1,7 @@
 [![CircleCI](https://circleci.com/gh/brendanlong/ocaml-xlsx-parser.svg?style=shield)](https://circleci.com/gh/brendanlong/ocaml-xlsx-parser)
 
+[![Coverage Status](https://coveralls.io/repos/github/brendanlong/ocaml-xlsx-parser/badge.svg?branch=master)](https://coveralls.io/github/brendanlong/ocaml-xlsx-parser?branch=master)
+
 The repo contains three libraries for reading data from Microsoft's document
 formats ("Office Open XML").
 
@@ -61,12 +63,11 @@ Some things I could use help with:
     the 1st edition. Part 2 is the most interesting for the Open Packaging
     Conventions and Part 4 has specifics for SpreadsheetML (or the other office
     formats if you want to start a library for them).
-  - Setup automatic code coverage reports. It's easy to have a typo when
-    implementing the spec, so I'd like to aim for 100% test coverage.
   - Add more tests. Right now there's a set of extremely high level tests
     that we get the sound output as OpenOffice's CSV export, but being so high
     level means a lot of things are completely untested until we're 100%
-    finished, which isn't a good situation to be in.
+    finished, which isn't a good situation to be in. It's easy to have a typo
+    when implementing this spec, so I'd like to aim for 100% test coverage.
   - The cell formatting needs a lot of work. It's what I'm likely to work on
     next, but if you think you can do it first I'd be happy to let someone
     else do it (let me know if you start working on this though, so we don't
