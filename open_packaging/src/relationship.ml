@@ -2,32 +2,34 @@ open Core_kernel
 open Stdint
 open Utils
 
-type target_mode =
-  | Internal
-  | External
-      [@@deriving sexp_of]
+module Target_mode = struct
+  type t =
+    | Internal
+    | External
+        [@@deriving sexp_of]
 
-let target_mode_of_string = function
-  | "Internal" -> Internal
-  | "External" -> External
-  | str -> failwithf "Expected ST_TargetMode but got '%s'" str ()
+  let of_string = function
+    | "Internal" -> Internal
+    | "External" -> External
+    | str -> failwithf "Expected ST_TargetMode but got '%s'" str ()
+end
 
 (* 8.3.3.2 Relationship Element *)
 type t =
-  { target_mode : target_mode
-  ; target : string (* xsd:anyURI *)
-  ; type_ : string (* xsd:anyURI *)
-  ; id : string (* xsd:ID *) }
+  { target_mode : Target_mode.t
+  ; target : string
+  ; type_ : string
+  ; id : string }
     [@@deriving fields, sexp_of]
 
 let of_xml = function
   | Xml.Element ("Relationship", attrs,  _) ->
-    let target_mode = ref Internal in
+    let target_mode = ref Target_mode.Internal in
     let target = ref None in
     let type_ = ref None in
     let id = ref None in
     List.iter attrs ~f:(function
-    | "TargetMode", v -> target_mode := target_mode_of_string v
+    | "TargetMode", v -> target_mode := Target_mode.of_string v
     | "Target", v -> target := Some v
     | "Type", v -> type_ := Some v
     | "Id", v -> id := Some v
