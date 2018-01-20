@@ -15,6 +15,14 @@ let expect_element expect_name f =
   | PCData str ->
     failwithf "Expected <%s> element but saw '%s'" expect_name str ()
 
+let expect_pcdata children =
+  List.find_map children ~f:(
+    let open Xml in
+    function
+    | PCData str -> Some str
+    | Element (name, _, _) -> failwithf "Expected PCData but got <%s>" name ())
+  |> Option.value ~default:""
+
 let require_attribute element name =
   function
   | Some v -> v

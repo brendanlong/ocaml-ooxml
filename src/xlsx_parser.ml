@@ -272,26 +272,6 @@ module Worksheet = struct
     { columns ; rows }
 end
 
-module Shared_strings = struct
-  type t = string list [@@deriving compare, sexp]
-
-  let of_xml root =
-    find_elements ~path:[ "sst" ] root
-    |> List.filter_map ~f:(function
-    | Element ("si", _, els) ->
-      elements_to_string els
-      |> Option.some
-    | _ -> None)
-    |> List.to_array
-
-  let of_zip zip =
-    Zip.find_entry zip "xl/sharedStrings.xml"
-    |> Zip.read_entry zip
-    |> Xml.parse_string
-    |> of_xml
-
-end
-
 type sheet =
   { name : string
   ; rows : string list list }
@@ -302,7 +282,11 @@ type t = sheet list [@@deriving compare, sexp]
 let read_file filename =
   let zip = Zip.open_in filename in
   Exn.protect ~f:(fun () ->
-    let shared_strings = Shared_strings.of_zip zip in
+    let shared_strings =
+      zip_entry_to_xml zip "xl/sharedStrings.xml"
+      |> Spreadsheetml.Shared_string_table.of_xml
+      |> Spreadsheetml.Shared_string_table.to_string_array
+    in
     let sheets =
       zip_entry_to_xml zip "xl/workbook.xml"
       |> Spreadsheetml.Workbook.of_xml

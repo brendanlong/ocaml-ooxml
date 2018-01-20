@@ -48,6 +48,6 @@ module Relationships = struct
       [@@deriving sexp_of]
 
   let of_xml =
-    expect_element "Relationships" (fun _ children ->
-      List.filter_map children ~f:Relationship.of_xml)
+    expect_element "Relationships" (fun _ ->
+      List.filter_map ~f:Relationship.of_xml)
 end
