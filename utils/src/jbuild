@@ -3,4 +3,4 @@
 (library
  ((name utils)
   (libraries (core_kernel stdint xml-light))
-  (preprocess (pps (ppx_jane ppx_driver.runner)))))
+  (preprocess (pps (bisect_ppx -conditional ppx_jane ppx_driver.runner)))))

@@ -4,4 +4,4 @@
  ((name spreadsheetml)
   (public_name spreadsheetml)
   (libraries (open_packaging))
-  (preprocess (pps (ppx_jane ppx_driver.runner)))))
+  (preprocess (pps (bisect_ppx -conditional ppx_jane ppx_driver.runner)))))

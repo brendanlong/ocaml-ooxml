@@ -4,4 +4,4 @@
  ((name open_packaging)
   (public_name open_packaging)
   (libraries (base core_kernel stdint utils xml-light))
-  (preprocess (pps (ppx_jane ppx_driver.runner)))))
+  (preprocess (pps (bisect_ppx -conditional ppx_jane ppx_driver.runner)))))

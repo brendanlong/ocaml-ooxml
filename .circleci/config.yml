@@ -27,3 +27,6 @@ jobs:
       - run:
           name: Test
           command: eval `opam config env` && make test
+      - run:
+          name: Coverage
+          command: eval `opam config env` && make coverage
