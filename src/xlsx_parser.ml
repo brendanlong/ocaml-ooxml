@@ -1,5 +1,5 @@
 open Core_kernel
-open Printf
+open Utils
 
 let find_attr (attrs : (string * string) list) (name_to_find : string) =
   List.find_map attrs ~f:(fun (name, value) ->
@@ -47,35 +47,6 @@ let elements_to_string els =
     failwithf "Unexpected shared string element %s"
       (Xml.to_string el) ())
   |> String.concat ~sep:""
-
-module Relationship = struct
-  type t =
-    { id : string
-    ; type_ : string
-    ; target : string }
-      [@@deriving compare, fields, sexp]
-
-  let to_map ts =
-    List.map ts ~f:(fun { id ; target } -> id, target)
-    |>String.Map.of_alist_exn
-
-  let of_xml = function
-    | Xml.Element ("Relationship", attrs, _) ->
-      let id = find_attr_exn attrs "Id" in
-      let type_ = find_attr_exn attrs "Type" in
-      let target = find_attr_exn attrs "Target" in
-      Some { id ; type_ ; target }
-    | _ -> None
-
-  let of_zip zip =
-    Zip.find_entry zip "xl/_rels/workbook.xml.rels"
-    |> Zip.read_entry zip
-    |> Xml.parse_string
-    |> function
-    | Xml.Element("Relationships", _, children) ->
-      List.filter_map children ~f:of_xml
-    | _ -> assert false
-end
 
 module Column = struct
   type t =
@@ -333,9 +304,7 @@ let read_file filename =
   Exn.protect ~f:(fun () ->
     let shared_strings = Shared_strings.of_zip zip in
     let sheets =
-      Zip.find_entry zip "xl/workbook.xml"
-      |> Zip.read_entry zip
-      |> Xml.parse_string
+      zip_entry_to_xml zip "xl/workbook.xml"
       |> Spreadsheetml.Workbook.of_xml
       |> Spreadsheetml.Workbook.sheets
     in
@@ -344,8 +313,11 @@ let read_file filename =
       |> Array.of_list
     in
     let rel_map =
-      Relationship.of_zip zip
-      |> Relationship.to_map
+      zip_entry_to_xml zip "xl/_rels/workbook.xml.rels"
+      |> Open_packaging.Relationships.of_xml
+      |> List.map ~f:(fun { Open_packaging.Relationship.id ; target } ->
+        id, target)
+      |> String.Map.of_alist_exn
     in
     List.map sheets ~f:(fun { Spreadsheetml.Workbook.Sheet.name ; id } ->
       let rows =

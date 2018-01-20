@@ -1,22 +1,7 @@
 (* See ECMA 376 Part 4, Section 3 - "SpreadsheetML Reference Material" *)
 open Core_kernel
 open Stdint
-
-let sexp_of_uint32 t =
-  Uint32.to_string t
-  |> Sexp.of_string
-
-let require_attribute element name =
-  function
-  | Some v -> v
-  | None -> failwithf "<%s> missing required attribute '%s'" element name ()
-
-let bool_of_xsd_boolean =
-  (* See http://books.xmlschemata.org/relaxng/ch19-77025.html *)
-  function
-  | "true" | "1" -> true
-  | "false" | "0" -> false
-  | str -> failwithf "Expected xsd:boolean but got '%s'" str ()
+open Utils
 
 module Workbook = struct
   module Book_view = struct
@@ -166,21 +151,15 @@ module Workbook = struct
     ; sheets = [] }
 
   let of_xml =
-    let open Xml in
-    function
-    | Element ("workbook", attrs, children) ->
+    expect_element "workbook" (fun attrs children ->
       List.fold children ~init:empty ~f:(fun t ->
-          function
-          | Element ("bookViews", _, children) ->
-            let book_views = List.filter_map children ~f:Book_view.of_xml in
-            { t with book_views }
-          | Element ("sheets", _, children) ->
-            let sheets = List.filter_map children ~f:Sheet.of_xml in
-            { t with sheets }
-          | _ -> t)
-    | Element (name, _, _) ->
-      failwithf "Expected <workbook> element but saw <%s>" name ()
-    | PCData str ->
-      failwithf "Expected <workbook> element but saw '%s'" str ()
+        function
+        | Element ("bookViews", _, children) ->
+          let book_views = List.filter_map children ~f:Book_view.of_xml in
+          { t with book_views }
+        | Element ("sheets", _, children) ->
+          let sheets = List.filter_map children ~f:Sheet.of_xml in
+          { t with sheets }
+        | _ -> t))
 
 end
