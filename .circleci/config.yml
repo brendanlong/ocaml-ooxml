@@ -35,4 +35,4 @@ jobs:
           command: opam install -y ocveralls
       - run:
           name: Upload coverage report
-          command: eval `opam config env` && ocveralls bisect*.out --send --repo_token $COVERALLS_REPO_TOKEN
+          command: eval `opam config env` && ocveralls bisect*.out --send --repo_token $COVERALLS_REPO_TOKEN --git
