@@ -1,5 +1,4 @@
 [![CircleCI](https://circleci.com/gh/brendanlong/ocaml-xlsx-parser.svg?style=shield)](https://circleci.com/gh/brendanlong/ocaml-xlsx-parser)
-
 [![Coverage Status](https://coveralls.io/repos/github/brendanlong/ocaml-xlsx-parser/badge.svg?branch=master)](https://coveralls.io/github/brendanlong/ocaml-xlsx-parser?branch=master)
 
 The repo contains three libraries for reading data from Microsoft's document
