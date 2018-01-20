@@ -1,0 +1,7 @@
+(jbuild_version 1)
+
+(library
+ ((name open_packaging)
+  (public_name open_packaging)
+  (libraries (base core_kernel stdint utils xml-light))
+  (preprocess (pps (ppx_jane ppx_driver.runner)))))

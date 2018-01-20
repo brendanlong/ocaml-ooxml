@@ -1,0 +1,7 @@
+(jbuild_version 1)
+
+(library
+ ((name spreadsheetml)
+  (public_name spreadsheetml)
+  (libraries (open_packaging))
+  (preprocess (pps (ppx_jane ppx_driver.runner)))))

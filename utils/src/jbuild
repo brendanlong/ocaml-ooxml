@@ -1,7 +1,6 @@
 (jbuild_version 1)
 
 (library
- ((name xlsx_parser)
-  (public_name xlsx_parser)
-  (libraries (spreadsheetml))
+ ((name utils)
+  (libraries (camlzip core_kernel stdint xml-light))
   (preprocess (pps (ppx_jane ppx_driver.runner)))))
