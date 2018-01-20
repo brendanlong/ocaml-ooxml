@@ -14,6 +14,7 @@ depends: [
   "core_kernel" {>= "v0.9.0"}
   "camlzip"
   "ppx_jane"
+  "stdint"
   "xml-light"
 
   "csv" {test}

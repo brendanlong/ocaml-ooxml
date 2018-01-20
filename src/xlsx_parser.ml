@@ -48,47 +48,6 @@ let elements_to_string els =
       (Xml.to_string el) ())
   |> String.concat ~sep:""
 
-module Sheet_meta = struct
-  type t =
-    { name : string
-    ; id : int
-    ; rel_id : string }
-      [@@deriving compare, fields, sexp]
-
-  let of_xml =
-    let open Xml in
-    function
-    | Element ("sheet", attrs, _) ->
-      let name = find_attr_exn attrs "name" in
-      let id = find_attr_exn attrs "sheetId" |> Int.of_string in
-      let rel_id = find_attr_exn attrs "r:id" in
-      Some { name ; id ; rel_id }
-    | _ -> None
-end
-
-module Workbook_meta = struct
-  type t =
-    { sheets : Sheet_meta.t list }
-      [@@deriving compare, fields, sexp]
-
-  let of_zip zip =
-    let open Xml in
-    Zip.find_entry zip "xl/workbook.xml"
-    |> Zip.read_entry zip
-    |> Xml.parse_string
-    |> function
-    | Element ("workbook", _, children) ->
-      let sheets =
-        List.find_map children ~f:(function
-        | Element ("sheets", _, sheets) ->
-          Some (List.filter_map sheets ~f:Sheet_meta.of_xml)
-        | _ -> None)
-        |> Option.value ~default:[]
-      in
-      { sheets }
-    | _ -> assert false
-end
-
 module Relationship = struct
   type t =
     { id : string
@@ -374,8 +333,11 @@ let read_file filename =
   Exn.protect ~f:(fun () ->
     let shared_strings = Shared_strings.of_zip zip in
     let sheets =
-      Workbook_meta.of_zip zip
-      |> Workbook_meta.sheets
+      Zip.find_entry zip "xl/workbook.xml"
+      |> Zip.read_entry zip
+      |> Xml.parse_string
+      |> Spreadsheetml.Workbook.of_xml
+      |> Spreadsheetml.Workbook.sheets
     in
     let styles =
       Style.of_zip zip
@@ -385,9 +347,9 @@ let read_file filename =
       Relationship.of_zip zip
       |> Relationship.to_map
     in
-    List.map sheets ~f:(fun { Sheet_meta.name ; rel_id } ->
+    List.map sheets ~f:(fun { Spreadsheetml.Workbook.Sheet.name ; id } ->
       let rows =
-        let target = Map.find_exn rel_map rel_id in
+        let target = Map.find_exn rel_map id in
         let path = sprintf "xl/%s" target in
         let worksheet =
           Zip.find_entry zip path
