@@ -1,4 +1,5 @@
 open Core_kernel
+open Stdint
 open Utils
 
 let find_attr (attrs : (string * string) list) (name_to_find : string) =
@@ -66,25 +67,6 @@ module Column = struct
     |> List.filter_map ~f:of_xml
 end
 
-module Style = struct
-  type t =
-    { num_fmt_id : int }
-      [@@deriving compare, sexp]
-
-  let of_xml = function
-    | Xml.Element ("xf", attrs, _) ->
-      let num_fmt_id = find_attr_exn attrs "numFmtId" |> Int.of_string in
-      Some { num_fmt_id }
-    | _ -> None
-
-  let of_zip zip =
-    Zip.find_entry zip "xl/styles.xml"
-    |> Zip.read_entry zip
-    |> Xml.parse_string
-    |> find_elements ~path:[ "styleSheet" ; "cellXfs" ]
-    |> List.filter_map ~f:of_xml
-end
-
 module Cell = struct
   type value =
     | Boolean of bool
@@ -124,7 +106,11 @@ module Cell = struct
         | l -> l)
         |> String.concat ~sep:"."
       in
-      (match styles.(style).Style.num_fmt_id with
+      styles.(style)
+      |> Spreadsheetml.Styles.Format.number_format_id
+      |> Option.map ~f:Uint32.to_int
+      |> Option.value ~default:0
+      |> (function
       | 1 ->
         Float.iround_exn n
         |> Int.to_string
@@ -293,7 +279,9 @@ let read_file filename =
       |> Spreadsheetml.Workbook.sheets
     in
     let styles =
-      Style.of_zip zip
+      zip_entry_to_xml zip "xl/styles.xml"
+      |> Spreadsheetml.Styles.of_xml
+      |> Spreadsheetml.Styles.cell_formats
       |> Array.of_list
     in
     let rel_map =
