@@ -1,6 +1,10 @@
 open Core_kernel
 open Stdint
 
+let sexp_of_uint8 t =
+  Uint8.to_string t
+  |> Sexp.of_string
+
 let sexp_of_uint32 t =
   Uint32.to_string t
   |> Sexp.of_string

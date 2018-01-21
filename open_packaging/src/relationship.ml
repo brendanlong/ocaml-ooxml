@@ -1,5 +1,4 @@
 open Core_kernel
-open Stdint
 open Utils
 
 module Target_mode = struct

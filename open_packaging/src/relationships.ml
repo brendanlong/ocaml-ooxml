@@ -1,5 +1,4 @@
 open Core_kernel
-open Stdint
 open Utils
 
 (* 8.3.3.1 Relationships Element *)
