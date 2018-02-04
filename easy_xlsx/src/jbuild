@@ -3,5 +3,5 @@
 (library
  ((name easy_xlsx)
   (public_name easy_xlsx)
-  (libraries (camlzip spreadsheetml))
+  (libraries (camlzip spreadsheetml str))
   (preprocess (pps (bisect_ppx -conditional ppx_jane ppx_driver.runner)))))

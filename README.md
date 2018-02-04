@@ -18,11 +18,11 @@ formats ("Office Open XML").
 (it should be obvious what they're mising -- if a field doesn't exist, I
 haven't got to it yet). Everything that does exist should be parsed properly.
 
-`easy_xlsx` is in very early stages. If you desperately need to read XLSX
-documents in OCaml, it's better than nothing, but it makes a lot of assumptions
-about the file format that may not be valid (where files are in the ZIP file)
-and the formatting is hackish and only handles the most common built-in
-formatting right now.
+`easy_xlsx` is in very early stages. It should properly give read XLSX files
+and output correct types, but the SpreadsheetML spec doesn't list all of the
+built-in format strings, so some types may not be handled correctly. At the
+moment, `easy_xlsx` will bail out in any case where it can't understand the
+formatting, although I'd be open to patches to make this optional.
 
 ## Building
 

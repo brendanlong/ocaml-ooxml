@@ -21,7 +21,7 @@ module Value = struct
     (* FIXME: This is only the English format codes. There are 4 Asian format
        codes (Chinese Simplified, Chinese Traditional, Japanese, Korean) and it's
        not clear to me how we're supposed to pick between them. *)
-    [ 0, ""
+    [ 0, "general"
     ; 1, "0"
     ; 2, "0.00"
     ; 3, "#,##0"
@@ -52,17 +52,14 @@ module Value = struct
     |> Int.Map.of_alist_exn
 
   let classify_format str =
-    (* FIXME: This is slow and doesn't correctly handle characters in quotes.
-       For example, the format string [mmm "0.00"] is a Date, not a Number. *)
+    (* FIXME: This is really slow.  We should really use Menhir for this. *)
     let str = String.lowercase str in
+    let remove_strings = Str.regexp "\\[[^\\[]*\\]\\|\"[^\"]*\"" in
+    let str = Str.global_replace remove_strings "" str in
     if str = "general" || str = "" then
       `Number
-    else if String.contains str '@' then
-      `String
-    else if String.contains str '0' || String.contains str '#'
-            || String.contains str '?' then
-      `Number
     else
+      let is_string = String.contains str '@' in
       let is_date = String.contains str 'y' || String.contains str 'd'
                     (* QQ is quarter, NN is day of the week *)
                     || String.contains str 'q' || String.contains str 'n'
@@ -72,7 +69,13 @@ module Value = struct
       let is_time = String.contains str 'h' || String.contains str 's'
                     || String.is_substring str ~substring:"AM/PM"
                     || String.is_substring str ~substring:"A/P" in
-      if is_date && is_time then
+      if [ is_string ; is_date || is_time ]
+         |> List.filter ~f:Fn.id
+         |> List.length > 1 then
+        failwithf "Ambiguous format string '%s'" str ()
+      else if is_string then
+        `String
+      else if is_date && is_time then
         `Datetime
       else if is_date then
         `Date
@@ -101,8 +104,13 @@ module Value = struct
       |> Spreadsheetml.Styles.Format.number_format_id
       |> Option.map ~f:Uint32.to_int
       |> Option.value ~default:0
-      |> Map.find formats
-      |> Option.value ~default:"General"
+      |> (fun num_fmt_id ->
+        match Map.find formats num_fmt_id with
+        | Some format -> format
+        | None ->
+          failwithf "Cell referenced numFmtId %d but it's not listed in the \
+                     XLSX file and isn't a known built-in format ID"
+            num_fmt_id ())
       |> classify_format
       |> (
         let date_of_float n =
