@@ -10,13 +10,13 @@ jobs:
       - run:
           name: Pin packages
           command: |
-            opam pin add -y -n xlsx_parser .
+            opam pin add -y -n easy_xlsx .
       - run:
           name: Install system dependencies
-          command: opam depext -y xlsx_parser
+          command: opam depext -y easy_xlsx
       - run:
           name: Install OCaml dependencies
-          command: opam install --deps-only -y xlsx_parser
+          command: opam install --deps-only -y easy_xlsx
       - run:
           name: Build
           command: eval `opam config env` && make
