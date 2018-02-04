@@ -1,13 +1,13 @@
 (jbuild_version 1)
 
 (executables
- ((names (test_xlsx_parser))
-  (libraries (csv oUnit xlsx_parser))
+ ((names (test_easy_xlsx))
+  (libraries (csv easy_xlsx oUnit))
 	(preprocess (pps (ppx_jane ppx_driver.runner)))))
 
 (alias
  ((name runtest)
-  (deps (test_xlsx_parser.exe))
+  (deps (test_easy_xlsx.exe))
  (action
   (chdir ${ROOT}/../..
    (run ${<})))))

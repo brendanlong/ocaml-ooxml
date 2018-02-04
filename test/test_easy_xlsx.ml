@@ -10,11 +10,11 @@ open Printf
    document to the CSV. *)
 
 let pp_diff fmt (exp, real) =
-  let open Xlsx_parser in
+  let open Easy_xlsx in
   if String.(exp.name <> real.name) then
     Caml.Format.fprintf fmt "Expected sheet %s but got sheet %s" exp.name real.name
   else
-    Caml.Format.fprintf fmt "Sheet: %s\n" (exp.Xlsx_parser.name);
+    Caml.Format.fprintf fmt "Sheet: %s\n" (exp.Easy_xlsx.name);
   let print_opt_row diff_mark row =
     Option.iter row ~f:(fun row ->
       String.concat ~sep:"," row
@@ -35,18 +35,18 @@ let pp_diff fmt (exp, real) =
         (List.tl exp |> Option.value ~default:[],
          List.tl real |> Option.value ~default:[])
   in
-  diff_lists (exp.Xlsx_parser.rows, real.Xlsx_parser.rows)
+  diff_lists (exp.Easy_xlsx.rows, real.Easy_xlsx.rows)
 
 let sort_sheets =
   List.sort ~cmp:(fun a b ->
-    String.compare a.Xlsx_parser.name b.Xlsx_parser.name)
+    String.compare a.Easy_xlsx.name b.Easy_xlsx.name)
 
 let make_test (skip, file_name, sheet_names) =
   let normalize_sheets sheets =
     (* Fix sheet order and remove whitespace at the end of lines or sheets,
        since we don't care about either of these things *)
     sort_sheets sheets
-    |> List.map ~f:(fun { Xlsx_parser.name ; rows } ->
+    |> List.map ~f:(fun { Easy_xlsx.name ; rows } ->
       let rows =
         List.rev_map rows ~f:(fun row ->
           List.rev row
@@ -55,7 +55,7 @@ let make_test (skip, file_name, sheet_names) =
         |> List.drop_while ~f:List.is_empty
         |> List.rev
       in
-      { Xlsx_parser.name ; rows })
+      { Easy_xlsx.name ; rows })
   in
   let sheet_names = List.sort ~cmp:String.compare sheet_names in
   file_name >::
@@ -73,10 +73,10 @@ let make_test (skip, file_name, sheet_names) =
             |> Array.map ~f:Array.to_list
             |> Array.to_list
           in
-          { Xlsx_parser.name = sheet_name ; rows })
+          { Easy_xlsx.name = sheet_name ; rows })
         |> normalize_sheets
       in
-      Xlsx_parser.read_file (sprintf "test/files/%s.xlsx" file_name)
+      Easy_xlsx.read_file (sprintf "test/files/%s.xlsx" file_name)
       |> normalize_sheets
       |> List.iter2_exn expect ~f:(fun expect actual ->
         assert_equal ~pp_diff expect actual)

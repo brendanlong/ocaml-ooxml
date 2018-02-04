@@ -8,7 +8,7 @@ formats ("Office Open XML").
     (the container format for all Microsoft Office documents)
   - `spreadsheetml` parses the XML data in SpreadsheetML (i.e. Excel's XLSX
     format)
-  - `xlsx_parser` reads XLSX documents, applies the formatting in the document,
+  - `easy_xlsx` reads XLSX documents, applies the formatting in the document,
     and returns the result as a list of sheets (with a sheet name and then
     a `string list list` of data). The goal of this library is to give the
     same results as if you exported the XLSX file to CSV and then read it with
@@ -18,7 +18,7 @@ formats ("Office Open XML").
 (it should be obvious what they're mising -- if a field doesn't exist, I
 haven't got to it yet). Everything that does exist should be parsed properly.
 
-`xlsx_parser` is in very early stages. If you desperately need to read XLSX
+`easy_xlsx` is in very early stages. If you desperately need to read XLSX
 documents in OCaml, it's better than nothing, but it makes a lot of assumptions
 about the file format that may not be valid (where files are in the ZIP file)
 and the formatting is hackish and only handles the most common built-in
@@ -29,9 +29,9 @@ formatting right now.
 Install dependencies:
 
 ```
-opam pin add -n xlsx_parser .
-opam depext xlsx_parser
-opam install --deps-only xlsx_parser
+opam pin add -n easy_xlsx .
+opam depext easy_xlsx
+opam install --deps-only easy_xlsx
 ```
 
 Then build:

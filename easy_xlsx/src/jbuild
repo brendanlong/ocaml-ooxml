@@ -1,7 +1,7 @@
 (jbuild_version 1)
 
 (library
- ((name xlsx_parser)
-  (public_name xlsx_parser)
+ ((name easy_xlsx)
+  (public_name easy_xlsx)
   (libraries (camlzip spreadsheetml))
   (preprocess (pps (bisect_ppx -conditional ppx_jane ppx_driver.runner)))))
