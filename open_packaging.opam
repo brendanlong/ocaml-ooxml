@@ -1,9 +1,9 @@
 opam-version: "1.2"
 version: "0.1"
 maintainer: "self@brendanlong.com"
-homepage: "https://github.com/brendanlong/ocaml-xlsx-parser"
-dev-repo: "https://github.com/brendanlong/ocaml-xlsx-parser.git"
-bug-reports: "https://github.com/brendanlong/ocaml-xlsx-parser/issues"
+homepage: "https://github.com/brendanlong/ocaml-ooxml"
+dev-repo: "https://github.com/brendanlong/ocaml-ooxml.git"
+bug-reports: "https://github.com/brendanlong/ocaml-ooxml/issues"
 
 build: [jbuilder build]
 build-test: [jbuilder runtest]
