@@ -3,13 +3,19 @@ open Stdint
 open Spreadsheetml
 
 module Value = struct
+  type time = Time.t [@@deriving compare]
+
+  let sexp_of_time t =
+    Time.to_string_iso8601_basic ~zone:Time.Zone.utc t
+    |> Sexp.of_string
+
   type t =
     | Date of Date.t
-    | Datetime of Time.t
+    | Datetime of time
     | Number of float
     | String of string
     | Time of Time.Ofday.t
-        [@@deriving compare]
+        [@@deriving compare, sexp_of]
 
   let built_in_formats =
     (* FIXME: This is only the English format codes. There are 4 Asian format
@@ -48,8 +54,13 @@ module Value = struct
   let classify_format str =
     (* FIXME: This is slow and doesn't correctly handle characters in quotes.
        For example, the format string [mmm "0.00"] is a Date, not a Number. *)
-    if String.contains str '0' || String.contains str '#'
-       || String.contains str '?' then
+    let str = String.lowercase str in
+    if str = "general" || str = "" then
+      `Number
+    else if String.contains str '@' then
+      `String
+    else if String.contains str '0' || String.contains str '#'
+            || String.contains str '?' then
       `Number
     else
       let is_date = String.contains str 'y' || String.contains str 'd'
@@ -68,10 +79,21 @@ module Value = struct
       else if is_time then
         `Time
       else
-        `String
+        `Number
 
-  let of_cell ~styles ~shared_strings
+  let of_cell ~styles ~formats ~shared_strings
       ({ Worksheet.Cell.style_index ; data_type ; _ } as cell) =
+    let formats = Map.merge built_in_formats formats ~f:(fun ~key ->
+        function
+        | `Left v -> Some v
+        | `Right v -> Some v
+        | `Both (a, b) ->
+          if a = b then Some a
+          else
+            failwithf "Got format string with ID %d, \"%s\", but there is a \
+                       built-in format string with the same ID, \"%s\""
+              key b a ())
+    in
     let str = Worksheet.Cell.to_string ~shared_strings cell in
     match data_type with
     | Number when str <> "" ->
@@ -79,8 +101,8 @@ module Value = struct
       |> Spreadsheetml.Styles.Format.number_format_id
       |> Option.map ~f:Uint32.to_int
       |> Option.value ~default:0
-      |> Map.find built_in_formats
-      |> Option.value ~default:"@"
+      |> Map.find formats
+      |> Option.value ~default:"General"
       |> classify_format
       |> (
         let date_of_float n =
@@ -90,35 +112,46 @@ module Value = struct
         let time_of_float n =
           let us =
             let time_part = Float.(modf n |> Parts.fractional) in
-            time_part *. 24. *. 3600. *. 1000.
+            let time_abs =
+              if time_part >=. 0. then time_part
+              else 1. +. time_part
+            in
+            time_abs *. 24. *. 3600. *. 1000000.
             |> Float.to_int
           in
           Time.Ofday.create ~us ()
         in
         let n = float_of_string str in
         function
-        | `Number ->  Number n
+        | `Number -> Number n
         | `Date -> Date (date_of_float n)
         | `Datetime ->
           let date = date_of_float n in
           let time = time_of_float n in
           Datetime (Time.utc_mktime date time)
         | `String -> String str
-        | `Time -> Time (time_of_float n))
+        | `Time ->
+          Time (time_of_float n))
     | _ -> String str
 
   let to_string = function
     | Date d -> Date.to_string_iso8601_basic d
     | Datetime t -> Time.to_string_iso8601_basic ~zone:Time.Zone.utc t
-    | Number f -> Float.to_string_hum ~strip_zero:true f
+    | Number f ->
+      Float.to_string_round_trippable f
+      |> String.rstrip ~drop:(function '.' -> true | _ -> false)
     | String s -> s
     | Time t -> Time.Ofday.to_string_trimmed t
+
+  let is_empty = function
+    | String "" -> true
+    | _ -> false
 end
 
 type sheet =
   { name : string
   ; rows : Value.t list list }
-    [@@deriving compare]
+    [@@deriving compare, fields, sexp_of]
 
 type t = sheet list [@@deriving compare]
 
@@ -140,11 +173,19 @@ let read_file filename =
       |> Workbook.of_xml
       |> Workbook.sheets
     in
-    let styles =
+    let stylesheet =
       zip_entry_to_xml zip "xl/styles.xml"
       |> Styles.of_xml
-      |> Styles.cell_formats
+    in
+    let styles =
+      Styles.cell_formats stylesheet
       |> Array.of_list
+    in
+    let formats =
+      Styles.number_formats stylesheet
+      |> List.map ~f:(fun { Styles.Number_format.id ; format } ->
+        Uint32.to_int id, format)
+      |> Int.Map.of_alist_exn
     in
     let rel_map =
       zip_entry_to_xml zip "xl/_rels/workbook.xml.rels"
@@ -210,7 +251,7 @@ let read_file filename =
             row @ List.init ~f:(Fn.const Worksheet.Cell.default) missing_cols
           else
             row)
-        |> List.map ~f:(List.map ~f:(Value.of_cell ~styles ~shared_strings))
+        |> List.map ~f:(List.map ~f:(Value.of_cell ~styles ~formats ~shared_strings))
       in
       { name ; rows }))
     ~finally:(fun () -> Zip.close_in zip)

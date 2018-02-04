@@ -2,12 +2,26 @@
 
 (executables
  ((names (test_easy_xlsx_docs))
+  (modules (test_easy_xlsx_docs))
+  (libraries (csv easy_xlsx oUnit))
+	(preprocess (pps (ppx_jane ppx_driver.runner)))))
+
+(executables
+ ((names (test_easy_xlsx_formats))
+  (modules (test_easy_xlsx_formats))
   (libraries (csv easy_xlsx oUnit))
 	(preprocess (pps (ppx_jane ppx_driver.runner)))))
 
 (alias
  ((name runtest)
   (deps (test_easy_xlsx_docs.exe))
+ (action
+  (chdir ${ROOT}/../..
+   (run ${<})))))
+
+(alias
+ ((name runtest)
+  (deps (test_easy_xlsx_formats.exe))
  (action
   (chdir ${ROOT}/../..
    (run ${<})))))

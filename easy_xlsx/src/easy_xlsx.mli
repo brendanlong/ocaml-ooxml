@@ -8,18 +8,19 @@ module Value : sig
     | Number of float
     | String of string
     | Time of Time.Ofday.t
-        [@@deriving compare]
+        [@@deriving compare, sexp_of]
         (** A cell value. Note that a [Number] could be either an integer or
            a float; Excel stores them exactly the same and the only difference
            is formatting. *)
 
   val to_string : t -> string
+  val is_empty : t -> bool
 end
 
 type sheet =
   { name : string
   ; rows : Value.t list list }
-    [@@deriving compare]
+    [@@deriving compare, fields, sexp_of]
     (** One sheet from a workbook. Empty rows will be returned, and empty or
        missing columns will be returned as [""]. *)
 
