@@ -2,86 +2,132 @@ open Core_kernel
 open Stdint
 open Spreadsheetml
 
-let zip_entry_to_xml zip name =
-  Zip.find_entry zip name
-  |> Zip.read_entry zip
-  |> Xml.parse_string
+module Value = struct
+  type t =
+    | Date of Date.t
+    | Datetime of Time.t
+    | Number of float
+    | String of string
+    | Time of Time.Ofday.t
+        [@@deriving compare]
 
-type sheet =
-  { name : string
-  ; rows : string list list }
-    [@@deriving compare, sexp]
+  let built_in_formats =
+    (* FIXME: This is only the English format codes. There are 4 Asian format
+       codes (Chinese Simplified, Chinese Traditional, Japanese, Korean) and it's
+       not clear to me how we're supposed to pick between them. *)
+    [ 0, ""
+    ; 1, "0"
+    ; 2, "0.00"
+    ; 3, "#,##0"
+    ; 4, "#,##0,00"
+    ; 9, "0%"
+    ; 10, "0.00%"
+    ; 11, "0.00E+00"
+    ; 12, "# ?/?"
+    ; 13, "# ??/??"
+    ; 14, "mm-dd-yy"
+    ; 15, "d-mmm-yy"
+    ; 16, "d-mmm"
+    ; 17, "mmm-yy"
+    ; 18, "h:mm AM/PM"
+    ; 19, "h:mm:ss AM/PM"
+    ; 20, "h:mm"
+    ; 21, "h:mm:ss"
+    ; 22, "m/d/yy h:mm"
+    ; 37, "#,##0 ;(#,##0)"
+    ; 38, "#,##0 ;[Red](#,##0)"
+    ; 39, "#,##0.00;(#,##0.00)"
+    ; 40, "#,##0.00;[Red](#,##0.00)"
+    ; 45, "mm:ss"
+    ; 46, "[h]:mm:ss"
+    ; 47, "mmss.0"
+    ; 48, "##0.0E+0"
+    ; 49, "@" ]
+    |> Int.Map.of_alist_exn
 
-type t = sheet list [@@deriving compare, sexp]
-
-let format_cell ~styles ~shared_strings
-    ({ Worksheet.Cell.style_index ; data_type ; _ } as cell) =
-  let str = Worksheet.Cell.to_string ~shared_strings cell in
-  match data_type with
-  | Number ->
-    if str = "" then
-      ""
+  let classify_format str =
+    (* FIXME: This is slow and doesn't correctly handle characters in quotes.
+       For example, the format string [mmm "0.00"] is a Date, not a Number. *)
+    if String.contains str '0' || String.contains str '#'
+       || String.contains str '?' then
+      `Number
     else
-      let add_commas s =
-        String.split s ~on:'.'
-        |> (function
-        | i :: p ->
-          (String.to_list_rev i
-           |> List.groupi ~break:(fun i _ _ -> i mod 3 = 0)
-           |> List.map ~f:List.rev
-           |> List.map ~f:String.of_char_list
-           |> List.rev
-           |> String.concat ~sep:",")
-          :: p
-        | l -> l)
-        |> String.concat ~sep:"."
-      in
-      let n = float_of_string str in
+      let is_date = String.contains str 'y' || String.contains str 'd'
+                    (* QQ is quarter, NN is day of the week *)
+                    || String.contains str 'q' || String.contains str 'n'
+                    (* WW is week number *)
+                    || String.contains str 'w'
+                    || String.is_substring str ~substring:"mmm" in
+      let is_time = String.contains str 'h' || String.contains str 's'
+                    || String.is_substring str ~substring:"AM/PM"
+                    || String.is_substring str ~substring:"A/P" in
+      if is_date && is_time then
+        `Datetime
+      else if is_date then
+        `Date
+      else if is_time then
+        `Time
+      else
+        `String
+
+  let of_cell ~styles ~shared_strings
+      ({ Worksheet.Cell.style_index ; data_type ; _ } as cell) =
+    let str = Worksheet.Cell.to_string ~shared_strings cell in
+    match data_type with
+    | Number when str <> "" ->
       styles.(Uint32.to_int style_index)
       |> Spreadsheetml.Styles.Format.number_format_id
       |> Option.map ~f:Uint32.to_int
       |> Option.value ~default:0
-      |> (function
-      | 1 ->
-        Float.iround_exn n
-        |> Int.to_string
-      | 2 ->
-        sprintf "%.2f" n
-      | 3 ->
-        Float.iround_exn n
-        |> Int.to_string
-        |> add_commas
-      | 4 ->
-        sprintf "%.2f" n
-        |> add_commas
-      | 9 ->
-        n *. 100.
-        |> Float.iround_exn
-        |> sprintf "%d%%"
-      | 10 ->
-        n *. 100.
-        |> sprintf "%.2f%%"
-      | 11 ->
-        sprintf "%.2E" n
-      (* TODO: 12 is defined as # ?/?, ex: 1234 4/7 *)
-      (* TODO: 13 is defined as # ??/??, ex: 1234 46/81 *)
-      | 14 ->
-        Date.create_exn ~y:1899 ~m:Month.Dec ~d:30
-        |> (fun d -> Date.add_days d (Float.iround_exn ~dir:`Down n))
-        |> (fun d ->
-          let month = Date.month d |> Month.to_int in
-          let day = Date.day d in
-          let year = Date.year d in
-          sprintf "%d/%d/%d" month day year)
-      | 0 | _ ->
-        if Float.(round_down n = n) then
-          Float.to_int n
-          |> sprintf "%d"
-        else
-          Float.to_string n)
-  | _ -> str
+      |> Map.find built_in_formats
+      |> Option.value ~default:"@"
+      |> classify_format
+      |> (
+        let date_of_float n =
+          let d = Date.create_exn ~y:1899 ~m:Month.Dec ~d:30 in
+          Date.add_days d (Float.iround_exn ~dir:`Down n)
+        in
+        let time_of_float n =
+          let us =
+            let time_part = Float.(modf n |> Parts.fractional) in
+            time_part *. 24. *. 3600. *. 1000.
+            |> Float.to_int
+          in
+          Time.Ofday.create ~us ()
+        in
+        let n = float_of_string str in
+        function
+        | `Number ->  Number n
+        | `Date -> Date (date_of_float n)
+        | `Datetime ->
+          let date = date_of_float n in
+          let time = time_of_float n in
+          Datetime (Time.utc_mktime date time)
+        | `String -> String str
+        | `Time -> Time (time_of_float n))
+    | _ -> String str
+
+  let to_string = function
+    | Date d -> Date.to_string_iso8601_basic d
+    | Datetime t -> Time.to_string_iso8601_basic ~zone:Time.Zone.utc t
+    | Number f -> Float.to_string_hum ~strip_zero:true f
+    | String s -> s
+    | Time t -> Time.Ofday.to_string_trimmed t
+end
+
+type sheet =
+  { name : string
+  ; rows : Value.t list list }
+    [@@deriving compare]
+
+type t = sheet list [@@deriving compare]
 
 let read_file filename =
+  let zip_entry_to_xml zip name =
+    Zip.find_entry zip name
+    |> Zip.read_entry zip
+    |> Xml.parse_string
+  in
   let zip = Zip.open_in filename in
   Exn.protect ~f:(fun () ->
     let shared_strings =
@@ -164,7 +210,7 @@ let read_file filename =
             row @ List.init ~f:(Fn.const Worksheet.Cell.default) missing_cols
           else
             row)
-        |> List.map ~f:(List.map ~f:(format_cell ~styles ~shared_strings))
+        |> List.map ~f:(List.map ~f:(Value.of_cell ~styles ~shared_strings))
       in
       { name ; rows }))
     ~finally:(fun () -> Zip.close_in zip)

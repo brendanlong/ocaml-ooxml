@@ -1,13 +1,29 @@
-(** A parser for XLSX files. *)
+(** An easy read for XLSX files. *)
+open Core_kernel
+
+module Value : sig
+  type t =
+    | Date of Date.t
+    | Datetime of Time.t
+    | Number of float
+    | String of string
+    | Time of Time.Ofday.t
+        [@@deriving compare]
+        (** A cell value. Note that a [Number] could be either an integer or
+           a float; Excel stores them exactly the same and the only difference
+           is formatting. *)
+
+  val to_string : t -> string
+end
 
 type sheet =
   { name : string
-  ; rows : string list list }
-    [@@deriving compare, sexp]
+  ; rows : Value.t list list }
+    [@@deriving compare]
     (** One sheet from a workbook. Empty rows will be returned, and empty or
        missing columns will be returned as [""]. *)
 
-type t = sheet list [@@deriving compare, sexp]
+type t = sheet list [@@deriving compare]
 
 val read_file : string -> sheet list
   (** [read_file file_name] synchronously reads the .xlsx document at
