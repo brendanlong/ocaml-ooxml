@@ -67,8 +67,8 @@ module Value = struct
                     || String.contains str 'w'
                     || String.is_substring str ~substring:"mmm" in
       let is_time = String.contains str 'h' || String.contains str 's'
-                    || String.is_substring str ~substring:"AM/PM"
-                    || String.is_substring str ~substring:"A/P" in
+                    || String.is_substring str ~substring:"am/pm"
+                    || String.is_substring str ~substring:"a/p" in
       if [ is_string ; is_date || is_time ]
          |> List.filter ~f:Fn.id
          |> List.length > 1 then
