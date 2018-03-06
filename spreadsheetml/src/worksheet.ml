@@ -1,5 +1,6 @@
 (* 3.3 Worksheets *)
-open Core_kernel
+open Base
+open Base.Printf
 open Stdint
 open Utils
 
@@ -165,7 +166,7 @@ module Row = struct
       | "hidden", v ->
         { acc with hidden = bool_of_xsd_boolean v }
       | "ht", v ->
-        { acc with height = Some (float_of_string v) }
+        { acc with height = Some (Float.of_string v) }
       | "outlineLevel", v ->
         { acc with outline_level = Uint8.of_string v }
       | "ph", v ->
@@ -230,7 +231,7 @@ module Column = struct
       | "style", v ->
         default_style := Uint32.of_string v
       | "width", v ->
-        width := Some (float_of_string v)
+        width := Some (Float.of_string v)
       | _ -> ());
       let max = require_attribute "col" "max" !max in
       let min = require_attribute "col" "min" !min in

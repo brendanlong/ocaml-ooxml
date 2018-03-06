@@ -1,4 +1,6 @@
-open Core_kernel
+open Base
+open Base.Printf
+open Sexplib
 open Stdint
 
 let sexp_of_uint8 t =
@@ -12,7 +14,7 @@ let sexp_of_uint32 t =
 let expect_element expect_name f =
   let open Xml in
   function
-  | Element (name, attrs, children) when name = expect_name ->
+  | Element (name, attrs, children) when String.(name = expect_name) ->
     f attrs children
   | Element (name, _, _) ->
     failwithf "Expected <%s> element but saw <%s>" expect_name name ()

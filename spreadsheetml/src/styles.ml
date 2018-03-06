@@ -1,5 +1,5 @@
 (* 3.8 Styles *)
-open Core_kernel
+open Base
 open Stdint
 open Utils
 

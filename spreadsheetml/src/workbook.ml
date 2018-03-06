@@ -1,4 +1,5 @@
-open Core_kernel
+open Base
+open Base.Printf
 open Stdint
 open Utils
 

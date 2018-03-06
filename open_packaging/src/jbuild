@@ -3,6 +3,6 @@
 (library
  ((name open_packaging)
   (public_name open_packaging)
-  (libraries (base core_kernel stdint utils xml-light))
+  (libraries (utils))
   (flags (:standard -w -47))
   (preprocess (pps (bisect_ppx -conditional ppx_jane ppx_driver.runner)))))

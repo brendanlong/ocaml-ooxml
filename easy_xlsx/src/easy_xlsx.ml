@@ -1,21 +1,29 @@
-open Core_kernel
+open Base
+open Base.Printf
 open Stdint
 open Spreadsheetml
 
 module Value = struct
-  type time = Time.t [@@deriving compare]
-
-  let sexp_of_time t =
-    Time.to_string_iso8601_basic ~zone:Time.Zone.utc t
-    |> Sexp.of_string
-
   type t =
-    | Date of Date.t
-    | Datetime of time
+    | Date of Ptime.date
+    | Datetime of Ptime.t
     | Number of float
     | String of string
-    | Time of Time.Ofday.t
-        [@@deriving compare, sexp_of]
+    | Time of Ptime.time
+
+  let to_string = function
+    | Date (y, m, d) -> sprintf "%d-%d-%d" y m d
+    | Datetime t -> Ptime.to_rfc3339 t
+    | Number f ->
+      Float.to_string_round_trippable f
+      |> String.rstrip ~drop:(function '.' -> true | _ -> false)
+    | String s -> s
+    | Time ((h, m, s), _tz) -> sprintf "%d:%d:%d" h m s
+
+  let sexp_of_t = function
+    | Number n -> Float.sexp_of_t n
+    | String s -> String.sexp_of_t s
+    | _ as t -> to_string t |> String.sexp_of_t
 
   let built_in_formats =
     (* FIXME: This is only the English format codes. There are 4 Asian format
@@ -49,14 +57,14 @@ module Value = struct
     ; 47, "mmss.0"
     ; 48, "##0.0E+0"
     ; 49, "@" ]
-    |> Int.Map.of_alist_exn
+    |> Map.of_alist_exn (module Int)
 
   let classify_format str =
     (* FIXME: This is really slow.  We should really use Menhir for this. *)
     let str = String.lowercase str in
     let remove_strings = Str.regexp "\\[[^\\[]*\\]\\|\"[^\"]*\"" in
     let str = Str.global_replace remove_strings "" str in
-    if str = "general" || str = "" then
+    if String.(str = "general" || str = "") then
       `Number
     else
       let is_string = String.contains str '@' in
@@ -85,21 +93,21 @@ module Value = struct
         `Number
 
   let of_cell ~styles ~formats ~shared_strings
-      ({ Worksheet.Cell.style_index ; data_type ; _ } as cell) =
+        ({ Worksheet.Cell.style_index ; data_type ; _ } as cell) =
     let formats = Map.merge built_in_formats formats ~f:(fun ~key ->
-        function
-        | `Left v -> Some v
-        | `Right v -> Some v
-        | `Both (a, b) ->
-          if a = b then Some a
-          else
-            failwithf "Got format string with ID %d, \"%s\", but there is a \
-                       built-in format string with the same ID, \"%s\""
-              key b a ())
+      function
+      | `Left v -> Some v
+      | `Right v -> Some v
+      | `Both (a, b) ->
+        if String.(a = b) then Some a
+        else
+          failwithf "Got format string with ID %d, \"%s\", but there is a \
+                     built-in format string with the same ID, \"%s\""
+            key b a ())
     in
     let str = Worksheet.Cell.to_string ~shared_strings cell in
     match data_type with
-    | Number when str <> "" ->
+    | Number when String.(str <> "") ->
       styles.(Uint32.to_int style_index)
       |> Spreadsheetml.Styles.Format.number_format_id
       |> Option.map ~f:Uint32.to_int
@@ -113,43 +121,38 @@ module Value = struct
             num_fmt_id ())
       |> classify_format
       |> (
+        let xlsx_epoch = Option.value_exn ~here:[%here]
+                           (Ptime.(of_date (1899, 12, 30))) in
         let date_of_float n =
-          let d = Date.create_exn ~y:1899 ~m:Month.Dec ~d:30 in
-          Date.add_days d (Float.iround_exn ~dir:`Down n)
+          Float.iround_exn ~dir:`Down n
+          |> (fun days -> Ptime.Span.of_d_ps (days, Int64.zero))
+          |> Option.value_exn ~here:[%here]
+          |> Ptime.add_span xlsx_epoch
+          |> Option.value_exn ~here:[%here]
+          |> Ptime.to_date
         in
         let time_of_float n =
-          let us =
-            let time_part = Float.(modf n |> Parts.fractional) in
-            let time_abs =
-              if time_part >=. 0. then time_part
-              else 1. +. time_part
-            in
-            time_abs *. 24. *. 3600. *. 1000000.
-            |> Float.to_int
-          in
-          Time.Ofday.create ~us ()
+          Float.((modf n |> Parts.fractional) * 24. * 60. * 60.)
+          |> Ptime.Span.of_float_s
+          |> Option.value_exn ~here:[%here]
+          |> Ptime.of_span
+          |> Option.value_exn ~here:[%here]
+          |> Ptime.to_date_time
+          |> snd
         in
-        let n = float_of_string str in
+        let n = Float.of_string str in
         function
         | `Number -> Number n
         | `Date -> Date (date_of_float n)
         | `Datetime ->
           let date = date_of_float n in
           let time = time_of_float n in
-          Datetime (Time.utc_mktime date time)
+          Datetime (Ptime.of_date_time (date, time)
+                    |> Option.value_exn ~here:[%here])
         | `String -> String str
         | `Time ->
           Time (time_of_float n))
     | _ -> String str
-
-  let to_string = function
-    | Date d -> Date.to_string_iso8601_basic d
-    | Datetime t -> Time.to_string_iso8601_basic ~zone:Time.Zone.utc t
-    | Number f ->
-      Float.to_string_round_trippable f
-      |> String.rstrip ~drop:(function '.' -> true | _ -> false)
-    | String s -> s
-    | Time t -> Time.Ofday.to_string_trimmed t
 
   let is_empty = function
     | String "" -> true
@@ -159,9 +162,9 @@ end
 type sheet =
   { name : string
   ; rows : Value.t list list }
-    [@@deriving compare, fields, sexp_of]
+[@@deriving fields, sexp_of]
 
-type t = sheet list [@@deriving compare]
+type t = sheet list [@@deriving sexp_of]
 
 let read_file filename =
   let zip_entry_to_xml zip name =
@@ -193,14 +196,14 @@ let read_file filename =
       Styles.number_formats stylesheet
       |> List.map ~f:(fun { Styles.Number_format.id ; format } ->
         Uint32.to_int id, format)
-      |> Int.Map.of_alist_exn
+      |> Map.of_alist_exn (module Int)
     in
     let rel_map =
       zip_entry_to_xml zip "xl/_rels/workbook.xml.rels"
       |> Open_packaging.Relationships.of_xml
       |> List.map ~f:(fun { Open_packaging.Relationship.id ; target ; _ } ->
         id, target)
-      |> String.Map.of_alist_exn
+      |> Map.of_alist_exn (module String)
     in
     List.map sheets ~f:(fun { Workbook.Sheet.name ; id ; _ } ->
       let rows =
@@ -229,7 +232,7 @@ let read_file filename =
             let cell_map =
               List.map cells ~f:(fun cell ->
                 Worksheet.Cell.column cell, cell)
-              |> Int.Map.of_alist_exn
+              |> Map.of_alist_exn (module Int)
             in
             let cells =
               Map.max_elt cell_map
@@ -240,7 +243,7 @@ let read_file filename =
               |> Option.value ~default:[]
             in
             index - 1, cells)
-          |> Int.Map.of_alist_exn
+          |> Map.of_alist_exn (module Int)
         in
         let n =
           Map.keys row_map
