@@ -16,28 +16,30 @@ jobs:
           name: Pin packages
           command: |
             opam pin add -y -n easy_xlsx .
+            opam pin add -y -n open_packaging .
+            opam pin add -y -n spreadsheetml .
       - run:
           name: Install system dependencies
-          command: opam depext -y easy_xlsx
+          command: opam depext -y easy_xlsx open_packaging spreadsheetml
       - run:
           name: Install OCaml dependencies
-          command: opam install --deps-only -y easy_xlsx
+          command: opam install --deps-only -y easy_xlsx open_packaging spreadsheetml
       - run:
           name: Build
-          command: eval `opam config env` && make
+          command: opam config exec -- make
       - run:
           name: Install OCaml test dependencies
           # Not using opam install -y -t because it tries to run csv's tests
           command: opam install -y csv oUnit
       - run:
           name: Test
-          command: eval `opam config env` && make test
+          command: opam config exec -- make test
       - run:
           name: Coverage
-          command: eval `opam config env` && make coverage
+          command: opam config exec -- make coverage
       - run:
           name: Install ocveralls
           command: opam install -y ocveralls
       - run:
           name: Upload coverage report
-          command: eval `opam config env` && ocveralls bisect*.out --send --repo_token $COVERALLS_REPO_TOKEN --git
+          command: opam config exec -- ocveralls bisect*.out --send --repo_token $COVERALLS_REPO_TOKEN --git
