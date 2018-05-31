@@ -5,12 +5,12 @@ clean:
 	@jbuilder clean
 
 coverage: clean
-	@BISECT_ENABLE=YES jbuilder runtest --dev
+	@BISECT_ENABLE=YES jbuilder runtest --dev --force
 	@bisect-ppx-report -I _build/default/ -html _coverage/ \
 	  `find . -name 'bisect*.out'`
 
 test:
-	@jbuilder runtest --dev
+	@jbuilder runtest --dev --force
 
 # until we have https://github.com/ocaml/opam-publish/issues/38
 REPO=../opam-repository
