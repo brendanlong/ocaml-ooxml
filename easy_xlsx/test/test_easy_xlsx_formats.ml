@@ -14,7 +14,7 @@ let test_easy_xlsx_formats =
     Datetime (Ptime.of_date_time (date, time) |> Option.value_exn) in
   let expect_time = Time ((16, 17, 37), 0) in
   let expect_string = String "-12345.6789" in
-  Easy_xlsx.read_file "test/files/formats.xlsx"
+  Easy_xlsx.read_file "easy_xlsx/test/files/formats.xlsx"
   |> List.hd_exn
   |> Easy_xlsx.rows
   |> List.tl_exn

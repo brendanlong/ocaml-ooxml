@@ -65,7 +65,7 @@ let make_test (file_name, sheet_names) =
       let expect =
         List.map sheet_names ~f:(fun sheet_name ->
           let rows =
-            sprintf "test/files/%s_%s.csv" file_name sheet_name
+            sprintf "easy_xlsx/test/files/%s_%s.csv" file_name sheet_name
             |> Csv.load ~strip:false
             |> Csv.to_array
             |> Array.map ~f:Array.to_list
