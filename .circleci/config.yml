@@ -6,6 +6,11 @@ jobs:
         environment:
           TERM: xterm
     steps:
+      - run:
+          name: Update opam
+          command: |
+            opam remote remove default
+            opam remote add default https://opam.ocaml.org
       - checkout
       - run:
           name: Pin packages
