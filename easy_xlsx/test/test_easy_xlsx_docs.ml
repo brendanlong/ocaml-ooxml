@@ -65,7 +65,7 @@ let make_test (file_name, sheet_names) =
       let expect =
         List.map sheet_names ~f:(fun sheet_name ->
           let rows =
-            sprintf "easy_xlsx/test/files/%s_%s.csv" file_name sheet_name
+            sprintf "files/%s_%s.csv" file_name sheet_name
             |> Csv.load ~strip:false
             |> Csv.to_array
             |> Array.map ~f:Array.to_list
@@ -74,7 +74,7 @@ let make_test (file_name, sheet_names) =
           { name = sheet_name ; rows })
         |> normalize_sheets
       in
-      Easy_xlsx.read_file (sprintf "test/files/%s.xlsx" file_name)
+      Easy_xlsx.read_file (sprintf "files/%s.xlsx" file_name)
       |> List.map ~f:(fun { Easy_xlsx.name ; rows } ->
         let rows =
           List.map rows ~f:(List.map ~f:Easy_xlsx.Value.to_string) in

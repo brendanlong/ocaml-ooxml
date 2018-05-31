@@ -15,15 +15,13 @@
 (alias
  ((package easy_xlsx)
   (name runtest)
-  (deps (test_easy_xlsx_docs.exe))
+  (deps (test_easy_xlsx_docs.exe (files_recursively_in files)))
  (action
-  (chdir ${ROOT}/../..
-   (run ${<})))))
+  (run ${<}))))
 
 (alias
  ((package easy_xlsx)
   (name runtest)
-  (deps (test_easy_xlsx_formats.exe))
+  (deps (test_easy_xlsx_formats.exe (files_recursively_in files)))
  (action
-  (chdir ${ROOT}/../..
-   (run ${<})))))
+  (run ${<}))))
