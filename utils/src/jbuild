@@ -3,4 +3,4 @@
 (library
  ((name utils)
   (libraries (base stdint xml-light))
-  (preprocess (pps (bisect_ppx -conditional ppx_jane ppx_driver.runner)))))
+  (preprocess (pps (bisect_ppx -conditional ppx_jane)))))

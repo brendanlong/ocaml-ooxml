@@ -5,4 +5,4 @@
   (public_name open_packaging)
   (libraries (utils))
   (flags (:standard -w -47))
-  (preprocess (pps (bisect_ppx -conditional ppx_jane ppx_driver.runner)))))
+  (preprocess (pps (bisect_ppx -conditional ppx_jane)))))
