@@ -15,7 +15,7 @@ module Value = struct
     | Date (y, m, d) -> sprintf "%d-%d-%d" y m d
     | Datetime t -> Ptime.to_rfc3339 t
     | Number f ->
-      Float.to_string_round_trippable f
+      Float.to_string f
       |> String.rstrip ~drop:(function '.' -> true | _ -> false)
     | String s -> s
     | Time ((h, m, s), _tz) -> sprintf "%d:%d:%d" h m s
