@@ -1,14 +1,13 @@
 opam-version: "1.2"
-version: "0.1"
+authors: ["Brendan Long <self@brendanlong.com>"]
 maintainer: "self@brendanlong.com"
 homepage: "https://github.com/brendanlong/ocaml-ooxml"
 dev-repo: "https://github.com/brendanlong/ocaml-ooxml.git"
 bug-reports: "https://github.com/brendanlong/ocaml-ooxml/issues"
+doc: "https://brendanlong.github.io/ocaml-ooxml/doc"
 
-build: [jbuilder build]
-build-test: [jbuilder runtest]
-install: [jbuilder install]
-remove: [jbuilder uninstall]
+build: ["jbuilder" "build" "-p" name "-j" jobs]
+build-test: ["jbuilder" "runtest" "-p" name "-j" jobs]
 
 depends: [
   "base" {= "v0.10.0"}
