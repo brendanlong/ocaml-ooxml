@@ -1,7 +1,7 @@
 open Base
 open Base.Printf
 open Stdint
-open Utils
+open Open_packaging.Utils
 
 module Rich_text = struct
 (* Note: We represent text and rich text the same internally. Unformatted

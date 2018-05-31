@@ -5,4 +5,4 @@
   (public_name spreadsheetml)
   (libraries (open_packaging))
   (flags (:standard -w -47))
-  (preprocess (pps (bisect_ppx -conditional ppx_jane)))))
+  (preprocess (pps (ppx_jane bisect_ppx -conditional)))))

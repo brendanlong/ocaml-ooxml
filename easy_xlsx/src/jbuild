@@ -4,4 +4,4 @@
  ((name easy_xlsx)
   (public_name easy_xlsx)
   (libraries (camlzip ptime spreadsheetml str))
-  (preprocess (pps (bisect_ppx -conditional ppx_jane)))))
+  (preprocess (pps (ppx_jane bisect_ppx -conditional)))))

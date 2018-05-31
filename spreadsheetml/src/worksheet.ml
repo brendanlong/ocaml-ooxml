@@ -2,7 +2,7 @@
 open Base
 open Base.Printf
 open Stdint
-open Utils
+open Open_packaging.Utils
 
 module Cell = struct
   module Type = struct

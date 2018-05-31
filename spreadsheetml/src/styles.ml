@@ -1,7 +1,7 @@
 (* 3.8 Styles *)
 open Base
 open Stdint
-open Utils
+open Open_packaging.Utils
 
 module Format = struct
   (* 3.8.45 xf (Format) *)

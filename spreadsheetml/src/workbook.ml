@@ -1,7 +1,7 @@
 open Base
 open Base.Printf
 open Stdint
-open Utils
+open Open_packaging.Utils
 
 module Book_view = struct
   module Visibility = struct
