@@ -24,6 +24,8 @@ built-in format strings, so some types may not be handled correctly. At the
 moment, `easy_xlsx` will bail out in any case where it can't understand the
 formatting, although I'd be open to patches to make this optional.
 
+[API documentation](https://brendanlong.github.io/ocaml-ooxml/doc/)
+
 ## Building
 
 Install dependencies:
