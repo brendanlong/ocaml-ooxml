@@ -1,8 +1,0 @@
-(jbuild_version 1)
-
-(library
- ((name open_packaging)
-  (public_name open_packaging)
-  (libraries (base sexplib stdint xml-light))
-  (flags (:standard -w -47))
-  (preprocess (pps (ppx_jane bisect_ppx -conditional)))))

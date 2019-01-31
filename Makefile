@@ -1,16 +1,16 @@
 build:
-	@jbuilder build @install --dev
+	@dune build @install
 
 clean:
-	@jbuilder clean
+	@dune clean
 
 coverage: clean
-	@BISECT_ENABLE=YES jbuilder runtest --dev --force
+	@BISECT_ENABLE=YES dune runtest --force
 	@bisect-ppx-report -I _build/default/ -html _coverage/ \
 	  `find . -name 'bisect*.out'`
 
 test:
-	@jbuilder runtest --dev --force
+	@dune runtest --force
 
 # until we have https://github.com/ocaml/opam-publish/issues/38
 REPO=../opam-repository

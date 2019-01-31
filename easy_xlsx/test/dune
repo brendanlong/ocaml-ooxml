@@ -1,0 +1,23 @@
+(executables
+  (names test_easy_xlsx_docs)
+  (modules test_easy_xlsx_docs)
+  (libraries csv easy_xlsx oUnit)
+	(preprocess (pps ppx_jane)))
+
+(executables
+  (names test_easy_xlsx_formats)
+  (modules test_easy_xlsx_formats)
+  (libraries csv easy_xlsx oUnit)
+	(preprocess (pps ppx_jane)))
+
+(alias
+  (package easy_xlsx)
+  (name runtest)
+  (deps test_easy_xlsx_docs.exe (source_tree files))
+  (action (run ./test_easy_xlsx_docs.exe)))
+
+(alias
+  (package easy_xlsx)
+  (name runtest)
+  (deps test_easy_xlsx_formats.exe (source_tree files))
+  (action (run ./test_easy_xlsx_formats.exe)))
