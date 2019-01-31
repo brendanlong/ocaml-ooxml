@@ -1,15 +1,18 @@
-opam-version: "1.2"
+opam-version: "2.0"
 authors: ["Brendan Long <self@brendanlong.com>"]
 maintainer: "self@brendanlong.com"
 homepage: "https://github.com/brendanlong/ocaml-ooxml"
-dev-repo: "https://github.com/brendanlong/ocaml-ooxml.git"
+dev-repo: "git+https://github.com/brendanlong/ocaml-ooxml.git"
 bug-reports: "https://github.com/brendanlong/ocaml-ooxml/issues"
 doc: "https://brendanlong.github.io/ocaml-ooxml/doc"
 
-build: ["jbuilder" "build" "-p" name "-j" jobs]
-build-test: ["jbuilder" "runtest" "-p" name "-j" jobs]
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+  ["dune" "runtest" "-p" name "-j" jobs] {with-test}
+]
 
 depends: [
+  "ocaml" {>= "4.04.2"}
   "open_packaging"
   "ppx_jane"
 
@@ -18,5 +21,3 @@ depends: [
 
   "ounit" {test}
 ]
-
-available: [ocaml-version >= "4.04.2"]

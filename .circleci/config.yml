@@ -2,14 +2,14 @@ version: 2
 jobs:
   build:
     docker:
-      - image: ocaml/opam:alpine-3.6_ocaml-4.04.2
+      - image: ocaml/opam2:alpine-3.8-ocaml-4.04
         environment:
           TERM: xterm
     steps:
       - run:
           name: Update opam
           command: |
-            opam remote remove default
+            opam remote remove --all default
             opam remote add default https://opam.ocaml.org
       - checkout
       - run:
