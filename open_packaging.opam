@@ -10,7 +10,7 @@ build: ["jbuilder" "build" "-p" name "-j" jobs]
 build-test: ["jbuilder" "runtest" "-p" name "-j" jobs]
 
 depends: [
-  "base" {= "v0.10.0"}
+  "base" {= "v0.11.1"}
   "ppx_jane"
   "sexplib"
   "stdint"

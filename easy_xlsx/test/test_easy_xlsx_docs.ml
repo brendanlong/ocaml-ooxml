@@ -40,7 +40,7 @@ let pp_diff fmt (exp, real) =
   diff_lists (exp.rows, real.rows)
 
 let sort_sheets =
-  List.sort ~cmp:(fun a b ->
+  List.sort ~compare:(fun a b ->
     String.compare a.name b.name)
 
 let make_test (file_name, sheet_names) =
@@ -59,7 +59,7 @@ let make_test (file_name, sheet_names) =
       in
       { name ; rows })
   in
-  let sheet_names = List.sort ~cmp:String.compare sheet_names in
+  let sheet_names = List.sort ~compare:String.compare sheet_names in
   file_name >::
     fun _ ->
       let expect =

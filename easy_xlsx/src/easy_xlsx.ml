@@ -219,7 +219,7 @@ let read_file filename =
           columns
           |> List.map ~f:Worksheet.Column.max
           |> List.map ~f:Uint32.to_int
-          |> List.max_elt ~cmp:Int.compare
+          |> List.max_elt ~compare:Int.compare
           |> Option.value ~default:0
         in
         let row_map =
@@ -247,7 +247,7 @@ let read_file filename =
         in
         let n =
           Map.keys row_map
-          |> List.max_elt ~cmp:Int.compare
+          |> List.max_elt ~compare:Int.compare
           |> Option.map ~f:((+) 1)
           |> Option.value ~default:0
         in
