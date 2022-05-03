@@ -3,4 +3,4 @@
   (public_name spreadsheetml)
   (libraries open_packaging)
   (flags (:standard -w -47))
-  (preprocess (pps ppx_jane bisect_ppx -conditional)))
+  (preprocess (pps ppx_jane bisect_ppx)))

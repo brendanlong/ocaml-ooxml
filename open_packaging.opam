@@ -12,7 +12,7 @@ build: [
 ]
 
 depends: [
-  "base" {= "v0.11.1"}
+  "base" {= "v0.14.1"}
   "ocaml" {>= "4.04.2"}
   "ppx_jane"
   "sexplib"
