@@ -27,7 +27,7 @@ let pp_diff fmt (exp, real) =
     | exp, real ->
       let exp_row = List.hd exp in
       let real_row = List.hd real in
-      if Option.equal (List.equal ~equal:String.equal) exp_row real_row then
+      if Option.equal (List.equal String.equal) exp_row real_row then
         print_opt_row ' ' exp_row
       else begin
         print_opt_row '-' exp_row;
