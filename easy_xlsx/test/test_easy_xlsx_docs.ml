@@ -90,7 +90,9 @@ let () =
   ; "hyperlink_import_xml_12", [ "Sheet1"; "Sheet2"; "Sheet'!" ]
   ; "oleobject_import_xml_12", [ "OLE"; "SourceData" ]
   ; "scenarios_import_xml_12", [ "Ranges"; "Settings"; "Name"; "RefCheck" ]
-  ; "sheetprotection_import_xml_12", [ "Sheet1"; "Sheet2"; "Sheet3"; "Sheet4" ] ]
+  ; "sheetprotection_import_xml_12", [ "Sheet1"; "Sheet2"; "Sheet3"; "Sheet4" ]
+  (* This test is not from the OpenOffice test suite. It is a simple xlsx file exported through Numbers on the Mac. *)
+  ; "mac_numbers_produced", [ "Sheet 1" ] ]
   |> List.map ~f:make_test
   |> test_list
   |> run_test_tt_main
