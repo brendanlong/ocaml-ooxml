@@ -100,6 +100,7 @@ module Value = struct
       | `Right v -> Some v
       | `Both (a, b) ->
         if String.(a = b) then Some a
+        else if String.(a = "general" && b = "General") then Some a
         else
           failwithf "Got format string with ID %d, \"%s\", but there is a \
                      built-in format string with the same ID, \"%s\""
