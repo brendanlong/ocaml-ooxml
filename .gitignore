@@ -1,6 +1,7 @@
 *#
 _build
 _coverage
+_opam
 *.install
 bisect*.out
 .merlin

@@ -14,20 +14,20 @@ type t =
 
 let pp_diff fmt (exp, real) =
   if String.(exp.name <> real.name) then
-    Caml.Format.fprintf fmt "Expected sheet %s but got sheet %s" exp.name real.name
+    Stdlib.Format.fprintf fmt "Expected sheet %s but got sheet %s" exp.name real.name
   else
-    Caml.Format.fprintf fmt "Sheet: %s\n" exp.name;
+    Stdlib.Format.fprintf fmt "Sheet: %s\n" exp.name;
   let print_opt_row diff_mark row =
     Option.iter row ~f:(fun row ->
       String.concat ~sep:"," row
-      |> Caml.Format.fprintf fmt "%c %s\n" diff_mark)
+      |> Stdlib.Format.fprintf fmt "%c %s\n" diff_mark)
   in
   let rec diff_lists = function
     | [], [] -> ()
     | exp, real ->
       let exp_row = List.hd exp in
       let real_row = List.hd real in
-      if Option.equal (List.equal ~equal:String.equal) exp_row real_row then
+      if Option.equal (List.equal String.equal) exp_row real_row then
         print_opt_row ' ' exp_row
       else begin
         print_opt_row '-' exp_row;
