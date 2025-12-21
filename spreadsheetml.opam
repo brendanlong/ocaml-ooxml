@@ -12,7 +12,7 @@ build: [
 ]
 
 depends: [
-  "ocaml" {>= "4.04.2"}
+  "ocaml" {>= "5.2.1"}
   "open_packaging"
   "ppx_jane"
 

@@ -13,7 +13,7 @@ build: [
 
 depends: [
   "camlzip"
-  "ocaml" {>= "4.04.2"}
+  "ocaml" {>= "5.2.1"}
   "ppx_jane"
   "ptime"
   "spreadsheetml"
