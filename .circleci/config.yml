@@ -14,9 +14,9 @@ jobs:
       - run:
           name: Pin packages
           command: |
-            opam pin add -y -n open_packaging .
-            opam pin add -y -n spreadsheetml .
-            opam pin add -y -n easy_xlsx .
+            opam pin add -y -n --kind path open_packaging .
+            opam pin add -y -n --kind path spreadsheetml .
+            opam pin add -y -n --kind path easy_xlsx .
       - run:
           name: Install dependencies
           command: opam install --deps-only -y -t easy_xlsx open_packaging spreadsheetml
