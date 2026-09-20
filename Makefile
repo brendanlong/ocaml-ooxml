@@ -11,19 +11,11 @@ coverage: clean
 test:
 	@dune runtest --force
 
-# until we have https://github.com/ocaml/opam-publish/issues/38
-REPO=../opam-repository
-PACKAGES=$(REPO)/packages
+setup:
+	@opam pin add -y -n --kind path open_packaging .
+	@opam pin add -y -n --kind path spreadsheetml .
+	@opam pin add -y -n --kind path easy_xlsx .
+	@opam install --deps-only -y -t easy_xlsx open_packaging spreadsheetml
 
-pkg-%:
-	topkg opam pkg -n $*
-	mkdir -p $(PACKAGES)/$*
-	cp -r _build/$*.* $(PACKAGES)/$*/
-	rm -f $(PACKAGES)/$*/$*.opam
-	cd $(PACKAGES) && git add $*
+.PHONY: all build clean coverage setup test
 
-PKGS=$(basename $(wildcard *.opam))
-opam-pkg:
-	$(MAKE) $(PKGS:%=pkg-%)
-
-.PHONY: all build clean coverage opam-pkg test

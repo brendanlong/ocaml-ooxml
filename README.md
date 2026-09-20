@@ -30,26 +30,35 @@ formatting, although I'd be open to patches to make this optional.
 
 Install dependencies:
 
+```sh
+opam pin add -y -n --kind path open_packaging .
+opam pin add -y -n --kind path spreadsheetml .
+opam pin add -y -n --kind path easy_xlsx .
+opam install --deps-only -y -t easy_xlsx open_packaging spreadsheetml
 ```
-opam pin add -n easy_xlsx .
-opam depext easy_xlsx
-opam install --deps-only easy_xlsx
+
+Or using `make`:
+
+```sh
+make setup
 ```
 
 Then build:
 
-```
+```sh
 make
+# or: dune build
 ```
 
 You can run the tests if you want:
 
-```
+```sh
 make test
+# or: dune runtest
 ```
 
-The `Makefile` is just a thin wrapper around jbuilder, so you can use
-jbuilder commands too if you prefer.
+The `Makefile` is just a thin wrapper around Dune, so you can use
+Dune commands too if you prefer.
 
 ## Helping
 
