@@ -75,13 +75,13 @@ relevant spec, give my opinion on approaches, etc.).
 
 Some things I could use help with:
 
-  - Implement more of the specs. See [ECMA 376](https://www.ecma-international.org/publications/standards/Ecma-376.htm).
+  - Implement more of the specs. See [ECMA 376](https://ecma-international.org/publications-and-standards/standards/ecma-376/).
     The editions only contain changes, so most of what's interesting is in
     the 1st edition. Part 2 is the most interesting for the Open Packaging
     Conventions and Part 4 has specifics for SpreadsheetML (or the other office
     formats if you want to start a library for them).
   - Add more tests. Right now there's a set of extremely high level tests
-    that we get the sound output as OpenOffice's CSV export, but being so high
+    that we get the same output as OpenOffice's CSV export, but being so high
     level means a lot of things are completely untested until we're 100%
     finished, which isn't a good situation to be in. It's easy to have a typo
     when implementing this spec, so I'd like to aim for 100% test coverage.
