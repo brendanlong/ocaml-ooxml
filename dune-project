@@ -27,7 +27,8 @@
   ppx_jane
   sexplib
   stdint
-  xml-light))
+  xml-light
+  (bisect_ppx (and :dev (>= 2.5.0)))))
 
 (package
  (name spreadsheetml)
@@ -37,7 +38,8 @@
  (depends
   (ocaml (>= 5.2.1))
   open_packaging
-  ppx_jane))
+  ppx_jane
+  (bisect_ppx (and :dev (>= 2.5.0)))))
 
 (package
  (name easy_xlsx)
@@ -49,5 +51,6 @@
   ppx_jane
   ptime
   spreadsheetml
+  (bisect_ppx (and :dev (>= 2.5.0)))
   (csv :with-test)
   (ounit2 :with-test)))

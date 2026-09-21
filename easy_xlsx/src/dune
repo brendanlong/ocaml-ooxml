@@ -3,4 +3,6 @@
  (public_name easy_xlsx)
  (libraries camlzip ptime spreadsheetml str)
  (preprocess
-  (pps ppx_jane)))
+  (pps ppx_jane))
+ (instrumentation
+  (backend bisect_ppx)))

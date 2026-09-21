@@ -15,6 +15,7 @@ depends: [
   "ocaml" {>= "5.2.1"}
   "open_packaging"
   "ppx_jane"
+  "bisect_ppx" {dev & >= "2.5.0"}
   "odoc" {with-doc}
 ]
 build: [

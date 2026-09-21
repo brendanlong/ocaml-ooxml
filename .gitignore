@@ -3,5 +3,6 @@ _build
 _coverage
 _opam
 *.install
-bisect*.out
+bisect*.coverage
+bisect.log
 .merlin

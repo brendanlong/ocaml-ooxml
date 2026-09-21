@@ -1,5 +1,5 @@
+[![CI](https://github.com/brendanlong/ocaml-ooxml/actions/workflows/ci.yml/badge.svg)](https://github.com/brendanlong/ocaml-ooxml/actions/workflows/ci.yml)
 [![CircleCI](https://circleci.com/gh/brendanlong/ocaml-ooxml.svg?style=shield)](https://circleci.com/gh/brendanlong/ocaml-ooxml)
-[![Coverage Status](https://coveralls.io/repos/github/brendanlong/ocaml-ooxml/badge.svg?branch=master)](https://coveralls.io/github/brendanlong/ocaml-ooxml?branch=master)
 
 The repo contains three libraries for reading data from Microsoft's document
 formats ("Office Open XML").
@@ -43,6 +43,13 @@ Or using `make`:
 make setup
 ```
 
+If you didn't let `opam init` add its hook to your shell profile, put opam's
+tools on your `PATH` for the current shell:
+
+```sh
+eval $(opam env)
+```
+
 Then build:
 
 ```sh
@@ -68,13 +75,13 @@ relevant spec, give my opinion on approaches, etc.).
 
 Some things I could use help with:
 
-  - Implement more of the specs. See [ECMA 376](https://www.ecma-international.org/publications/standards/Ecma-376.htm).
+  - Implement more of the specs. See [ECMA 376](https://ecma-international.org/publications-and-standards/standards/ecma-376/).
     The editions only contain changes, so most of what's interesting is in
     the 1st edition. Part 2 is the most interesting for the Open Packaging
     Conventions and Part 4 has specifics for SpreadsheetML (or the other office
     formats if you want to start a library for them).
   - Add more tests. Right now there's a set of extremely high level tests
-    that we get the sound output as OpenOffice's CSV export, but being so high
+    that we get the same output as OpenOffice's CSV export, but being so high
     level means a lot of things are completely untested until we're 100%
     finished, which isn't a good situation to be in. It's easy to have a typo
     when implementing this spec, so I'd like to aim for 100% test coverage.

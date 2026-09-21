@@ -15,6 +15,7 @@ depends: [
   "ppx_jane"
   "ptime"
   "spreadsheetml"
+  "bisect_ppx" {dev & >= "2.5.0"}
   "csv" {with-test}
   "ounit2" {with-test}
   "odoc" {with-doc}

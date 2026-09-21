@@ -48,3 +48,7 @@ jobs:
 
       - name: Test
         run: opam exec -- dune runtest
+
+      - name: Coverage
+        if: matrix.os == 'ubuntu-latest' && matrix.ocaml-compiler == '5.3.x'
+        run: opam exec -- make coverage
