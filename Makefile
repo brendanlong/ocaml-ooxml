@@ -5,7 +5,8 @@ clean:
 	@dune clean
 
 coverage: clean
-	@BISECT_ENABLE=YES dune runtest --force
+	@rm -rf _coverage
+	@dune runtest --instrument-with bisect_ppx --force
 	@bisect-ppx-report html
 
 test:
