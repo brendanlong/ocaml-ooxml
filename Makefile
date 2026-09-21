@@ -17,5 +17,5 @@ setup:
 	@opam pin add -y -n --kind path easy_xlsx .
 	@opam install --deps-only -y -t easy_xlsx open_packaging spreadsheetml
 
-.PHONY: all build clean coverage setup test
+.PHONY: build clean coverage setup test
 
