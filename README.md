@@ -43,6 +43,13 @@ Or using `make`:
 make setup
 ```
 
+If you didn't let `opam init` add its hook to your shell profile, put opam's
+tools on your `PATH` for the current shell:
+
+```sh
+eval $(opam env)
+```
+
 Then build:
 
 ```sh
