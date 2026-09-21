@@ -9,8 +9,8 @@ homepage: "https://github.com/brendanlong/ocaml-ooxml"
 doc: "https://brendanlong.github.io/ocaml-ooxml/doc"
 bug-reports: "https://github.com/brendanlong/ocaml-ooxml/issues"
 depends: [
+  "dune" {>= "3.0"}
   "ocaml" {>= "5.2.1"}
-  "dune" {>= "3.0" & >= "3.0"}
   "camlzip"
   "ppx_jane"
   "ptime"

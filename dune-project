@@ -23,7 +23,6 @@
   "A library for parsing Microsoft's Open Packaging Specification (most commonly used for Microsoft Office's \"Office Open XML\")")
  (depends
   (ocaml (>= 5.2.1))
-  (dune (>= 3.0))
   base
   ppx_jane
   sexplib
@@ -37,7 +36,6 @@
   "A library for parsing SpreadsheetML (used in Microsoft Excel files)")
  (depends
   (ocaml (>= 5.2.1))
-  (dune (>= 3.0))
   open_packaging
   ppx_jane))
 
@@ -47,7 +45,6 @@
  (description "A library to easily read XLSX files into a simpler format")
  (depends
   (ocaml (>= 5.2.1))
-  (dune (>= 3.0))
   camlzip
   ppx_jane
   ptime
