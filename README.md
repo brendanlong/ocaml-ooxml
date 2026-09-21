@@ -1,5 +1,4 @@
 [![CI](https://github.com/brendanlong/ocaml-ooxml/actions/workflows/ci.yml/badge.svg)](https://github.com/brendanlong/ocaml-ooxml/actions/workflows/ci.yml)
-[![CircleCI](https://circleci.com/gh/brendanlong/ocaml-ooxml.svg?style=shield)](https://circleci.com/gh/brendanlong/ocaml-ooxml)
 
 The repo contains three libraries for reading data from Microsoft's document
 formats ("Office Open XML").
